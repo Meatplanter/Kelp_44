@@ -26,5 +26,5 @@ func _physics_process(delta: float) -> void:
 		velocity.x += distance
 		velocity.y += distance
 		
-		
+		print("test")
 	move_and_slide()
