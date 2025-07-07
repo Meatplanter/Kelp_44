@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bc2ej70xjolx2"]
+
+[ext_resource type="Script" uid="uid://pwjsn1icjlo8" path="res://LeftShoe.gd" id="1_1pac1"]
+[ext_resource type="Texture2D" uid="uid://mhadgvm6kalh" path="res://Assets/Shoe.png" id="1_6t80o"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1pac1"]
+radius = 7.0
+height = 26.0
+
+[node name="LeftShoe" type="CharacterBody2D"]
+script = ExtResource("1_1pac1")
+
+[node name="Shoe" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_6t80o")
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_1pac1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)

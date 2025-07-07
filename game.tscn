@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://i7ssqk3udw6h"]
+[gd_scene load_steps=6 format=4 uid="uid://i7ssqk3udw6h"]
 
 [ext_resource type="Texture2D" uid="uid://3sssh4smi3wv" path="res://Assets/Resized.png" id="1_e2o6t"]
-[ext_resource type="PackedScene" uid="uid://dmw176204y7dd" path="res://shoe.tscn" id="2_feb5d"]
+[ext_resource type="PackedScene" uid="uid://bc2ej70xjolx2" path="res://LeftShoe.tscn" id="2_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://dmw176204y7dd" path="res://RightShoe.tscn" id="3_feb5d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc0e3"]
 texture = ExtResource("1_e2o6t")
@@ -19,4 +20,10 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAD+/wAAAAAAAAAAAAD+//7/AAAAAAA
 tile_set = SubResource("TileSet_7jktm")
 rendering_quadrant_size = 32
 
-[node name="Shoe" parent="." instance=ExtResource("2_feb5d")]
+[node name="LeftShoe" parent="." instance=ExtResource("2_e2o6t")]
+
+[node name="RightShoe" parent="." instance=ExtResource("3_feb5d")]
+position = Vector2(32, 0)
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 32, 0)
