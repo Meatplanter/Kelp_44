@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdk2p220dyth6"]
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_omn17"]
-
-[node name="CharacterBody" type="CharacterBody2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("SegmentShape2D_omn17")
