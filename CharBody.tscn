@@ -24,4 +24,6 @@ script = ExtResource("1_i5h2e")
 script = ExtResource("4_e8thm")
 
 [node name="Camera2D" type="Camera2D" parent="CharBody/Marker2D"]
+ignore_rotation = false
 zoom = Vector2(2, 2)
+rotation_smoothing_enabled = true
