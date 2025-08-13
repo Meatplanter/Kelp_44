@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bocd6tqhioqxg"]
 
 [ext_resource type="Script" uid="uid://lpw0jorajten" path="res://Bullet.gd" id="1_4s4u5"]
-[ext_resource type="Texture2D" uid="uid://t2t02rgw12wy" path="res://Assets/bullet2_Warstwa 1-2.png" id="2_7281b"]
+[ext_resource type="Texture2D" uid="uid://hccyxo0hsydq" path="res://Assets/bullet.png" id="2_7281b"]
 [ext_resource type="Texture2D" uid="uid://dhfjumeo8bx3w" path="res://Assets/tracer.png" id="2_u8st5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8st5"]

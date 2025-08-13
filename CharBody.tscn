@@ -39,7 +39,6 @@ wait_time = 2.0
 autostart = true
 
 [node name="Gun" parent="." instance=ExtResource("5_iaqfm")]
-visible = false
 light_mask = 3
 visibility_layer = 3
 position = Vector2(16, 0)
