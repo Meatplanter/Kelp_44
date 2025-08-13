@@ -8,6 +8,9 @@ var canMove = true
 var moveDistance = 32
 var maxMoveDistance = 75
 
+func _ready() -> void:
+	Global.RightShoeNode = self
+
 func _input(event):
 	if canMove == true && %CharBody.cameraState == 0:
 		if event.is_action_pressed("RS_move_right") && %LeftShoe.global_position.distance_to(global_position + Vector2(1,0) * moveDistance) < maxMoveDistance && %LeftShoe.global_position.distance_to(global_position + Vector2(1,0) * moveDistance) != 0:
@@ -201,7 +204,6 @@ func _process(delta: float) -> void:
 	else:
 		tween = create_tween()
 		tween.tween_property(self,"rotation",abs(%CharBody.midpoint.angle_to_point(%CharBody.focus) + 0.5 * PI),moveTime)
-	print(%CharBody.midpoint.angle_to_point(%CharBody.focus) * 180/PI)
 	if currPos == targPos:
 		canMove = true
 	else:

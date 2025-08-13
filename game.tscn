@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=4 uid="uid://i7ssqk3udw6h"]
+[gd_scene load_steps=8 format=4 uid="uid://i7ssqk3udw6h"]
 
 [ext_resource type="Texture2D" uid="uid://3sssh4smi3wv" path="res://Assets/Resized.png" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://cxp434ialc278" path="res://game.gd" id="1_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://bqhvigu27dsbf" path="res://enemy.tscn" id="4_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://vpi5u34tocl" path="res://CharBody.tscn" id="5_7jktm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc0e3"]
@@ -13,6 +14,12 @@ texture = ExtResource("1_e2o6t")
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_fc0e3")
 
+[sub_resource type="Curve2D" id="Curve2D_feb5d"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -600, -300, 0, 0, 0, 0, 600, -300, 0, 0, 0, 0, 600, 300, 0, 0, 0, 0, -600, 300, 0, 0, 0, 0, -600, -300)
+}
+point_count = 5
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_fc0e3")
 
@@ -22,3 +29,25 @@ tile_set = SubResource("TileSet_7jktm")
 rendering_quadrant_size = 32
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("5_7jktm")]
+unique_name_in_owner = true
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_feb5d")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+unique_name_in_owner = true
+position = Vector2(-600, -300)
+
+[node name="BulletSpawnTime" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="SlomoBulletSpawnTime" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="Enemy" parent="." instance=ExtResource("4_fc0e3")]
+position = Vector2(122, -132)
+
+[connection signal="timeout" from="BulletSpawnTime" to="." method="_on_bullet_spawn_time_timeout"]
+[connection signal="timeout" from="SlomoBulletSpawnTime" to="." method="_on_slomo_bullet_spawn_time_timeout"]

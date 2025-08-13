@@ -8,6 +8,9 @@ var canMove = true
 var moveDistance = 32
 var maxMoveDistance = 75
 
+func _ready() -> void:
+	Global.LeftShoeNode = self
+
 func _input(event):
 	if canMove == true && %CharBody.cameraState == 0:
 		if event.is_action_pressed("LS_move_right") && %RightShoe.global_position.distance_to(global_position + Vector2(1,0) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(1,0) * moveDistance) != 0:
