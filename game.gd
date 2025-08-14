@@ -17,7 +17,8 @@ func spawn_enemy():
 	var new_enemy = preload("res://enemy.tscn").instantiate()
 	%PathFollow2D.progress_ratio = randf()
 	new_enemy.global_position = %PathFollow2D.global_position
-	add_child(new_enemy)
+	if get_child_count() < 10:
+		add_child(new_enemy)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

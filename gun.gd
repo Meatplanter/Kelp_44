@@ -13,6 +13,10 @@ func _physics_process(delta: float) -> void:
 
 
 func _process(delta: float) -> void:
+	if Global.gameMode == 0:
+		hide()
+	elif Global.gameMode == 1:
+		show()
 	if Global.gameSpeed == 0.1:
 		$ShootTimer.set_paused(1)
 		$SlomoShootTimer.set_paused(0)

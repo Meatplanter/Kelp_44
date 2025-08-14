@@ -20,30 +20,10 @@ func _ready() -> void:
 	#Adding global reference to dig into variables from anywhere
 	Global.CharBodyNode = self
 	
-func _on_body_entered(body: Node2D) -> void:
-	print("ouch")
 
 func _draw():
 	draw_circle(focus,15.0,Color.RED)
-		
-#func shoot():
-	#const BULLET = preload("res://Bullet.tscn")
-	#var new_bullet = BULLET.instantiate()
-	#
-	##So that the bullet shoots 20 pixels from midpoint (avoiding body collision)
-	#var directional = get_point_position(1)-get_point_position(0)
-	#var normal = Vector2(-directional.y,directional.x).normalized()2217cx2
-	#new_bullet.global_position = midpoint + normal * -20
-	#
-	##So that bullet shoots towards focus
-	#new_bullet.global_rotation = midpoint.angle_to_point(focus)
-	#
-	#add_child(new_bullet)
-	#
-#22
-#func _on_timer_timeout() -> void:
-	#shoot()
-
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	set_point_position(0,%LeftShoe.global_position)

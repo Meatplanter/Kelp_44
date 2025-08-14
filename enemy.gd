@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var health = 2
+
 @onready var playerLocation = get_node("/root/Game/CharacterBody2D/CharBody")
 
 # Called when the node enters the scene tree for the first time.
@@ -15,3 +17,8 @@ func _process(delta: float) -> void:
 	else:
 		velocity = direction * 0.0
 	move_and_slide()
+
+func take_damage():
+	health -= 1
+	if health == 0:
+		queue_free()
