@@ -4,19 +4,22 @@ extends Area2D
 func _physics_process(delta: float) -> void:
 	if get_parent().has_meta("Enemy"): #enemy has gun, points it at player
 		look_at(Global.midpoint)
+		if global_position.distance_to(Global.midpoint) <= 250: #player in range
+			show()
+		else:
+			hide()
 	elif get_parent().has_meta("Player"): #player has gun, points it at the closest enemy
 		global_position = Global.midpoint
 		var enemiesInRange = get_overlapping_bodies()
-		if enemiesInRange.size() > 0:
+		if enemiesInRange.size() > 0: #enemy in range
+			show()
 			var targetEnemy = enemiesInRange.front()
 			look_at(targetEnemy.global_position)
+		else: #enemy outside of range
+			hide()
 
 
 func _process(delta: float) -> void:
-	if Global.gameMode == 0:
-		hide()
-	elif Global.gameMode == 1:
-		show()
 	if Global.gameSpeed == 0.1:
 		$ShootTimer.set_paused(1)
 		$SlomoShootTimer.set_paused(0)
@@ -38,7 +41,8 @@ func shoot():
 			var targetEnemy = enemiesInRange.front()
 			new_bullet.global_rotation = %ShootingPoint.global_position.angle_to_point(targetEnemy.global_position)
 	
-	add_child(new_bullet)
+	if is_visible_in_tree(): #don't shoot if parent hidden
+		get_parent().get_parent().add_child(new_bullet) #bullet doesn't disappear when enemy does
 	
 
 

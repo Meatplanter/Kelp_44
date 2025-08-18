@@ -7,7 +7,6 @@ var cameraState = 0
 var cameraCounter = 0
 var static_body := StaticBody2D.new()
 var collision_shape := CollisionShape2D.new()
-var health = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -67,4 +66,8 @@ func _process(delta: float) -> void:
 		cameraState = 2
 		$Marker2D/Camera2D.rotate(1.5 * PI)
 		
+	if Global.playerHealth == 0: #game over screen
+		$Marker2D/GameOver.visible = true
+		get_tree().paused = true
+	
 	queue_redraw()

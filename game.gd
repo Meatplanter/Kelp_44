@@ -4,7 +4,7 @@ var CharBodyNode
 var RightShoeNode
 var LeftShoeNode
 
-var gameSpeed = 1.0
+var gameSpeed
 
 func spawn_bullet():
 	var new_bullet = preload("res://Bullet.tscn").instantiate()
@@ -28,14 +28,15 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Global.LeftShoeNode.canMove == true && Global.RightShoeNode.canMove == true:
-		gameSpeed = 0.1
+		gameSpeed = Global.bulletTime
 		$BulletSpawnTime.set_paused(1)
 		$SlomoBulletSpawnTime.set_paused(0)
 	else:
-		gameSpeed = 1.0
+		gameSpeed = Global.normalTime
 		$SlomoBulletSpawnTime.set_paused(1)
 		$BulletSpawnTime.set_paused(0)
 	Global.gameSpeed = gameSpeed
+	
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ChangeMode") && Global.gameMode == 0:

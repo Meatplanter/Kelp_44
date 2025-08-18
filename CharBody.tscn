@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://vpi5u34tocl"]
+[gd_scene load_steps=7 format=3 uid="uid://vpi5u34tocl"]
 
 [ext_resource type="Script" uid="uid://cqyv41oyv0lcg" path="res://CharBody.gd" id="1_i5h2e"]
 [ext_resource type="PackedScene" uid="uid://bc2ej70xjolx2" path="res://LeftShoe.tscn" id="2_iaqfm"]
 [ext_resource type="PackedScene" uid="uid://dmw176204y7dd" path="res://RightShoe.tscn" id="3_sl5bb"]
 [ext_resource type="Script" uid="uid://c63kxpwm4xegy" path="res://marker_2d.gd" id="4_e8thm"]
 [ext_resource type="PackedScene" uid="uid://27towt3jaocl" path="res://gun.tscn" id="5_iaqfm"]
+[ext_resource type="Script" uid="uid://g7fnkyhbdemq" path="res://hp_left.gd" id="5_sl5bb"]
 
 [node name="CharBody" type="CharacterBody2D"]
 visibility_layer = 2
@@ -33,6 +34,44 @@ script = ExtResource("4_e8thm")
 ignore_rotation = false
 zoom = Vector2(2, 2)
 rotation_smoothing_enabled = true
+
+[node name="Label" type="Label" parent="CharBody/Marker2D/Camera2D"]
+offset_left = -286.0
+offset_top = -160.0
+offset_right = -234.0
+offset_bottom = -137.0
+text = "Health left:"
+metadata/_edit_use_anchors_ = true
+
+[node name="HPLeft" type="Label" parent="CharBody/Marker2D/Camera2D"]
+offset_left = -197.0
+offset_top = -160.0
+offset_right = -157.0
+offset_bottom = -137.0
+text = "10"
+script = ExtResource("5_sl5bb")
+metadata/_edit_use_anchors_ = true
+
+[node name="GameOver" type="CanvasLayer" parent="CharBody/Marker2D"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CharBody/Marker2D/GameOver"]
+offset_left = -5.0
+offset_top = -9.0
+offset_right = 1159.0
+offset_bottom = 659.0
+color = Color(0.152941, 0.168627, 0.188235, 0.894118)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CharBody/Marker2D/GameOver/ColorRect"]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 212.0
+offset_right = 1038.0
+offset_bottom = 417.0
+theme_override_font_sizes/font_size = 150
+text = "GAME OVER!"
+metadata/_edit_use_anchors_ = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0

@@ -1,18 +1,20 @@
 extends Area2D
 
 var travelledDistance = 0
+var bulletSpeed = Global.bulletSpeed
+var bulletRange = Global.bulletRange
 
 func _physics_process(delta: float) -> void:
-	const SPEED = 200
-	const RANGE = 1000
 	var direction = Vector2.RIGHT.rotated(rotation)
-	position += direction * SPEED * delta * Global.gameSpeed
-	travelledDistance += SPEED * delta * Global.gameSpeed
+	position += direction * bulletSpeed * delta * Global.gameSpeed
+	travelledDistance += bulletSpeed * delta * Global.gameSpeed
 	
-	if travelledDistance > RANGE:
+	if travelledDistance > bulletRange:
 		queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
 	queue_free()
 	if body.has_method("take_damage"):
 		body.take_damage()
+	else: #player body (generated dynamically)
+		Global.playerHealth -= 1
