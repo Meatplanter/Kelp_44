@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var health = 2
+var health = Global.enemyHealth
 
 @onready var playerLocation = get_node("/root/Game/CharacterBody2D/CharBody")
 
@@ -21,4 +21,5 @@ func _process(delta: float) -> void:
 func take_damage():
 	health -= 1
 	if health == 0:
+		Global.enemiesKilled += 1
 		queue_free()

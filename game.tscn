@@ -38,11 +38,11 @@ unique_name_in_owner = true
 position = Vector2(-600, -300)
 
 [node name="BulletSpawnTime" type="Timer" parent="."]
-wait_time = 0.3
+wait_time = 0.2
 autostart = true
 
 [node name="SlomoBulletSpawnTime" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
 autostart = true
 
 [connection signal="timeout" from="BulletSpawnTime" to="." method="_on_bullet_spawn_time_timeout"]

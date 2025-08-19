@@ -20,8 +20,8 @@ func _ready() -> void:
 	Global.CharBodyNode = self
 	
 
-func _draw():
-	draw_circle(focus,15.0,Color.RED)
+#func _draw():
+	#draw_circle(focus,15.0,Color.RED)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 	Global.midpoint = midpoint
 	var directional = get_point_position(1)-get_point_position(0)
 	var normal = Vector2(-directional.y,directional.x).normalized()
-	focus = midpoint + normal * -128
+	focus = midpoint + normal * -512
 	bodylength = get_point_position(0).distance_to(get_point_position(1))
 	cameraCounter = int(midpoint.angle_to_point(focus) * 180 / PI) #przekształcanie radianów na stopnie licząc od osi X
 
@@ -69,5 +69,11 @@ func _process(delta: float) -> void:
 	if Global.playerHealth == 0: #game over screen
 		$Marker2D/GameOver.visible = true
 		get_tree().paused = true
+		if Global.gameMode == 0:
+			$Marker2D/GameOver/ColorRect/LabelBulletsDodged.text += str(Global.bulletsDodged)
+			$Marker2D/GameOver/ColorRect/LabelBulletsDodged.visible = true
+		elif Global.gameMode == 1:
+			$Marker2D/GameOver/ColorRect/LabelEnemiesKilled.text += str(Global.enemiesKilled)
+			$Marker2D/GameOver/ColorRect/LabelEnemiesKilled.visible = true
 	
-	queue_redraw()
+	#queue_redraw()

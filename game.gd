@@ -17,7 +17,7 @@ func spawn_enemy():
 	var new_enemy = preload("res://enemy.tscn").instantiate()
 	%PathFollow2D.progress_ratio = randf()
 	new_enemy.global_position = %PathFollow2D.global_position
-	if get_child_count() < 10:
+	if get_child_count() < 15:
 		add_child(new_enemy)
 
 # Called when the node enters the scene tree for the first time.
@@ -27,7 +27,12 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Global.LeftShoeNode.canMove == true && Global.RightShoeNode.canMove == true:
+	if Global.leftMoving == false && Global.rightMoving == false:
+		Global.canMove = true
+	else:
+		Global.canMove = false
+	
+	if Global.canMove == true:
 		gameSpeed = Global.bulletTime
 		$BulletSpawnTime.set_paused(1)
 		$SlomoBulletSpawnTime.set_paused(0)
@@ -36,6 +41,7 @@ func _process(delta: float) -> void:
 		$SlomoBulletSpawnTime.set_paused(1)
 		$BulletSpawnTime.set_paused(0)
 	Global.gameSpeed = gameSpeed
+	
 	
 
 func _input(event: InputEvent) -> void:
