@@ -75,6 +75,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="LabelBulletsDodged" type="Label" parent="CharBody/Marker2D/GameOver/ColorRect"]
 visible = false
+layout_mode = 0
 offset_left = 364.0
 offset_top = 434.0
 offset_right = 736.0
