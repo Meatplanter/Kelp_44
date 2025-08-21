@@ -47,7 +47,7 @@ wait_time = 2.0
 autostart = true
 
 [node name="Enemy2" parent="." instance=ExtResource("4_fc0e3")]
-position = Vector2(-94, 65)
+position = Vector2(-68, -80)
 
 [connection signal="timeout" from="BulletSpawnTime" to="." method="_on_bullet_spawn_time_timeout"]
 [connection signal="timeout" from="SlomoBulletSpawnTime" to="." method="_on_slomo_bullet_spawn_time_timeout"]

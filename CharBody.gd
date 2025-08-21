@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 	Global.focus = focus
 	bodylength = get_point_position(0).distance_to(get_point_position(1))
 	cameraCounter = int(midpoint.angle_to_point(focus) * 180 / PI) #przekształcanie radianów na stopnie licząc od osi X
-	Global.orientation = midpoint.angle_to_point(focus)
+	#Global.orientation = midpoint.angle_to_point(focus)
 	collision_shape.shape.a = %LeftShoe.global_position
 	collision_shape.shape.b = %RightShoe.global_position
 	

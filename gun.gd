@@ -11,23 +11,6 @@ func shortest_angle(from: float, to: float) -> float:
 	var delta = fmod(to - from + PI, TAU) - PI
 	return from + delta
 
-# Utility function to check if an angle is between two others (with wraparound support)
-func is_angle_between(angle: float, start: float, end: float) -> bool:
-	angle = wrapf(angle, -PI, PI)
-	start = wrapf(start, -PI, PI)
-	end = wrapf(end, -PI, PI)
-	
-	if start <= end:
-		return start <= angle and angle <= end
-	else:
-		# Wrapping around the ±PI boundary
-		return angle >= start or angle <= end
-
-func closest_clamped_angle(angle: float, min_angle: float, max_angle: float) -> float:
-	var angle_dist_to_min = abs(shortest_angle(angle, min_angle))
-	var angle_dist_to_max = abs(shortest_angle(angle, max_angle))
-	return min_angle if angle_dist_to_min < angle_dist_to_max else max_angle
-	
 
 func _physics_process(delta: float) -> void:
 	if get_parent().has_meta("Enemy"): #enemy has gun, points it at player
@@ -46,23 +29,30 @@ func _physics_process(delta: float) -> void:
 		if enemiesInRange.size() > 0: #enemy in range
 			show()
 			targetEnemy = enemiesInRange.front()
-			var target_angle = wrapf(Global.midpoint.angle_to_point(targetEnemy.global_position), -PI, PI)
-			var half_fov = PI / 2  # 90 degrees field of view from orientation
-			var orientation = wrapf(Global.orientation, -PI, PI)
+			var enemyDirection = (targetEnemy.global_position - Global.midpoint).normalized()
+			var orientation = (Global.focus - Global.midpoint).normalized()
+			var bodyEnemyAngle = enemyDirection.angle_to(orientation)
+			var clamped_angle = clamp(bodyEnemyAngle,-PI/2,PI/2)
+			print (rad_to_deg(clamped_angle))
 			
-			var min_angle = wrapf(orientation - half_fov, -PI, PI)
-			var max_angle = wrapf(orientation + half_fov, -PI, PI)
 			
-			if is_angle_between(target_angle, min_angle, max_angle):
-				clamped_angle = target_angle
-				print("in sight")
-			else:
-				clamped_angle = closest_clamped_angle(target_angle, min_angle, max_angle)
-				print("can't see")
-				
-			var shortest = shortest_angle(rotation, clamped_angle)
+			#var target_angle = wrapf(Global.midpoint.angle_to_point(targetEnemy.global_position), -PI, PI)
+			#var half_fov = PI / 2  # 90 degrees field of view from orientation
+			#var orientation = wrapf(Global.orientation, -PI, PI)
+			#
+			#var min_angle = wrapf(orientation - half_fov, -PI, PI)
+			#var max_angle = wrapf(orientation + half_fov, -PI, PI)
+			#
+			#if is_angle_between(target_angle, min_angle, max_angle):
+				#clamped_angle = target_angle
+				#print("in sight")
+			#else:
+				#clamped_angle = closest_clamped_angle(target_angle, min_angle, max_angle)
+				#print("can't see")
+				#
+			#var shortest = shortest_angle(rotation, clamped_angle)
 			tween = create_tween()
-			tween.tween_property(self, "rotation", shortest, aimingSpeed).set_ease(Tween.EASE_IN_OUT)
+			tween.tween_property(self, "rotation", clamped_angle, aimingSpeed).set_ease(Tween.EASE_IN_OUT)
 		else: #enemy outside of range
 			hide()
 		

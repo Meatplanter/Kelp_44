@@ -18,7 +18,6 @@ var playerHealth = 10
 
 var midpoint = Vector2(0,16)
 var focus = Vector2(0,0)
-var orientation = 0.0 #angle midpointo to focus
 
 
 #movement
