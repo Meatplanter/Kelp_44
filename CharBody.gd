@@ -3,10 +3,11 @@ extends Line2D
 var midpoint = Vector2(0,16)
 var focus = Vector2(0,0)
 var bodylength = 32
-var cameraState = 0
+var cameraState = Global.cameraState #0 patrzy w górę, 1 w prawo, 2 w dół, 3 w lewo
 var cameraCounter = 0
 var static_body := StaticBody2D.new()
 var collision_shape := CollisionShape2D.new()
+var bodyRotationCumulative = Global.bodyRotationCumulative
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -76,5 +77,11 @@ func _process(delta: float) -> void:
 		elif Global.gameMode == 1:
 			$Marker2D/GameOver/ColorRect/LabelEnemiesKilled.text += str(Global.enemiesKilled)
 			$Marker2D/GameOver/ColorRect/LabelEnemiesKilled.visible = true
-	
-	#queue_redraw()
+			
+	Global.cameraState = cameraState
+	var orientationDegrees = rad_to_deg(Vector2.ZERO.angle_to_point((Global.focus - Global.midpoint).normalized())+PI/2)
+	#print(orientationDegrees)
+	var stepPerFrame = Global.bodyRotationCumulative + orientationDegrees
+	#Global.bodyRotationCumulative += stepPerFrame
+	#stepPerFrame = 0
+	print(stepPerFrame)

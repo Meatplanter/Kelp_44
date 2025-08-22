@@ -11,6 +11,7 @@ var gameMode = 0 # 0 = spawn bullets 1 = spawn enemies
 var bulletsDodged = 0
 var enemiesKilled = 0
 var gameSpeed = 1.0
+var cameraState = 0 #0 looking up, 1 looking right, 2 looking down, 3 looking left
 
 
 #player
@@ -28,6 +29,12 @@ var styleTween = Tween.TRANS_EXPO
 var leftMoving = false
 var rightMoving = false
 var canMove = true
+
+
+#rotations
+var bodyRotationCumulative = rad_to_deg(-PI/2) #also initial orientation
+var leftGunRotationCumulative = rad_to_deg(-PI) #also initial gun position
+var rigtGunRotationCumulative = rad_to_deg(0*PI) #also initial gun position
 
 
 #gun & bullets
