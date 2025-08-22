@@ -14,7 +14,7 @@ var gameSpeed = 1.0
 
 
 #player
-var playerHealth = 10
+var playerHealth = 1000
 
 var midpoint = Vector2(0,16)
 var focus = Vector2(0,0)
@@ -23,6 +23,7 @@ var focus = Vector2(0,0)
 #movement
 var moveTime = 0.4
 var moveDistance = 32
+var styleTween = Tween.TRANS_EXPO
 
 var leftMoving = false
 var rightMoving = false
@@ -36,5 +37,5 @@ var bulletRange = 1000
 
 
 #enemy
-var enemyHealth = 10
+var enemyHealth = 100
 var enemyRange = 300

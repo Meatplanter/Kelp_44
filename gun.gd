@@ -32,10 +32,17 @@ func _physics_process(delta: float) -> void:
 			var enemyDirection = (targetEnemy.global_position - Global.midpoint).normalized()
 			var orientation = (Global.focus - Global.midpoint).normalized()
 			var bodyEnemyAngle = enemyDirection.angle_to(orientation)
-			var clamped_angle = clamp(bodyEnemyAngle,-PI/2,PI/2)
-			print (rad_to_deg(clamped_angle))
+			var clamped_angle = -(clamp(bodyEnemyAngle,-PI/2,PI/2))
 			
-			
+			var rotationVector = Vector2.RIGHT.rotated(rotation)
+			var gunPointing = -(rotationVector.angle_to(orientation))
+			var aimAngle = clamped_angle - gunPointing
+			print ("clamped_angle to enemy: ",rad_to_deg(clamped_angle)," gunPointing: ",rad_to_deg(gunPointing)," aimAngle: ",rad_to_deg(aimAngle))
+			#if gunPointing < clamped_angle: #enemy to the left of where we're aiming
+				#aimAngle = clamped_angle - (-gunPointing)
+			#elif gunPointing >= clamped_angle:
+				#aimAngle = clamped_angle - (-gunPointing)
+			#print(rad_to_deg(rotation))
 			#var target_angle = wrapf(Global.midpoint.angle_to_point(targetEnemy.global_position), -PI, PI)
 			#var half_fov = PI / 2  # 90 degrees field of view from orientation
 			#var orientation = wrapf(Global.orientation, -PI, PI)
@@ -51,8 +58,9 @@ func _physics_process(delta: float) -> void:
 				#print("can't see")
 				#
 			#var shortest = shortest_angle(rotation, clamped_angle)
+			print(rad_to_deg(wrapf(Global.midpoint.angle_to_point(Global.focus),-PI,PI)))
 			tween = create_tween()
-			tween.tween_property(self, "rotation", clamped_angle, aimingSpeed).set_ease(Tween.EASE_IN_OUT)
+			tween.tween_property(self, "rotation", gunPointing + aimAngle + wrapf(Global.midpoint.angle_to_point(Global.focus),-PI,PI), aimingSpeed).set_ease(Tween.EASE_IN_OUT)
 		else: #enemy outside of range
 			hide()
 		
