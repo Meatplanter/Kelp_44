@@ -20,47 +20,82 @@ func _input(event):
 	if Global.canMove == true && %CharBody.cameraState == 0:
 		if event.is_action_pressed("LS_move_right") && %RightShoe.global_position.distance_to(global_position + Vector2(1,0) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(1,0) * moveDistance) != 0:
 			targPos[0] += moveDistance
+			if Global.leftWeighted == false && targPos[0] == Global.RightShoeNode.global_position.x - 32 && targPos[1] == Global.RightShoeNode.global_position.y: #optimal walking
+				Global.leftWeighted = false
+				Global.rightWeighted = true
+				moveTime = 0.2
+				print(moveTime)
+			elif Global.leftWeighted == true && targPos[0] == Global.RightShoeNode.global_position.x - 32 && targPos[1] == Global.RightShoeNode.global_position.y: #returning to walking after taking a step back
+				Global.leftWeighted = false
+				Global.rightWeighted = true
+				moveTime = 0.6
+				print(moveTime)
+			elif Global.leftWeighted == false: #optimal complex movement
+				Global.leftWeighted = true
+				Global.rightWeighted = false
+				moveTime = 0.4
+				print(moveTime)
+			elif Global.leftWeighted == true: #least optimal movement
+				Global.leftWeighted = true
+				Global.rightWeighted = false
+				moveTime = 1
+				print(moveTime)
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime).set_trans(styleTween)
 			
+
 		elif event.is_action_pressed("LS_move_left") && %RightShoe.global_position.distance_to(global_position + Vector2(-1,0) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(-1,0) * moveDistance) != 0:
 			targPos[0] -= moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_up") && %RightShoe.global_position.distance_to(global_position + Vector2(0,-1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(0,-1) * moveDistance) != 0:
 			targPos[1] -= moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_down") && %RightShoe.global_position.distance_to(global_position + Vector2(0,1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(0,1) * moveDistance) != 0:
 			targPos[1] += moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_rightup") && %RightShoe.global_position.distance_to(global_position + Vector2(1,-1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(1,-1) * moveDistance) != 0:
 			targPos[0] += moveDistance
 			targPos[1] -= moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime*sqrt).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_rightdown") && %RightShoe.global_position.distance_to(global_position + Vector2(1,1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(1,1) * moveDistance) != 0:
 			targPos[0] += moveDistance
 			targPos[1] += moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime*sqrt).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_leftup") && %RightShoe.global_position.distance_to(global_position + Vector2(-1,-1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(-1,-1) * moveDistance) != 0:
 			targPos[0] -= moveDistance
 			targPos[1] -= moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime*sqrt).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_leftdown") && %RightShoe.global_position.distance_to(global_position + Vector2(-1,1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(-1,1) * moveDistance) != 0:
 			targPos[0] -= moveDistance
 			targPos[1] += moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime*sqrt).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 
 
@@ -69,45 +104,62 @@ func _input(event):
 			targPos[1] += moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_left") && %RightShoe.global_position.distance_to(global_position + Vector2(0,-1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(0,-1) * moveDistance) != 0:
 			targPos[1] -= moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_up") && %RightShoe.global_position.distance_to(global_position + Vector2(1,0) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(1,0) * moveDistance) != 0:
 			targPos[0] += moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_down") && %RightShoe.global_position.distance_to(global_position + Vector2(-1,0) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(-1,0) * moveDistance) != 0:
 			targPos[0] -= moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_rightup") && %RightShoe.global_position.distance_to(global_position + Vector2(1,1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(1,1) * moveDistance) != 0:
 			targPos[0] += moveDistance
 			targPos[1] += moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime*sqrt).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_rightdown") && %RightShoe.global_position.distance_to(global_position + Vector2(-1,1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(-1,1) * moveDistance) != 0:
 			targPos[0] -= moveDistance
 			targPos[1] += moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime*sqrt).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_leftup") && %RightShoe.global_position.distance_to(global_position + Vector2(1,-1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(1,-1) * moveDistance) != 0:
 			targPos[0] += moveDistance
 			targPos[1] -= moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime*sqrt).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_leftdown") && %RightShoe.global_position.distance_to(global_position + Vector2(-1,-1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(-1,-1) * moveDistance) != 0:
 			targPos[0] -= moveDistance
 			targPos[1] -= moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime*sqrt).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
+			
 
 
 	elif Global.canMove == true && %CharBody.cameraState == 2:
@@ -115,45 +167,62 @@ func _input(event):
 			targPos[0] -= moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_left") && %RightShoe.global_position.distance_to(global_position + Vector2(1,0) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(1,0) * moveDistance) != 0:
 			targPos[0] += moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_up") && %RightShoe.global_position.distance_to(global_position + Vector2(0,1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(0,1) * moveDistance) != 0:
 			targPos[1] += moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_down") && %RightShoe.global_position.distance_to(global_position + Vector2(0,-1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(0,-1) * moveDistance) != 0:
 			targPos[1] -= moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_rightup") && %RightShoe.global_position.distance_to(global_position + Vector2(-1,1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(-1,1) * moveDistance) != 0:
 			targPos[0] -= moveDistance
 			targPos[1] += moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime*sqrt).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_rightdown") && %RightShoe.global_position.distance_to(global_position + Vector2(-1,-1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(-1,-1) * moveDistance) != 0:
 			targPos[0] -= moveDistance
 			targPos[1] -= moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime*sqrt).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_leftup") && %RightShoe.global_position.distance_to(global_position + Vector2(1,1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(1,1) * moveDistance) != 0:
 			targPos[0] += moveDistance
 			targPos[1] += moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime*sqrt).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_leftdown") && %RightShoe.global_position.distance_to(global_position + Vector2(1,-1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(1,-1) * moveDistance) != 0:
 			targPos[0] += moveDistance
 			targPos[1] -= moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime*sqrt).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
+			
 
 
 	elif Global.canMove == true && %CharBody.cameraState == 3:
@@ -161,45 +230,62 @@ func _input(event):
 			targPos[1] -= moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_left") && %RightShoe.global_position.distance_to(global_position + Vector2(0,1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(0,1) * moveDistance) != 0:
 			targPos[1] += moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_up") && %RightShoe.global_position.distance_to(global_position + Vector2(-1,0) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(-1,0) * moveDistance) != 0:
 			targPos[0] -= moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_down") && %RightShoe.global_position.distance_to(global_position + Vector2(1,0) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(1,0) * moveDistance) != 0:
 			targPos[0] += moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_rightup") && %RightShoe.global_position.distance_to(global_position + Vector2(-1,-1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(-1,-1) * moveDistance) != 0:
 			targPos[0] -= moveDistance
 			targPos[1] -= moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime*sqrt).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_rightdown") && %RightShoe.global_position.distance_to(global_position + Vector2(1,-1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(1,-1) * moveDistance) != 0:
 			targPos[0] += moveDistance
 			targPos[1] -= moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime*sqrt).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_leftup") && %RightShoe.global_position.distance_to(global_position + Vector2(-1,1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(-1,1) * moveDistance) != 0:
 			targPos[0] -= moveDistance
 			targPos[1] += moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime*sqrt).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
 			
 		elif event.is_action_pressed("LS_move_leftdown") && %RightShoe.global_position.distance_to(global_position + Vector2(1,1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(1,1) * moveDistance) != 0:
 			targPos[0] += moveDistance
 			targPos[1] += moveDistance
 			tween = create_tween()
 			tween.tween_property(self,"position",Vector2(targPos[0],targPos[1]),moveTime*sqrt).set_trans(styleTween)
+			Global.leftWeighted = true
+			Global.rightWeighted = false
+			
 
 func _process(delta: float) -> void:
 	currPos = [int(global_position.x),int(global_position.y)]
@@ -208,6 +294,7 @@ func _process(delta: float) -> void:
 	var to_angle = Global.midpoint.angle_to_point(%CharBody.focus)
 	var shortest = shortest_angle(from_angle, to_angle)
 	tween.tween_property(self,"rotation",shortest+0.5 * PI,moveTime)
+	moveTime = Global.moveTime
 
 	if currPos == targPos:
 		Global.leftMoving = false

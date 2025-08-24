@@ -29,8 +29,10 @@ func _physics_process(delta: float) -> void:
 		if enemiesInRange.size() > 0: #enemy in range
 			show()
 			targetEnemy = enemiesInRange.front()
+
 			var enemyDirection = (targetEnemy.global_position - Global.midpoint).normalized()
 			var orientation = (Global.focus - Global.midpoint).normalized()
+			#var orientationDegrees = rad_to_deg(orientation-rotation)
 			var bodyEnemyAngle = enemyDirection.angle_to(orientation)
 			var clamped_angle = -(clamp(bodyEnemyAngle,-PI/2,PI/2))
 			
@@ -41,7 +43,12 @@ func _physics_process(delta: float) -> void:
 			#print ("clamped_angle to enemy: ",rad_to_deg(clamped_angle)," gunPointing: ",rad_to_deg(gunPointing)," aimAngle: ",rad_to_deg(aimAngle))
 			
 			tween = create_tween()
-			
+			#var rot = rotation_degrees
+			#tween.tween_property(self, "rotation_degrees", rotation_degrees-62, delta).set_ease(Tween.EASE_IN_OUT)
+			#print(rad_to_deg(clamped_angle+aimAngle))
+			#print(rad_to_deg(enemyDirection.angle_to_point(Vector2.RIGHT)))
+			#rot += 1
+			#tween.tween_property(self, "rotation_degrees", 180, aimingSpeed).set_ease(Tween.EASE_IN_OUT)
 			tween.tween_property(self, "rotation", gunPointing + aimAngle + wrapf(Global.midpoint.angle_to_point(Global.focus),-PI,PI), aimingSpeed).set_ease(Tween.EASE_IN_OUT)
 
 

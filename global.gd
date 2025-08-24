@@ -23,13 +23,14 @@ var focus = Vector2(0,0)
 
 #movement
 var moveTime = 0.4
-var moveDistance = 32
+var moveDistance = 32 #base 32
 var styleTween = Tween.TRANS_EXPO
 
 var leftMoving = false
 var rightMoving = false
 var canMove = true
-
+var leftWeighted = true
+var rightWeighted = true 
 
 #rotations
 var bodyRotationCumulative = rad_to_deg(-PI/2) #also initial orientation

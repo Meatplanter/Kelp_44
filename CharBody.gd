@@ -21,8 +21,16 @@ func _ready() -> void:
 	Global.CharBodyNode = self
 	
 
-#func _draw():
-	#draw_circle(focus,15.0,Color.RED)
+func _draw():
+	if Global.leftWeighted == true:
+		draw_circle(Global.LeftShoeNode.global_position,5.0,Color.RED)
+	elif Global.leftWeighted == false:
+		draw_circle(Global.LeftShoeNode.global_position,5.0,Color.GREEN)
+	
+	if Global.rightWeighted == true:
+		draw_circle(Global.RightShoeNode.global_position,5.0,Color.RED)
+	elif Global.rightWeighted  == false:
+		draw_circle(Global.RightShoeNode.global_position,5.0,Color.GREEN)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -79,9 +87,11 @@ func _process(delta: float) -> void:
 			$Marker2D/GameOver/ColorRect/LabelEnemiesKilled.visible = true
 			
 	Global.cameraState = cameraState
-	var orientationDegrees = rad_to_deg(Vector2.ZERO.angle_to_point((Global.focus - Global.midpoint).normalized())+PI/2)
-	#print(orientationDegrees)
-	var stepPerFrame = Global.bodyRotationCumulative + orientationDegrees
+	queue_redraw()
+	#var orientationDegrees = rad_to_deg(Global.bodyRotationCumulative.angle_to((Global.focus - Global.midpoint).normalized())+PI/2)
+	#print(Global.bodyRotationCumulative)
+	#print(rad_to_deg(Global.midpoint.angle_to_point(Global.focus)+PI/2))
+	#var stepPerFrame = Global.bodyRotationCumulative + orientationDegrees
 	#Global.bodyRotationCumulative += stepPerFrame
 	#stepPerFrame = 0
-	print(stepPerFrame)
+	#print(stepPerFrame)

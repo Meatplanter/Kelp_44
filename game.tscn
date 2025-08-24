@@ -47,7 +47,7 @@ wait_time = 2.0
 autostart = true
 
 [node name="Enemy2" parent="." instance=ExtResource("4_fc0e3")]
-position = Vector2(62, -89)
+position = Vector2(81, -85)
 
 [node name="Label" type="Label" parent="."]
 offset_left = -12.0
