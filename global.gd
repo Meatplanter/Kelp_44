@@ -22,9 +22,16 @@ var focus = Vector2(0,0)
 
 
 #movement
-var moveTime = 0.4
+var moveTime = 0.4 #useless?
 var moveDistance = 32 #base 32
 var styleTween = Tween.TRANS_EXPO
+var pureMovement = 0.3 #in seconds
+var placingWeight = 0.2 #in seconds
+
+var moveSimpleOptimal = pureMovement #e.g. walking forward, first half of movement, raising foot
+var moveComplexOptimal = pureMovement + placingWeight #e.g. walking forward, planting foot in front
+var moveSimpleHeavy = placingWeight + pureMovement #e.g. retracting step after planting foot
+var moveComplexHeavy = placingWeight + pureMovement + placingWeight #e.g. moving same foot outwards twice
 
 var leftMoving = false
 var rightMoving = false

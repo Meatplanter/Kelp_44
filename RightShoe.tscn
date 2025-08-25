@@ -12,3 +12,12 @@ texture_filter = 1
 texture = ExtResource("1_keobd")
 flip_h = true
 flip_v = true
+
+[node name="Label" type="Label" parent="Shoe"]
+offset_left = 6.0
+offset_top = -12.0
+offset_right = 25.0
+offset_bottom = 10.0
+theme_override_colors/font_color = Color(0, 0.62762, 0.221395, 1)
+theme_override_font_sizes/font_size = 12
+text = "N/D"
