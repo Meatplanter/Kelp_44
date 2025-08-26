@@ -1,5 +1,6 @@
 extends Line2D
 
+var tween: Tween
 var midpoint = Vector2(0,16)
 var focus = Vector2(0,0)
 var bodylength = 32
@@ -12,11 +13,11 @@ var bodyRotationCumulative = Global.bodyRotationCumulative
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#Adding initial collision shape
-	add_child(static_body)
-	collision_shape.shape = SegmentShape2D.new()
-	collision_shape.shape.a = %LeftShoe.global_position
-	collision_shape.shape.b = %RightShoe.global_position
-	static_body.add_child(collision_shape)
+	#add_child(static_body)
+	#collision_shape.shape = SegmentShape2D.new()
+	#collision_shape.shape.a = %LeftShoe.global_position
+	#collision_shape.shape.b = %RightShoe.global_position
+	#static_body.add_child(collision_shape)
 	#Adding global reference to dig into variables from anywhere
 	Global.CharBodyNode = self
 	
@@ -45,8 +46,8 @@ func _process(delta: float) -> void:
 	bodylength = get_point_position(0).distance_to(get_point_position(1))
 	cameraCounter = int(midpoint.angle_to_point(focus) * 180 / PI) #przekształcanie radianów na stopnie licząc od osi X
 	#Global.orientation = midpoint.angle_to_point(focus)
-	collision_shape.shape.a = %LeftShoe.global_position
-	collision_shape.shape.b = %RightShoe.global_position
+	#collision_shape.shape.a = %LeftShoe.global_position
+	#collision_shape.shape.b = %RightShoe.global_position
 	
 	if cameraState == 0 && cameraCounter == 0:
 		cameraState = 1
@@ -87,6 +88,10 @@ func _process(delta: float) -> void:
 			$Marker2D/GameOver/ColorRect/LabelEnemiesKilled.visible = true
 			
 	Global.cameraState = cameraState
+	#print((Vector2(%RightShoe.targPos[0],%RightShoe.targPos[1]) + Vector2(%LeftShoe.targPos[0],%LeftShoe.targPos[1])) / 2) to jest target midpoint
+	#%Torso.look_at(focus)
+	#%Torso.rotate(PI/2)
+		
 	queue_redraw()
 	#var orientationDegrees = rad_to_deg(Global.bodyRotationCumulative.angle_to((Global.focus - Global.midpoint).normalized())+PI/2)
 	#print(Global.bodyRotationCumulative)

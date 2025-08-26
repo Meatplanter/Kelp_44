@@ -38,6 +38,7 @@ var rightMoving = false
 var canMove = true
 var leftWeighted = true
 var rightWeighted = true 
+var weightedShoe = "both"
 
 #rotations
 var bodyRotationCumulative = rad_to_deg(-PI/2) #also initial orientation
@@ -47,10 +48,10 @@ var rigtGunRotationCumulative = rad_to_deg(0*PI) #also initial gun position
 
 #gun & bullets
 var aimingSpeed = 1
-var bulletSpeed = 200
+var bulletSpeed = 150
 var bulletRange = 1000
 
 
 #enemy
-var enemyHealth = 100
+var enemyHealth = 200
 var enemyRange = 300

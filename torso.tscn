@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmant07862ycy"]
+
+[ext_resource type="Script" uid="uid://clo8fxrvg1r84" path="res://torso.gd" id="1_50s6g"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gher4"]
+radius = 7.0
+height = 54.0
+
+[node name="Torso" type="CharacterBody2D"]
+script = ExtResource("1_50s6g")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(0.381481, 0)
+scale = Vector2(0.770553, 0.516293)
+color = Color(0.929412, 0.658824, 0.419608, 0.756863)
+polygon = PackedVector2Array(-30.0741, -16.1538, 25.9259, -16.1538, 33.598, -0.0288615, 26, 13, -30.28, 13.2194, -38.1304, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_gher4")

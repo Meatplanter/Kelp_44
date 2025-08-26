@@ -46,9 +46,6 @@ autostart = true
 wait_time = 2.0
 autostart = true
 
-[node name="Enemy2" parent="." instance=ExtResource("4_fc0e3")]
-position = Vector2(81, -85)
-
 [node name="Label" type="Label" parent="."]
 offset_left = -12.0
 offset_top = 115.0
@@ -76,6 +73,9 @@ offset_top = -136.0
 offset_right = 27.0
 offset_bottom = -113.0
 text = "-90"
+
+[node name="Enemy" parent="." instance=ExtResource("4_fc0e3")]
+position = Vector2(94, 37)
 
 [connection signal="timeout" from="BulletSpawnTime" to="." method="_on_bullet_spawn_time_timeout"]
 [connection signal="timeout" from="SlomoBulletSpawnTime" to="." method="_on_slomo_bullet_spawn_time_timeout"]

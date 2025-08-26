@@ -42,7 +42,12 @@ func _process(delta: float) -> void:
 		$BulletSpawnTime.set_paused(0)
 	Global.gameSpeed = gameSpeed
 	
-	
+	if Global.leftWeighted == true && Global.rightWeighted == true:
+		Global.weightedShoe = "both"
+	elif Global.leftWeighted == true && Global.rightWeighted == false:
+		Global.weightedShoe = "left"
+	elif Global.leftWeighted == false && Global.rightWeighted == true:
+		Global.weightedShoe = "right"
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ChangeMode") && Global.gameMode == 0:
