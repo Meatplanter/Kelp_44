@@ -6,7 +6,6 @@ var move_speed: float = 50.0 * Global.gameSpeed
 func _process(delta: float) -> void:
 	look_at(Global.focus)
 	rotate(PI/2)
-	
 
 func _physics_process(delta: float) -> void:
 	var target_position: Vector2
@@ -20,3 +19,6 @@ func _physics_process(delta: float) -> void:
 			target_position = (Global.midpoint + %RightShoe.global_position) / 2
 
 	global_position = global_position.move_toward(target_position, move_speed * delta)
+
+func take_damage():
+	Global.playerHealth -= 1

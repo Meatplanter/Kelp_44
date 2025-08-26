@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://st87cub2d44w"]
+
+[ext_resource type="Texture2D" uid="uid://b7fdjmtmtm3i3" path="res://Assets/BloodSplatter.png" id="1_3c66d"]
+
+[node name="Wound" type="Area2D"]
+
+[node name="BloodSplatter" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_3c66d")

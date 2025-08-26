@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 			var gunPointing = -(rotationVector.angle_to(orientation))
 			var aimAngle = clamped_angle - gunPointing
 			
-			print ("clamped_angle to enemy: ",rad_to_deg(clamped_angle)," gunPointing: ",rad_to_deg(gunPointing)," aimAngle: ",rad_to_deg(aimAngle))
+			#print ("clamped_angle to enemy: ",rad_to_deg(clamped_angle)," gunPointing: ",rad_to_deg(gunPointing)," aimAngle: ",rad_to_deg(aimAngle))
 			
 			tween = create_tween()
 			#var rot = rotation_degrees
