@@ -7,7 +7,7 @@ var bulletTime = 0.05
 var CharBodyNode = null
 var RightShoeNode = null
 var LeftShoeNode = null
-var gameMode = 0 # 0 = spawn bullets 1 = spawn enemies
+var gameMode = 3 # 0 = spawn bullets 1 = spawn enemies
 var bulletsDodged = 0
 var enemiesKilled = 0
 var gameSpeed = 1.0

@@ -36,6 +36,8 @@ func _physics_process(delta: float) -> void:
 			var bodyEnemyAngle = enemyDirection.angle_to(orientation)
 			var clamped_angle = -(clamp(bodyEnemyAngle,-PI/2,PI/2))
 			
+			
+			
 			var rotationVector = Vector2.RIGHT.rotated(rotation)
 			var gunPointing = -(rotationVector.angle_to(orientation))
 			var aimAngle = clamped_angle - gunPointing
@@ -44,12 +46,13 @@ func _physics_process(delta: float) -> void:
 			
 			tween = create_tween()
 			#var rot = rotation_degrees
-			#tween.tween_property(self, "rotation_degrees", rotation_degrees-62, delta).set_ease(Tween.EASE_IN_OUT)
+			#rot += 1
+			#print(rotation)
+			#tween.tween_property(self, "rotation_degrees", 2760, 10).set_ease(Tween.EASE_IN_OUT)
 			#print(rad_to_deg(clamped_angle+aimAngle))
 			#print(rad_to_deg(enemyDirection.angle_to_point(Vector2.RIGHT)))
-			#rot += 1
 			#tween.tween_property(self, "rotation_degrees", 180, aimingSpeed).set_ease(Tween.EASE_IN_OUT)
-			tween.tween_property(self, "rotation", gunPointing + aimAngle + wrapf(Global.midpoint.angle_to_point(Global.focus),-PI,PI), aimingSpeed).set_ease(Tween.EASE_IN_OUT)
+			tween.tween_property(self, "rotation", rotation + aimAngle, aimingSpeed).set_ease(Tween.EASE_IN_OUT)
 
 
 		else: #enemy outside of range
