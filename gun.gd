@@ -73,7 +73,7 @@ func _process(delta: float) -> void:
 		$SlomoShootTimer.set_paused(1)
 		
 	aimingSpeed = Global.aimingSpeed / Global.gameSpeed
-	print(aimingSpeed)
+
 
 func shoot():
 	const BULLET = preload("res://Bullet.tscn")

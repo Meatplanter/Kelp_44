@@ -46,10 +46,11 @@ func _physics_process(delta: float) -> void:
 	if bulletContact == 0.0: bulletSlowdown = bulletSlowdown * Global.bulletSlowdown
 	travelledDistance += bulletSpeed * delta * Global.gameSpeed
 	
-	if travelledDistance > bulletRange:
+	if travelledDistance > bulletRange*bulletSlowdown:
 		Global.bulletsDodged += 1
 		queue_free()
-	
+	#print(bulletRange*bulletSlowdown,"  ",bulletSlowdown, " trav dist ",travelledDistance)
+	print(2/(pow(bulletSlowdown,5)))
 	#$SubViewport.size = Vector2(160,3) - Vector2(delta,3)
 
 func _on_body_entered(body: Node2D) -> void:
@@ -68,7 +69,7 @@ func _on_splatter_timer_timeout() -> void:
 	if $Bullet.is_visible_in_tree() == false:
 		var bloodTrail = bloodTrailScene.instantiate()
 		bloodTrail.rotation_degrees = randf_range(0,360)
-		bloodTrail.scale = Vector2(randf_range(0.5,2),randf_range(0.5,2))
+		bloodTrail.scale = Vector2(randf_range(1,2/(pow(bulletSlowdown,4))),randf_range(1,2/(pow(bulletSlowdown,4))))
 		bloodTrail.global_position = self.global_position
 		get_parent().add_child(bloodTrail)
 
