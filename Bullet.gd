@@ -11,7 +11,7 @@ var bulletEntryDistance
 var shootingPoint
 var shootingDistance
 
-var bloodTrailScene = preload("res://blood_trail.tscn")
+var bloodTrailScene = preload("res://blood_trail_pc.tscn")
 
 func _ready() -> void:
 	shootingPoint = global_position

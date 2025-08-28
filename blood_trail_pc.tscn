@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq4hevwntd1aw"]
+
+[ext_resource type="Texture2D" uid="uid://3x6wpddqu4d8" path="res://Assets/BloodSplatter2.png" id="1_1y17q"]
+
+[node name="blood_trail_pc" type="Area2D"]
+
+[node name="BloodSplatter2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.435294)
+texture_filter = 1
+texture = ExtResource("1_1y17q")
