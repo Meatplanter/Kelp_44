@@ -1,7 +1,7 @@
 extends Area2D
 
 var tween: Tween
-var aimingSpeed = Global.aimingSpeed
+var aimingSpeed = Global.aimingSpeed * Global.gameSpeed
 var enemyRange = Global.enemyRange
 
 var targetEnemy
@@ -43,7 +43,6 @@ func _physics_process(delta: float) -> void:
 			var aimAngle = clamped_angle - gunPointing
 			
 			#print ("clamped_angle to enemy: ",rad_to_deg(clamped_angle)," gunPointing: ",rad_to_deg(gunPointing)," aimAngle: ",rad_to_deg(aimAngle))
-			
 			tween = create_tween()
 			#var rot = rotation_degrees
 			#rot += 1
@@ -72,6 +71,9 @@ func _process(delta: float) -> void:
 	else:
 		$ShootTimer.set_paused(1)
 		$SlomoShootTimer.set_paused(1)
+		
+	aimingSpeed = Global.aimingSpeed / Global.gameSpeed
+	print(aimingSpeed)
 
 func shoot():
 	const BULLET = preload("res://Bullet.tscn")
