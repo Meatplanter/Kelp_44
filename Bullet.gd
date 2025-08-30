@@ -50,7 +50,7 @@ func _physics_process(delta: float) -> void:
 		Global.bulletsDodged += 1
 		queue_free()
 	#print(bulletRange*bulletSlowdown,"  ",bulletSlowdown, " trav dist ",travelledDistance)
-	print(2/(pow(bulletSlowdown,5)))
+	#print(2/(pow(bulletSlowdown,5)))
 	#$SubViewport.size = Vector2(160,3) - Vector2(delta,3)
 
 func _on_body_entered(body: Node2D) -> void:
