@@ -47,11 +47,13 @@ var rigtGunRotationCumulative = rad_to_deg(0*PI) #also initial gun position
 
 
 #gun & bullets
+var targetEnemy = null
 var aimingSpeed = 1 * gameSpeed
 var bulletSpeed = 150
 var bulletRange = 1000
 var bulletSlowdown = 0.998
 
+var bloodTrialVisible = false
 
 #enemy
 var enemyHealth = 200

@@ -66,7 +66,7 @@ func _on_body_entered(body: Node2D) -> void:
 		
 
 func _on_splatter_timer_timeout() -> void:
-	if $Bullet.is_visible_in_tree() == false:
+	if $Bullet.is_visible_in_tree() == false && Global.bloodTrialVisible == true:
 		var bloodTrail = bloodTrailScene.instantiate()
 		bloodTrail.rotation_degrees = randf_range(0,360)
 		bloodTrail.scale = Vector2(randf_range(1,2/(pow(bulletSlowdown,4))),randf_range(1,2/(pow(bulletSlowdown,4))))
@@ -74,7 +74,7 @@ func _on_splatter_timer_timeout() -> void:
 		get_parent().add_child(bloodTrail)
 
 func _on_slomo_splatter_timer_timeout() -> void:
-	if $Bullet.is_visible_in_tree() == false:
+	if $Bullet.is_visible_in_tree() == false && Global.bloodTrialVisible == true:
 		var bloodTrail = bloodTrailScene.instantiate()
 		bloodTrail.rotation_degrees = randf_range(0,360)
 		bloodTrail.scale = Vector2(randf_range(0.5,2),randf_range(0.5,2))

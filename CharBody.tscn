@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://vpi5u34tocl"]
+[gd_scene load_steps=7 format=3 uid="uid://vpi5u34tocl"]
 
 [ext_resource type="Script" uid="uid://cqyv41oyv0lcg" path="res://CharBody.gd" id="1_i5h2e"]
 [ext_resource type="PackedScene" uid="uid://bc2ej70xjolx2" path="res://LeftShoe.tscn" id="2_iaqfm"]
 [ext_resource type="PackedScene" uid="uid://dmw176204y7dd" path="res://RightShoe.tscn" id="3_sl5bb"]
 [ext_resource type="Script" uid="uid://c63kxpwm4xegy" path="res://marker_2d.gd" id="4_e8thm"]
-[ext_resource type="PackedScene" uid="uid://27towt3jaocl" path="res://gun.tscn" id="5_iaqfm"]
 [ext_resource type="Script" uid="uid://g7fnkyhbdemq" path="res://hp_left.gd" id="5_sl5bb"]
 [ext_resource type="PackedScene" uid="uid://dmant07862ycy" path="res://torso.tscn" id="6_7aaa2"]
 
@@ -99,11 +98,6 @@ text = "Enemies killed: "
 [node name="Torso" parent="." instance=ExtResource("6_7aaa2")]
 unique_name_in_owner = true
 position = Vector2(16, -1)
-
-[node name="Gun" parent="." instance=ExtResource("5_iaqfm")]
-light_mask = 3
-visibility_layer = 3
-position = Vector2(33, 0)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0

@@ -80,7 +80,7 @@ position = Vector2(18, 276)
 rotation = -1.57079
 
 [node name="Enemy" parent="." instance=ExtResource("5_ryrav")]
-position = Vector2(182, -62)
+position = Vector2(35, -73)
 
 [connection signal="timeout" from="BulletSpawnTime" to="." method="_on_bullet_spawn_time_timeout"]
 [connection signal="timeout" from="SlomoBulletSpawnTime" to="." method="_on_slomo_bullet_spawn_time_timeout"]

@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://27towt3jaocl"]
+[gd_scene load_steps=4 format=3 uid="uid://27towt3jaocl"]
 
 [ext_resource type="Script" uid="uid://dktqxutrtm32m" path="res://gun.gd" id="1_dk5gl"]
 [ext_resource type="Texture2D" uid="uid://bs1qakvfa2h7s" path="res://Assets/Revolver.png" id="1_vk1bi"]
-[ext_resource type="Texture2D" uid="uid://2ky28yqw5i71" path="res://Assets/SleeveForearm.png" id="3_kw0bs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dk5gl"]
 radius = 506.025
@@ -19,7 +18,7 @@ shape = SubResource("CircleShape2D_dk5gl")
 
 [node name="Revolver" type="Sprite2D" parent="WeaponPivot"]
 texture_filter = 1
-position = Vector2(48, 0)
+position = Vector2(8, 0)
 texture = ExtResource("1_vk1bi")
 
 [node name="ShootingPoint" type="Marker2D" parent="WeaponPivot/Revolver"]
@@ -32,21 +31,6 @@ autostart = true
 [node name="SlomoShootTimer" type="Timer" parent="."]
 wait_time = 10.0
 autostart = true
-
-[node name="ElbowPivot" type="Marker2D" parent="."]
-position = Vector2(21, 0)
-
-[node name="SleeveForearm" type="Sprite2D" parent="ElbowPivot"]
-texture_filter = 1
-position = Vector2(11, 0)
-scale = Vector2(0.625, 1)
-texture = ExtResource("3_kw0bs")
-
-[node name="SleeveForearm" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(11.75, 0)
-scale = Vector2(0.734375, 1)
-texture = ExtResource("3_kw0bs")
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="timeout" from="SlomoShootTimer" to="." method="_on_slomo_shoot_timer_timeout"]
