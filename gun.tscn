@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://2ky28yqw5i71" path="res://Assets/SleeveForearm.png" id="3_kw0bs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dk5gl"]
-radius = 200.0
+radius = 506.025
 
 [node name="Gun" type="Area2D"]
 collision_layer = 0

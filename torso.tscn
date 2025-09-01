@@ -9,6 +9,7 @@ height = 54.0
 [node name="Torso" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_50s6g")
+metadata/Player = true
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 position = Vector2(0.381481, 0)

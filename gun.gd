@@ -11,7 +11,6 @@ func shortest_angle(from: float, to: float) -> float:
 	var delta = fmod(to - from + PI, TAU) - PI
 	return from + delta
 
-
 func _physics_process(delta: float) -> void:
 	if get_parent().has_meta("Enemy"): #enemy has gun, points it at player
 		if global_position.distance_to(Global.midpoint) <= enemyRange: #player in range
@@ -23,41 +22,35 @@ func _physics_process(delta: float) -> void:
 			tween.tween_property(self, "rotation", shortest, aimingSpeed).set_ease(Tween.EASE_IN_OUT)
 		else:
 			hide()
+			
+			
 	elif get_parent().has_meta("Player"): #player has gun, points it at the closest enemy
 		global_position = Global.midpoint
 		var enemiesInRange = get_overlapping_bodies()
 		if enemiesInRange.size() > 0: #enemy in range
 			show()
-			targetEnemy = enemiesInRange.front()
-
-			var enemyDirection = (targetEnemy.global_position - Global.midpoint).normalized()
-			var orientation = (Global.focus - Global.midpoint).normalized()
-			#var orientationDegrees = rad_to_deg(orientation-rotation)
+			
+			#gun positioning
+			var orientation = (Global.focus - Global.midpoint).normalized() #vector perpendicular to the body position
+			var rotationVector = Vector2.RIGHT.rotated(rotation) #currently aiming in objective terms
+			var gunPointing = -(rotationVector.angle_to(orientation)) #currently aiming in subjective terms
+			
+			#enemy positioning
+			targetEnemy = enemiesInRange.front() #first enemy observed
+			var enemyDirection = (targetEnemy.global_position - self.global_position).normalized() #angle to enemy from midpoint
+			
+			#combined
 			var bodyEnemyAngle = enemyDirection.angle_to(orientation)
-			var clamped_angle = -(clamp(bodyEnemyAngle,-PI/2,PI/2))
+			var clamped_angle = -(clamp(bodyEnemyAngle,-PI/2,PI/2)) #subjective angle to enemy clamped in front of the body
+			var aimAngle = clamped_angle - gunPointing #how to correct to aim at enemy
 			
-			
-			
-			var rotationVector = Vector2.RIGHT.rotated(rotation)
-			var gunPointing = -(rotationVector.angle_to(orientation))
-			var aimAngle = clamped_angle - gunPointing
-			
-			#print ("clamped_angle to enemy: ",rad_to_deg(clamped_angle)," gunPointing: ",rad_to_deg(gunPointing)," aimAngle: ",rad_to_deg(aimAngle))
+			print ("clamped_angle to enemy: ",rad_to_deg(clamped_angle)," gunPointing: ",rad_to_deg(gunPointing)," aimAngle: ",rad_to_deg(aimAngle))
 			tween = create_tween()
-			#var rot = rotation_degrees
-			#rot += 1
-			#print(rotation)
-			#tween.tween_property(self, "rotation_degrees", 2760, 10).set_ease(Tween.EASE_IN_OUT)
-			#print(rad_to_deg(clamped_angle+aimAngle))
-			#print(rad_to_deg(enemyDirection.angle_to_point(Vector2.RIGHT)))
-			#tween.tween_property(self, "rotation_degrees", 180, aimingSpeed).set_ease(Tween.EASE_IN_OUT)
 			tween.tween_property(self, "rotation", rotation + aimAngle, aimingSpeed).set_ease(Tween.EASE_IN_OUT)
-
-
+		
 		else: #enemy outside of range
 			hide()
 		
-		#print(Global.midpoint.angle_to_point(global_position))
 
 
 func _process(delta: float) -> void:
@@ -86,11 +79,11 @@ func shoot():
 		new_bullet.global_position = %ShootingPoint.global_position
 		var enemiesInRange = get_overlapping_bodies()
 		if enemiesInRange.size() > 0:
-			var targetEnemy = enemiesInRange.front()
+			#var targetEnemy = enemiesInRange.front()
 			new_bullet.global_rotation = rotation 
 	
-	if is_visible_in_tree(): #don't shoot if parent hidden
-		get_parent().get_parent().add_child(new_bullet) #bullet doesn't disappear when enemy does
+	if is_visible_in_tree(): #shoot only if gun not hidden
+		get_parent().get_parent().add_child(new_bullet) #bullet doesn't disappear when gun/enemy disappears
 	
 
 
