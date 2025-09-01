@@ -13,7 +13,9 @@ func _physics_process(delta):
 		
 	if enemiesInRange.size() > 0:
 		targetEnemy = enemiesInRange.front()
+		#look_at(targetEnemy.global_position)
 	else:
 		targetEnemy = null
+	
 	
 	Global.targetEnemy = targetEnemy

@@ -8,7 +8,7 @@ var gameSpeed = 1.0
 var CharBodyNode = null
 var RightShoeNode = null
 var LeftShoeNode = null
-var gameMode = 0 # 0 = spawn bullets 1 = spawn enemies
+var gameMode = 2 # 0 = spawn bullets 1 = spawn enemies
 var bulletsDodged = 0
 var enemiesKilled = 0
 var cameraState = 0 #0 looking up, 1 looking right, 2 looking down, 3 looking left
@@ -48,7 +48,7 @@ var rigtGunRotationCumulative = rad_to_deg(0*PI) #also initial gun position
 
 #gun & bullets
 var targetEnemy = null
-var aimingSpeed = 1 * gameSpeed
+var aimingSpeed = 1
 var bulletSpeed = 150
 var bulletRange = 1000
 var bulletSlowdown = 0.998

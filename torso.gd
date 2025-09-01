@@ -33,16 +33,22 @@ func _physics_process(delta: float) -> void:
 		var enemyAngleRS = enemyDirectionRS.angle_to(orientation)
 		var clampedAngleRS = -(clamp(enemyAngleRS,-PI/2,PI/4))
 		tween = create_tween()
-		tween.tween_property($TorsoPolygon2D/RightShoulderPivot, "rotation", clampedAngleRS-PI/2, Global.aimingSpeed).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property($TorsoPolygon2D/RightShoulderPivot, "rotation", clampedAngleRS-PI/2, Global.aimingSpeed/Global.gameSpeed/3).set_ease(Tween.EASE_IN_OUT)
 
 		#rotate right elbow toward enemy
-		var enemyDirectionRE = (targetEnemy.global_position - $TorsoPolygon2D/RightShoulderPivot/RightBiceps/RightElbowPivot.global_position).normalized() #angle to enemy from right elbow
-		var enemyAngleRE = enemyDirectionRE.angle_to($TorsoPolygon2D/RightShoulderPivot/RightBiceps/RightElbowPivot.global_position) #angle to biceps
-		print(enemyAngleRE)
-		var clampedAngleRE = -(clamp(enemyAngleRE,-PI/2,PI/4))
-		tween = create_tween()
-		tween.tween_property($TorsoPolygon2D/RightShoulderPivot/RightBiceps/RightElbowPivot, "rotation", clampedAngleRE-PI/2, Global.aimingSpeed).set_ease(Tween.EASE_IN_OUT)
+		var bicepMidpointR = ($TorsoPolygon2D/RightShoulderPivot/RightBiceps/RightElbowPivot.global_position + $TorsoPolygon2D/RightShoulderPivot.global_position)*0.5
+		var bicepDirectionalR = $TorsoPolygon2D/RightShoulderPivot/RightBiceps/RightElbowPivot.global_position - $TorsoPolygon2D/RightShoulderPivot.global_position
+		var bicepNormalR = Vector2(-bicepDirectionalR.y,bicepDirectionalR.x).normalized()
+		var bicepFocusR = bicepMidpointR + bicepNormalR * -512
+		var bicepOrientationR = (bicepFocusR - bicepMidpointR).normalized()
 		
+		var enemyDirectionRE = (targetEnemy.global_position - $TorsoPolygon2D/RightShoulderPivot/RightBiceps/RightElbowPivot.global_position).normalized() #angle to enemy from right elbow
+		var enemyAngleRE = enemyDirectionRE.angle_to(bicepOrientationR) #angle to biceps
+		var clampedAngleRE = -(clamp(enemyAngleRE,-PI/2,0))
+		tween = create_tween()
+		tween.tween_property($TorsoPolygon2D/RightShoulderPivot/RightBiceps/RightElbowPivot, "rotation", clampedAngleRE-PI/2, Global.aimingSpeed/Global.gameSpeed).set_ease(Tween.EASE_IN_OUT)
+		
+		#print(Global.aimingSpeed/Global.gameSpeed/10)
 		#tween = create_tween()
 		#tween.tween_property($TorsoPolygon2D/RightShoulderPivot, "rotation", clamped_angle-PI/2, Global.aimingSpeed).set_ease(Tween.EASE_IN_OUT)
 		

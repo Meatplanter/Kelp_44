@@ -36,7 +36,6 @@ position = Vector2(24, 0)
 [node name="RightBiceps" type="Polygon2D" parent="TorsoPolygon2D/RightShoulderPivot"]
 position = Vector2(0.0235519, -0.00272036)
 rotation = -6.28319
-scale = Vector2(1, 1)
 color = Color(0.214763, 0.147017, 0.068558, 1)
 offset = Vector2(-3.02355, 0.00272018)
 polygon = PackedVector2Array(0, 0, 3, -4, 27, -4, 30, 0, 27, 4, 3, 4)
@@ -63,10 +62,8 @@ script = ExtResource("2_vfirn")
 
 [node name="HatCompressed" type="Sprite2D" parent="Head"]
 texture_filter = 1
-scale = Vector2(1, 1)
 texture = ExtResource("3_vfirn")
 flip_v = true
 
 [node name="HeadPerspective" type="CollisionShape2D" parent="Head"]
-scale = Vector2(1, 1)
 shape = SubResource("CircleShape2D_ldi0w")
