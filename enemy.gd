@@ -11,8 +11,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	look_at(Global.midpoint)
 	var direction = global_position.direction_to(playerLocation.midpoint)
-	if global_position.distance_to(playerLocation.midpoint) > 150:
+	if global_position.distance_to(playerLocation.midpoint) > 300:
 		velocity = direction * Global.gameSpeed * 30.0
 	else:
 		velocity = direction * 0.0

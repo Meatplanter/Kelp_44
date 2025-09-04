@@ -10,7 +10,7 @@ var tween: Tween
 var moveTime = Global.moveTime
 var sqrt = sqrt(2)
 var moveDistance = Global.moveDistance
-var maxMoveDistance = 75
+var maxMoveDistance = Global.maxMoveDistance
 var styleTween = Global.styleTween
 
 func _ready() -> void:

@@ -69,7 +69,7 @@ func _on_splatter_timer_timeout() -> void:
 	if $Bullet.is_visible_in_tree() == false && Global.bloodTrialVisible == true:
 		var bloodTrail = bloodTrailScene.instantiate()
 		bloodTrail.rotation_degrees = randf_range(0,360)
-		bloodTrail.scale = Vector2(randf_range(1,2/(pow(bulletSlowdown,4))),randf_range(1,2/(pow(bulletSlowdown,4))))
+		bloodTrail.scale = Vector2(randf_range(0.5,2),randf_range(0.5,2))
 		bloodTrail.global_position = self.global_position
 		get_parent().add_child(bloodTrail)
 

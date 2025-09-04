@@ -6,6 +6,8 @@ var LeftShoeNode
 
 var gameSpeed
 
+var enemy_count = 0
+
 func spawn_bullet():
 	var new_bullet = preload("res://Bullet.tscn").instantiate()
 	%PathFollow2D.progress_ratio = randf()
@@ -17,7 +19,7 @@ func spawn_enemy():
 	var new_enemy = preload("res://enemy.tscn").instantiate()
 	%PathFollow2D.progress_ratio = randf()
 	new_enemy.global_position = %PathFollow2D.global_position
-	if get_child_count() < 15:
+	if enemy_count < 5:
 		add_child(new_enemy)
 
 # Called when the node enters the scene tree for the first time.
@@ -27,6 +29,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	enemy_count = 0
+	for child in get_children():
+		if child.has_meta("Enemy"):
+			enemy_count += 1
 	if Global.leftMoving == false && Global.rightMoving == false:
 		Global.canMove = true
 	else:
