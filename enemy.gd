@@ -6,7 +6,9 @@ var health = Global.enemyHealth
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	EnemyManager.register_enemy(self)
+	
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -24,3 +26,6 @@ func take_damage():
 	if health == 0:
 		Global.enemiesKilled += 1
 		queue_free()
+
+func _exit_tree():
+	EnemyManager.unregister_enemy(self)

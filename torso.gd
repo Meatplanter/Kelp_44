@@ -29,10 +29,10 @@ func _physics_process(delta: float) -> void:
 	global_position = global_position.move_toward(swayPostion, move_speed * delta * Global.gameSpeed)
 	
 	
-	if Global.targetEnemyLeft != null && Global.targetEnemyRight != null:
+	if EnemyManager.targetEnemyLeft != null && EnemyManager.targetEnemyRight != null:
 		var orientation = (Global.focus - Global.midpoint).normalized() #vector perpendicular to the body position
-		var targetEnemyLeft = Global.targetEnemyLeft
-		var targetEnemyRight = Global.targetEnemyRight
+		var targetEnemyLeft = EnemyManager.targetEnemyLeft
+		var targetEnemyRight = EnemyManager.targetEnemyRight
 		
 		#var enemyDirectionLE = (targetEnemy.global_position - $TorsoPolygon2D/RightShoulderPivot.global_position).normalized() #angle to enemy from right shoulder
 		
@@ -85,7 +85,7 @@ func _physics_process(delta: float) -> void:
 		#var rotationVector = Vector2.UP.rotated(rotation) #currently aiming in objective terms
 		#var pointing = -(rotationVector.angle_to(orientation)) #currently aiming in subjective terms
 		#
-		#var targetEnemy = Global.targetEnemy
+		#var targetEnemy = EnemyManager.targetEnemyLeft
 		#var enemyDirection = (targetEnemy.global_position - $TorsoPolygon2D/RightShoulderPivot.global_position).normalized() #angle to enemy from shoulder
 		#
 		#var bodyEnemyAngle = enemyDirection.angle_to(orientation)

@@ -9,22 +9,56 @@ var rightCooldown = 1.0
 
 var thresholdAim = deg_to_rad(15)
 
+var targetEnemyLeft = EnemyManager.targetEnemyLeft
+var targetEnemyRight = EnemyManager.targetEnemyRight
+
 func _draw():
-	if get_parent().has_meta("Player") && Global.targetEnemyLeft != null && get_parent().has_meta("Left"):
+	if get_parent().has_meta("Player") && EnemyManager.targetEnemyLeft != null && get_parent().has_meta("Left"):
 		var aimFrom = %ShootingPoint.position
-		var aimTo = %ShootingPoint.global_position + Vector2.RIGHT.rotated(%ShootingPoint.rotation) * 500
-		var aimDir = (aimTo - aimFrom).normalized()
-		var targetDir = (Global.targetEnemyLeft.global_position - aimFrom)
-		var angleDiff = aimDir.angle_to(targetDir)
-		#if abs(angleDiff) <= thresholdAim: 
-		print(rad_to_deg(angleDiff))
-		if abs(angleDiff) <= thresholdAim:
-			draw_line(aimFrom,aimTo,Color.KHAKI)
+		var aimTo = %ShootingPoint.global_position + Vector2.RIGHT.rotated(%ShootingPoint.rotation) * 50000
+		#var aimDir = (aimTo - aimFrom).normalized()
+		#var targetDir = (EnemyManager.targetEnemyLeft.global_position - aimFrom).normalized()
+		#var angleDiff = aimDir.angle_to(targetDir)
+		#print(EnemyManager.targetEnemyLeft.global_position)
+		#if abs(angleDiff) <= thresholdAim:
+		draw_line(aimFrom,aimTo,Color.KHAKI)
 		#draw_circle(%ShootingPoint.position,10,Color.RED)
+	elif get_parent().has_meta("Player") && EnemyManager.targetEnemyRight != null && get_parent().has_meta("Right"):
+		var aimFrom = %ShootingPoint.position
+		var aimTo = %ShootingPoint.global_position + Vector2.RIGHT.rotated(%ShootingPoint.rotation) * 50000
+		draw_line(aimFrom,aimTo,Color.KHAKI)
+		
 
 func shortest_angle(from: float, to: float) -> float:
 	var delta = fmod(to - from + PI, TAU) - PI
 	return from + delta
+
+#func select_next_target_left(direction: Vector2):
+	#if not targetEnemyLeft:
+		#return
+#
+	#var enemies = EnemyManager.get_enemies()
+	#var current_pos = targetEnemyLeft.global_position
+#
+	#var best_enemy: Node2D = null
+	#var best_score = INF
+#
+	#for enemy in enemies:
+		#if enemy == targetEnemyLeft:
+			#continue
+#
+		#var to_enemy = (EnemyManager.enemy.global_position - current_pos).normalized()
+#
+		## Direction check: only consider enemies roughly in that direction
+		#if direction.dot(to_enemy) > 0.5:  # adjust threshold as needed
+			#var dist = current_pos.distance_to(EnemyManager.enemy.global_position)
+			#if dist < best_score:
+				#best_score = dist
+				#best_enemy = enemy
+				#
+	#if best_enemy:
+		#targetEnemyLeft = best_enemy
+		##highlight_target(targetEnemyLeft)
 
 func _input(event):
 	if event.is_action_pressed("ShootLeftGun") && leftCooldown < 0 && get_parent().has_meta("Player") && get_parent().has_meta("Left"):
@@ -44,7 +78,7 @@ func _physics_process(delta: float) -> void:
 			
 			
 	elif get_parent().has_meta("Player"): #player has gun, points it at the closest enemy
-		if Global.targetEnemyRight != null && Global.targetEnemyLeft != null: #enemy in range
+		if EnemyManager.targetEnemyRight != null && EnemyManager.targetEnemyLeft != null: #enemy in range
 			show()
 		else: #enemy outside of range
 			hide()
@@ -91,7 +125,8 @@ func shoot():
 	new_bullet.global_rotation = get_parent().global_rotation
 	
 	if is_visible_in_tree(): #shoot only if gun not hidden
-		get_parent().get_parent().add_child(new_bullet)
+		get_tree().get_current_scene().add_child(new_bullet)
+		#get_parent().get_parent().get_parent().add_child(new_bullet)
 		
 	
 
