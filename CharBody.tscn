@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://vpi5u34tocl"]
+[gd_scene load_steps=8 format=3 uid="uid://vpi5u34tocl"]
 
 [ext_resource type="Script" uid="uid://cqyv41oyv0lcg" path="res://CharBody.gd" id="1_i5h2e"]
 [ext_resource type="PackedScene" uid="uid://bc2ej70xjolx2" path="res://LeftShoe.tscn" id="2_iaqfm"]
 [ext_resource type="PackedScene" uid="uid://dmw176204y7dd" path="res://RightShoe.tscn" id="3_sl5bb"]
 [ext_resource type="Script" uid="uid://c63kxpwm4xegy" path="res://marker_2d.gd" id="4_e8thm"]
+[ext_resource type="Script" uid="uid://qjt0l3kan22g" path="res://camera_2d.gd" id="5_7aaa2"]
 [ext_resource type="Script" uid="uid://g7fnkyhbdemq" path="res://hp_left.gd" id="5_sl5bb"]
 [ext_resource type="PackedScene" uid="uid://dmant07862ycy" path="res://torso.tscn" id="6_7aaa2"]
 
@@ -34,8 +35,10 @@ script = ExtResource("4_e8thm")
 [node name="Camera2D" type="Camera2D" parent="CharBody/Marker2D"]
 ignore_rotation = false
 zoom = Vector2(2, 2)
+position_smoothing_enabled = true
 rotation_smoothing_enabled = true
 rotation_smoothing_speed = 3.0
+script = ExtResource("5_7aaa2")
 
 [node name="LabelHealthLeft" type="Label" parent="CharBody/Marker2D/Camera2D"]
 offset_left = -286.0
