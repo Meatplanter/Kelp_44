@@ -27,11 +27,11 @@ func enemy_scope():
 	get_enemies()
 	for enemy in enemies:
 		if enemy.global_position.x > maxX:
-			maxX = enemy.global_position.x
+			maxX = enemy.global_position.x +32
 		if enemy.global_position.x < minX:
-			minX = enemy.global_position.x
+			minX = enemy.global_position.x -32
 		if enemy.global_position.y > maxY:
-			maxY = enemy.global_position.y
+			maxY = enemy.global_position.y +32
 		if enemy.global_position.y < minY:
-			minY = enemy.global_position.y
+			minY = enemy.global_position.y -32
 			

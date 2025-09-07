@@ -8,7 +8,7 @@ var gameSpeed = 1.0
 var CharBodyNode = null
 var RightShoeNode = null
 var LeftShoeNode = null
-var gameMode = 1 # 0 = spawn bullets 1 = spawn enemies
+var gameMode = 2 # 0 = spawn bullets 1 = spawn enemies
 var bulletsDodged = 0
 var enemiesKilled = 0
 var cameraState = 0 #0 looking up, 1 looking right, 2 looking down, 3 looking left
