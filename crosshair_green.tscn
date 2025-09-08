@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cv6rrvjpkfwc4"]
+
+[ext_resource type="Texture2D" uid="uid://dtkfml6h0qms4" path="res://Assets/Crosshair_green.png" id="1_ohvo6"]
+
+[node name="Crosshair_green" type="Marker2D"]
+
+[node name="CrosshairGreen" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.588235)
+texture_filter = 1
+texture = ExtResource("1_ohvo6")

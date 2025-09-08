@@ -75,38 +75,6 @@ func _physics_process(delta: float) -> void:
 		var clampedAngleLE = -(clamp(enemyAngleLE,-PI,-PI/2))
 		tween = create_tween()
 		tween.tween_property($TorsoPolygon2D/LeftShoulderPivot/LeftBiceps/LeftElbowPivot, "rotation", clampedAngleLE-PI/2, Global.aimingSpeed/Global.gameSpeed)#.set_ease(Tween.EASE_IN_OUT)
-		
-		#print(Global.aimingSpeed/Global.gameSpeed/10)
-		#tween = create_tween()
-		#tween.tween_property($TorsoPolygon2D/RightShoulderPivot, "rotation", clamped_angle-PI/2, Global.aimingSpeed).set_ease(Tween.EASE_IN_OUT)
-		
-		#rotate right forearm toward enemy
-		#var orientation = (Global.focus - Global.midpoint).normalized() #vector perpendicular to the body position
-		#var rotationVector = Vector2.UP.rotated(rotation) #currently aiming in objective terms
-		#var pointing = -(rotationVector.angle_to(orientation)) #currently aiming in subjective terms
-		#
-		#var targetEnemy = EnemyManager.targetEnemyLeft
-		#var enemyDirection = (targetEnemy.global_position - $TorsoPolygon2D/RightShoulderPivot.global_position).normalized() #angle to enemy from shoulder
-		#
-		#var bodyEnemyAngle = enemyDirection.angle_to(orientation)
-		#var clamped_angle = -(clamp(bodyEnemyAngle,-PI/2,PI/4)) #subjective angle to enemy clamped in front of the body
-		##var aimAngle = clamped_angle - pointing #how to correct to aim at enemy
-		#
-		#tween = create_tween()
-		#tween.tween_property($TorsoPolygon2D/RightShoulderPivot, "rotation", clamped_angle-PI/2, Global.aimingSpeed).set_ease(Tween.EASE_IN_OUT)
-
-		#print(rad_to_deg(aimAngle))
-		#print(rad_to_deg(clamped_angle))
-		#print(rad_to_deg(pointing))
-		#print(rotationVector)
-		#print ("clamped_angle to enemy: ",rad_to_deg(clamped_angle)," Pointing: ",rad_to_deg(pointing)," aimAngle: ",rad_to_deg(aimAngle))
-		
-		#var RSRot = $TorsoPolygon2D/RightShoulderPivot.rotation
-		#Vector2.RIGHT.rotated(rotation)
-		#var RSEnem = $TorsoPolygon2D/RightShoulderPivot
-
-		
-		#print(rotationVector)
 
 func take_damage():
 	Global.playerHealth -= 1

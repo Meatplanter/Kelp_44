@@ -17,7 +17,7 @@ func _ready() -> void:
 	Global.RightShoeNode = self
 
 func _input(event):
-	if Global.canMove == true && %CharBody.cameraState == 0:
+	if Global.canMove == true && %CharBody.cameraState == 0 && Global.targettingMode == false:
 		if event.is_action_pressed("RS_move_right") && %LeftShoe.global_position.distance_to(global_position + Vector2(1,0) * moveDistance) < maxMoveDistance && %LeftShoe.global_position.distance_to(global_position + Vector2(1,0) * moveDistance) != 0:
 			targPos[0] += moveDistance
 			if Global.rightWeighted == false: #optimal complex movement
@@ -195,7 +195,7 @@ func _input(event):
 			
 
 
-	elif Global.canMove == true && %CharBody.cameraState == 1:
+	elif Global.canMove == true && %CharBody.cameraState == 1 && Global.targettingMode == false:
 		if event.is_action_pressed("RS_move_right") && %LeftShoe.global_position.distance_to(global_position + Vector2(0,1) * moveDistance) < maxMoveDistance && %LeftShoe.global_position.distance_to(global_position + Vector2(0,1) * moveDistance) != 0:
 			targPos[1] += moveDistance
 			if Global.rightWeighted == false: #optimal complex movement
@@ -374,7 +374,7 @@ func _input(event):
 			
 
 
-	elif Global.canMove == true && %CharBody.cameraState == 2:
+	elif Global.canMove == true && %CharBody.cameraState == 2 && Global.targettingMode == false:
 		if event.is_action_pressed("RS_move_right") && %LeftShoe.global_position.distance_to(global_position + Vector2(-1,0) * moveDistance) < maxMoveDistance && %LeftShoe.global_position.distance_to(global_position + Vector2(-1,0) * moveDistance) != 0:
 			targPos[0] -= moveDistance
 			if Global.rightWeighted == false: #optimal complex movement
@@ -551,7 +551,7 @@ func _input(event):
 			
 
 
-	elif Global.canMove == true && %CharBody.cameraState == 3:
+	elif Global.canMove == true && %CharBody.cameraState == 3 && Global.targettingMode == false:
 		if event.is_action_pressed("RS_move_right") && %LeftShoe.global_position.distance_to(global_position + Vector2(0,-1) * moveDistance) < maxMoveDistance && %LeftShoe.global_position.distance_to(global_position + Vector2(0,-1) * moveDistance) != 0:
 			targPos[1] -= moveDistance
 			if Global.rightWeighted == false: #optimal complex movement

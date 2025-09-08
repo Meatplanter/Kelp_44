@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqhvigu27dsbf"]
+[gd_scene load_steps=7 format=3 uid="uid://bqhvigu27dsbf"]
 
 [ext_resource type="Script" uid="uid://cey3hoiu0kp28" path="res://enemy.gd" id="1_4gyqm"]
 [ext_resource type="PackedScene" uid="uid://27towt3jaocl" path="res://gun.tscn" id="2_iifgy"]
 [ext_resource type="Texture2D" uid="uid://b7oifqaddjc5d" path="res://Assets/Sombr.png" id="2_qi2p4"]
+[ext_resource type="PackedScene" uid="uid://djlscpladb4be" path="res://crosshair.tscn" id="4_iifgy"]
+[ext_resource type="PackedScene" uid="uid://cv6rrvjpkfwc4" path="res://crosshair_green.tscn" id="5_epg4t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iifgy"]
 radius = 20.0
@@ -21,3 +23,17 @@ metadata/Enemy = true
 
 [node name="Gun" parent="." instance=ExtResource("2_iifgy")]
 position = Vector2(34, 0)
+
+[node name="CrosshairLeft" parent="." instance=ExtResource("4_iifgy")]
+visible = false
+
+[node name="CrosshairRight" parent="." instance=ExtResource("4_iifgy")]
+visible = false
+rotation = 0.785398
+
+[node name="Crosshair_greenLeft" parent="." instance=ExtResource("5_epg4t")]
+visible = false
+
+[node name="Crosshair_greenRight" parent="." instance=ExtResource("5_epg4t")]
+visible = false
+rotation = 0.785398

@@ -36,6 +36,7 @@ script = ExtResource("4_e8thm")
 ignore_rotation = false
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 rotation_smoothing_enabled = true
 rotation_smoothing_speed = 3.0
 script = ExtResource("5_7aaa2")

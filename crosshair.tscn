@@ -5,6 +5,6 @@
 [node name="Crosshair" type="Marker2D"]
 
 [node name="Crosshair" type="Sprite2D" parent="."]
-self_modulate = Color(1, 1, 1, 0.784314)
+self_modulate = Color(1, 1, 1, 0.588235)
 texture_filter = 1
 texture = ExtResource("1_rtxwy")

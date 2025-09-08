@@ -13,6 +13,26 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if EnemyManager.targetEnemyLeft == self && Global.leftCanShoot == true:
+		$Crosshair_greenLeft.show()
+		$CrosshairLeft.hide()
+	elif EnemyManager.targetEnemyLeft == self && Global.leftCanShoot == false:
+		$Crosshair_greenLeft.hide()
+		$CrosshairLeft.show()
+	else:
+		$Crosshair_greenLeft.hide()
+		$CrosshairLeft.hide()
+		
+	if EnemyManager.targetEnemyRight == self && Global.rightCanShoot == true:
+		$Crosshair_greenRight.show()
+		$CrosshairRight.hide()
+	elif EnemyManager.targetEnemyRight == self && Global.rightCanShoot == false:
+		$Crosshair_greenRight.hide()
+		$CrosshairRight.show()
+	else:
+		$Crosshair_greenRight.hide()
+		$CrosshairRight.hide()
+	
 	look_at(Global.midpoint)
 	var direction = global_position.direction_to(playerLocation.midpoint)
 	if global_position.distance_to(playerLocation.midpoint) > 300:

@@ -26,9 +26,9 @@ func spawn_enemy():
 func _ready() -> void:
 	pass # Replace with function body.
 
-func _draw():
-	draw_circle(Vector2(EnemyManager.minX,EnemyManager.minY),10,Color.RED)
-	draw_circle(Vector2(EnemyManager.maxX,EnemyManager.maxY),10,Color.RED)
+#func _draw():
+	#draw_circle(Vector2(EnemyManager.minX,EnemyManager.minY),10,Color.RED)
+	#draw_circle(Vector2(EnemyManager.maxX,EnemyManager.maxY),10,Color.RED)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

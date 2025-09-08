@@ -3,6 +3,7 @@ extends Node
 #game
 var normalTime = 1.0
 var bulletTime = 0.05
+var targettingMode = false
 
 var gameSpeed = 1.0
 var CharBodyNode = null
@@ -15,7 +16,7 @@ var cameraState = 0 #0 looking up, 1 looking right, 2 looking down, 3 looking le
 
 
 #player
-var playerHealth = 10
+var playerHealth = 1000
 
 var midpoint = Vector2(0,16)
 var focus = Vector2(0,0)
@@ -50,6 +51,9 @@ var rigtGunRotationCumulative = rad_to_deg(0*PI) #also initial gun position
 #gun & bullets
 var targetEnemyLeft = null
 var targetEnemyRight = null
+var leftCanShoot = false
+var rightCanShoot = false
+
 var aimingSpeed = 1
 var bulletSpeed = 150
 var bulletRange = 1000
@@ -60,3 +64,10 @@ var bloodTrialVisible = true
 #enemy
 var enemyHealth = 2
 var enemyRange = 300
+
+
+#vector camera normal
+var VecRight = Vector2.RIGHT
+var VecLeft = Vector2.LEFT
+var VecUp = Vector2.UP
+var VecDown = Vector2.DOWN

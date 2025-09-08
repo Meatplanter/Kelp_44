@@ -88,12 +88,16 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	if leftCooldown > 0 && get_parent().has_meta("Player") && get_parent().has_meta("Left"):
 		$WeaponPivot/Revolver.self_modulate = Color.RED
+		Global.leftCanShoot = false
 	elif leftCooldown < 0 && get_parent().has_meta("Player") && get_parent().has_meta("Left"):
 		$WeaponPivot/Revolver.self_modulate = Color.GREEN
+		Global.leftCanShoot = true
 	if rightCooldown > 0 && get_parent().has_meta("Player") && get_parent().has_meta("Right"):
 		$WeaponPivot/Revolver.self_modulate = Color.RED
+		Global.rightCanShoot = false
 	elif rightCooldown < 0 && get_parent().has_meta("Player") && get_parent().has_meta("Right"):
 		$WeaponPivot/Revolver.self_modulate = Color.GREEN
+		Global.rightCanShoot = true
 	
 	if is_visible_in_tree() == true:
 		if Global.gameSpeed == Global.bulletTime:
