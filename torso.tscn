@@ -80,4 +80,5 @@ texture = ExtResource("3_vfirn")
 flip_v = true
 
 [node name="HeadPerspective" type="CollisionShape2D" parent="Head"]
+visible = false
 shape = SubResource("CircleShape2D_ldi0w")

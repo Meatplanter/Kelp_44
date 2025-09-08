@@ -6,9 +6,14 @@ var shoulderRotationOffset = 2 #so that the shoulder rotates quicker and adjust 
 
 func _process(delta: float) -> void:
 	look_at(Global.focus)
+	#look_at(Global.VecUp*500)
 	rotate(PI/2)
 	
-	
+	if Global.gameSpeed == Global.normalTime:
+		shoulderRotationOffset = 20
+	elif Global.gameSpeed == Global.bulletTime:
+		shoulderRotationOffset = 2
+
 	#if Global.gameSpeed == 1:
 		#shoulderRotationOffset = 3
 	#else:
@@ -31,6 +36,7 @@ func _physics_process(delta: float) -> void:
 	
 	if EnemyManager.targetEnemyLeft != null && EnemyManager.targetEnemyRight != null:
 		var orientation = (Global.focus - Global.midpoint).normalized() #vector perpendicular to the body position
+		#var orientation = (Global.VecUp*500 - Global.midpoint).normalized() #vector perpendicular to the body position
 		var targetEnemyLeft = EnemyManager.targetEnemyLeft
 		var targetEnemyRight = EnemyManager.targetEnemyRight
 		

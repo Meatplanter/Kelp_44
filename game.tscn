@@ -79,8 +79,5 @@ text = "-90"
 [node name="Enemy" parent="." instance=ExtResource("4_fc0e3")]
 position = Vector2(115, -68)
 
-[node name="Enemy2" parent="." instance=ExtResource("4_fc0e3")]
-position = Vector2(-66, 72)
-
 [connection signal="timeout" from="BulletSpawnTime" to="." method="_on_bullet_spawn_time_timeout"]
 [connection signal="timeout" from="SlomoBulletSpawnTime" to="." method="_on_slomo_bullet_spawn_time_timeout"]
