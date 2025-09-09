@@ -17,7 +17,7 @@ func _ready() -> void:
 	Global.LeftShoeNode = self
 
 func _input(event):
-	if Global.canMove == true && %CharBody.cameraState == 0 && Global.targettingMode == false:
+	if Global.canMove == true && %CharBody.cameraState == 0 && Global.targettingMode == false && Global.timeReverseMode == false:
 		if event.is_action_pressed("LS_move_right") && %RightShoe.global_position.distance_to(global_position + Vector2(1,0) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(1,0) * moveDistance) != 0:
 			targPos[0] += moveDistance
 			if Global.leftWeighted == false && targPos[0] == Global.RightShoeNode.global_position.x - moveDistance && targPos[1] == Global.RightShoeNode.global_position.y: #optimal walking
@@ -196,7 +196,7 @@ func _input(event):
 			
 
 
-	elif Global.canMove == true && %CharBody.cameraState == 1 && Global.targettingMode == false:
+	elif Global.canMove == true && %CharBody.cameraState == 1 && Global.targettingMode == false && Global.timeReverseMode == false:
 		if event.is_action_pressed("LS_move_right") && %RightShoe.global_position.distance_to(global_position + Vector2(0,1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(0,1) * moveDistance) != 0:
 			targPos[1] += moveDistance
 			if Global.leftWeighted == false && targPos[1] == Global.RightShoeNode.global_position.y - moveDistance && targPos[0] == Global.RightShoeNode.global_position.x: #optimal walking
@@ -373,7 +373,7 @@ func _input(event):
 			
 
 
-	elif Global.canMove == true && %CharBody.cameraState == 2 && Global.targettingMode == false:
+	elif Global.canMove == true && %CharBody.cameraState == 2 && Global.targettingMode == false && Global.timeReverseMode == false:
 		if event.is_action_pressed("LS_move_right") && %RightShoe.global_position.distance_to(global_position + Vector2(-1,0) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(-1,0) * moveDistance) != 0:
 			targPos[0] -= moveDistance
 			if Global.leftWeighted == false && targPos[0] == Global.RightShoeNode.global_position.x + moveDistance && targPos[1] == Global.RightShoeNode.global_position.y: #optimal walking
@@ -551,7 +551,7 @@ func _input(event):
 			
 
 
-	elif Global.canMove == true && %CharBody.cameraState == 3 && Global.targettingMode == false:
+	elif Global.canMove == true && %CharBody.cameraState == 3 && Global.targettingMode == false && Global.timeReverseMode == false:
 		if event.is_action_pressed("LS_move_right") && %RightShoe.global_position.distance_to(global_position + Vector2(0,-1) * moveDistance) < maxMoveDistance && %RightShoe.global_position.distance_to(global_position + Vector2(0,-1) * moveDistance) != 0:
 			targPos[1] -= moveDistance
 			if Global.leftWeighted == false && targPos[1] == Global.RightShoeNode.global_position.y + moveDistance && targPos[0] == Global.RightShoeNode.global_position.x: #optimal walking
@@ -740,3 +740,4 @@ func _process(delta: float) -> void:
 		Global.leftMoving = false
 	else:
 		Global.leftMoving = true
+		Global.pausePoint = 0

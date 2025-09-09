@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://vpi5u34tocl"]
+[gd_scene load_steps=9 format=3 uid="uid://vpi5u34tocl"]
 
 [ext_resource type="Script" uid="uid://cqyv41oyv0lcg" path="res://CharBody.gd" id="1_i5h2e"]
 [ext_resource type="PackedScene" uid="uid://bc2ej70xjolx2" path="res://LeftShoe.tscn" id="2_iaqfm"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://qjt0l3kan22g" path="res://camera_2d.gd" id="5_7aaa2"]
 [ext_resource type="Script" uid="uid://g7fnkyhbdemq" path="res://hp_left.gd" id="5_sl5bb"]
 [ext_resource type="PackedScene" uid="uid://dmant07862ycy" path="res://torso.tscn" id="6_7aaa2"]
+[ext_resource type="PackedScene" uid="uid://c5nunyagwdk5f" path="res://pause_menu.tscn" id="7_tfx1a"]
 
 [node name="CharBody" type="CharacterBody2D"]
 visibility_layer = 2
@@ -57,6 +58,9 @@ offset_bottom = -137.0
 text = "10"
 script = ExtResource("5_sl5bb")
 metadata/_edit_use_anchors_ = true
+
+[node name="Pause menu" parent="CharBody/Marker2D/Camera2D" instance=ExtResource("7_tfx1a")]
+visible = false
 
 [node name="GameOver" type="CanvasLayer" parent="CharBody/Marker2D"]
 visible = false

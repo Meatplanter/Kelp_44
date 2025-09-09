@@ -60,15 +60,25 @@ func _process(delta: float) -> void:
 	elif Global.leftWeighted == false && Global.rightWeighted == true:
 		Global.weightedShoe = "right"
 		
+		
+	if Input.is_action_pressed("TimeReverse") && Global.pausePoint < 0:
+		Global.timeReverseMode = true
+	else:
+		Global.timeReverseMode = false
+		
+	if Global.timeReverseMode == true:
+		Global.gameSpeed = Global.timeReverse
+		
+	Global.pausePoint -= Global.gameSpeed
 
-func _input(event: InputEvent) -> void:
+	
+func _input(event):
 	if event.is_action_pressed("ChangeMode") && Global.gameMode == 0:
 		Global.gameMode = 1
 		print("Mode is now: Spawn enemies")
 	elif event.is_action_pressed("ChangeMode") && Global.gameMode == 1:
 		Global.gameMode = 0
 		print("Mode is now: Spawn bullets")
-		
 
 func _on_bullet_spawn_time_timeout() -> void:
 	if Global.gameMode == 0:

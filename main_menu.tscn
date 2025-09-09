@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=3 uid="uid://dti6ul7mc0mum"]
+
+[ext_resource type="Script" uid="uid://dxtw4ih6v5wcu" path="res://main_menu.gd" id="1_06t4h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vrkn"]
+bg_color = Color(0.424688, 0.659625, 0.548648, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06t4h")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -110.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
+text = "Start
+"
+
+[node name="GameMode" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 19.0
+offset_right = 368.0
+offset_bottom = 50.0
+item_count = 3
+popup/item_0/text = "spawn bullets"
+popup/item_0/id = 0
+popup/item_1/text = "spawn enemies"
+popup/item_1/id = 1
+popup/item_2/text = "spawn nothing"
+popup/item_2/id = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 21.0
+offset_right = 132.0
+offset_bottom = 44.0
+text = "Game mode:"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 63.0
+offset_right = 132.0
+offset_bottom = 86.0
+text = "Bullet speed:"
+
+[node name="BulletSpeed" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 58.0
+offset_right = 368.0
+offset_bottom = 91.0
+placeholder_text = "Default: 150"
+
+[connection signal="pressed" from="Button" to="." method="_startgame_button_pressed"]
+[connection signal="item_selected" from="GameMode" to="." method="_on_option_button_item_selected"]
+[connection signal="text_changed" from="BulletSpeed" to="." method="_on_bullet_speed_text_changed"]

@@ -18,6 +18,13 @@ func _process(delta: float) -> void:
 		#shoulderRotationOffset = 3
 	#else:
 		#shoulderRotationOffset = 1
+		
+	if EnemyManager.get_enemies().size() < 1:
+		$TorsoPolygon2D/RightShoulderPivot.hide()
+		$TorsoPolygon2D/LeftShoulderPivot.hide()
+	else:
+		$TorsoPolygon2D/RightShoulderPivot.show()
+		$TorsoPolygon2D/LeftShoulderPivot.show()
 
 func _physics_process(delta: float) -> void:
 
@@ -31,7 +38,7 @@ func _physics_process(delta: float) -> void:
 		"right":
 			swayPostion = (Global.midpoint + %RightShoe.global_position) / 2
 	
-	global_position = global_position.move_toward(swayPostion, move_speed * delta * Global.gameSpeed)
+	global_position = global_position.move_toward(swayPostion, move_speed * delta * abs(Global.gameSpeed))
 	
 	
 	if EnemyManager.targetEnemyLeft != null && EnemyManager.targetEnemyRight != null:

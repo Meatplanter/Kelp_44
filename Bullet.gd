@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 		
 		if bulletEntryDistance >= 160:
 			queue_free()
-			
+	
 
 func _physics_process(delta: float) -> void:
 	var direction = Vector2.RIGHT.rotated(rotation)
@@ -52,6 +52,7 @@ func _physics_process(delta: float) -> void:
 	#print(bulletRange*bulletSlowdown,"  ",bulletSlowdown, " trav dist ",travelledDistance)
 	#print(2/(pow(bulletSlowdown,5)))
 	#$SubViewport.size = Vector2(160,3) - Vector2(delta,3)
+	
 
 func _on_body_entered(body: Node2D) -> void:
 	$Bullet.hide()

@@ -53,6 +53,10 @@ func _process(delta):
 		Global.VecUp = Vector2.LEFT
 		Global.VecDown = Vector2.RIGHT
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("Esc"):
+		get_tree().paused = true
+		$"Pause menu".show()
 
 	if Input.is_action_pressed("TargettingMode"):
 		targetting_mode(Vector2(EnemyManager.minX,EnemyManager.minY),Vector2(EnemyManager.maxX,EnemyManager.maxY))
@@ -61,3 +65,4 @@ func _process(delta):
 		zoom = normal_zoom
 		global_position = Global.midpoint
 		Global.targettingMode = false
+		
