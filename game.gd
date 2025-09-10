@@ -61,7 +61,7 @@ func _process(delta: float) -> void:
 		Global.weightedShoe = "right"
 		
 		
-	if Input.is_action_pressed("TimeReverse") && Global.pausePoint < 0:
+	if Input.is_action_pressed("Space") && Global.pausePoint < 0:
 		Global.timeReverseMode = true
 	else:
 		Global.timeReverseMode = false

@@ -19,7 +19,7 @@ var cameraState = 0 #0 looking up, 1 looking right, 2 looking down, 3 looking le
 
 
 #player
-var playerHealth = 1000
+var playerHealth = 10
 
 var midpoint = Vector2(0,16)
 var focus = Vector2(0,0)
@@ -28,15 +28,24 @@ var focus = Vector2(0,0)
 #movement
 var moveTime = 0.4 #useless?
 var moveDistance = 32 #base 32
-var maxMoveDistance = 65 #base 75
+var maxMoveDistance = 65 #at first 75
 var styleTween = Tween.TRANS_QUAD #for movement
 var pureMovement = 0.3 #in seconds
 var placingWeight = 0.2 #in seconds
 
-var moveSimpleOptimal = pureMovement #e.g. walking forward, first half of movement, raising foot
-var moveComplexOptimal = pureMovement + placingWeight #e.g. walking forward, planting foot in front
-var moveSimpleHeavy = placingWeight + pureMovement #e.g. retracting step after planting foot
-var moveComplexHeavy = placingWeight + pureMovement + placingWeight #e.g. moving same foot outwards twice
+
+var moveSimpleOptimal: #e.g. walking forward, first half of movement, raising foot
+	get:
+		return pureMovement
+var moveComplexOptimal: #e.g. walking forward, planting foot in front
+	get:
+		return pureMovement + placingWeight
+var moveSimpleHeavy: #e.g. retracting step after planting foot
+	get:
+		return placingWeight + pureMovement
+var moveComplexHeavy: #e.g. moving same foot outwards twice
+	get:
+		return placingWeight + pureMovement + placingWeight
 
 var leftMoving = false
 var rightMoving = false
@@ -62,7 +71,8 @@ var bulletSpeed = 100
 var bulletRange = 1000
 var bulletSlowdown = 0.998
 
-var bloodTrialVisible = true
+var bloodTrailVisible = true
+var bloodTrailScene = false #true is pixels, false is sprite
 
 #enemy
 var enemyHealth = 2

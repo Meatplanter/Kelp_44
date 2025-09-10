@@ -11,11 +11,14 @@ var bulletEntryDistance
 var shootingPoint
 var shootingDistance
 
-var bloodTrailScene = preload("res://blood_trail_pc.tscn")
+var bloodTrailScene
 
 func _ready() -> void:
 	shootingPoint = global_position
-	#print(shootingPoint)
+	if Global.bloodTrailScene == true:
+		bloodTrailScene = preload("res://blood_trail_px.tscn")
+	elif Global.bloodTrailScene == false:
+		bloodTrailScene = preload("res://blood_trail_pc.tscn")
 
 
 func _process(delta: float) -> void:
@@ -67,7 +70,7 @@ func _on_body_entered(body: Node2D) -> void:
 		
 
 func _on_splatter_timer_timeout() -> void:
-	if $Bullet.is_visible_in_tree() == false && Global.bloodTrialVisible == true:
+	if $Bullet.is_visible_in_tree() == false && Global.bloodTrailVisible == true:
 		var bloodTrail = bloodTrailScene.instantiate()
 		bloodTrail.rotation_degrees = randf_range(0,360)
 		bloodTrail.scale = Vector2(randf_range(0.5,2),randf_range(0.5,2))
@@ -75,7 +78,7 @@ func _on_splatter_timer_timeout() -> void:
 		get_parent().add_child(bloodTrail)
 
 func _on_slomo_splatter_timer_timeout() -> void:
-	if $Bullet.is_visible_in_tree() == false && Global.bloodTrialVisible == true:
+	if $Bullet.is_visible_in_tree() == false && Global.bloodTrailVisible == true:
 		var bloodTrail = bloodTrailScene.instantiate()
 		bloodTrail.rotation_degrees = randf_range(0,360)
 		bloodTrail.scale = Vector2(randf_range(0.5,2),randf_range(0.5,2))
