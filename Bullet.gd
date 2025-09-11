@@ -45,13 +45,15 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	var direction = Vector2.RIGHT.rotated(rotation)
-	position += direction * bulletSpeed * delta * Global.gameSpeed * bulletSlowdown
+	position += direction * randf_range(0.75*bulletSpeed,1.5*bulletSpeed) * delta * Global.gameSpeed * bulletSlowdown
 	if bulletContact == 0.0: bulletSlowdown = bulletSlowdown * Global.bulletSlowdown
 	travelledDistance += bulletSpeed * delta * Global.gameSpeed
 	
 	if travelledDistance > bulletRange*bulletSlowdown:
 		Global.bulletsDodged += 1
 		queue_free()
+		if Global.gameMode == 0:
+			Global.currentExp += Global.xp4bullet
 	#print(bulletRange*bulletSlowdown,"  ",bulletSlowdown, " trav dist ",travelledDistance)
 	#print(2/(pow(bulletSlowdown,5)))
 	#$SubViewport.size = Vector2(160,3) - Vector2(delta,3)

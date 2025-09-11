@@ -11,14 +11,14 @@ var enemy_count = 0
 func spawn_bullet():
 	var new_bullet = preload("res://Bullet.tscn").instantiate()
 	%PathFollow2D.progress_ratio = randf()
-	new_bullet.global_position = %PathFollow2D.global_position
-	new_bullet.look_at(Global.CharBodyNode.midpoint)
+	new_bullet.global_position = %PathFollow2D.global_position + Global.midpoint
+	new_bullet.look_at(Global.midpoint)
 	add_child(new_bullet)
 
 func spawn_enemy():
 	var new_enemy = preload("res://enemy.tscn").instantiate()
 	%PathFollow2D.progress_ratio = randf()
-	new_enemy.global_position = %PathFollow2D.global_position
+	new_enemy.global_position = %PathFollow2D.global_position + Global.midpoint
 	if enemy_count < 5:
 		add_child(new_enemy)
 
@@ -70,6 +70,12 @@ func _process(delta: float) -> void:
 		Global.gameSpeed = Global.timeReverse
 		
 	Global.pausePoint -= Global.gameSpeed
+	
+	if Global.currentExp >= Global.expToLevel:
+		Global.currentExp -= Global.expToLevel
+		get_tree().paused = true
+		%CharacterBody2D/CharBody/Marker2D/Camera2D/LevelUpScreen.show()
+		
 
 	
 func _input(event):

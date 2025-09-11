@@ -69,7 +69,7 @@ offset_left = 924.0
 offset_top = 20.0
 offset_right = 1112.0
 offset_bottom = 55.0
-placeholder_text = "Default: 100"
+placeholder_text = "Default: 120"
 
 [node name="Label3" type="Label" parent="."]
 layout_mode = 0

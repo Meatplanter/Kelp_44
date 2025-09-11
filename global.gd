@@ -12,6 +12,7 @@ var gameSpeed = 1.0
 var CharBodyNode = null
 var RightShoeNode = null
 var LeftShoeNode = null
+var TorsoCollisionNode = null
 var gameMode = 0 # 0 = spawn bullets 1 = spawn enemies
 var bulletsDodged = 0
 var enemiesKilled = 0
@@ -24,6 +25,10 @@ var playerHealth = 10
 var midpoint = Vector2(0,16)
 var focus = Vector2(0,0)
 
+var xp4bullet = 1
+var xp4enemy = 7
+var currentExp = 0
+var expToLevel = 20
 
 #movement
 var moveTime = 0.4 #useless?
@@ -67,8 +72,8 @@ var leftCanShoot = false
 var rightCanShoot = false
 
 var aimingSpeed = 1
-var bulletSpeed = 100
-var bulletRange = 1000
+var bulletSpeed = 120
+var bulletRange = 700
 var bulletSlowdown = 0.998
 
 var bloodTrailVisible = true

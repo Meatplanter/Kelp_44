@@ -46,6 +46,8 @@ func take_damage():
 	if health == 0:
 		Global.enemiesKilled += 1
 		queue_free()
+		if Global.gameMode == 1:
+			Global.currentExp += Global.xp4enemy
 
 func _exit_tree():
 	EnemyManager.unregister_enemy(self)

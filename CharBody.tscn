@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://vpi5u34tocl"]
+[gd_scene load_steps=12 format=3 uid="uid://vpi5u34tocl"]
 
 [ext_resource type="Script" uid="uid://cqyv41oyv0lcg" path="res://CharBody.gd" id="1_i5h2e"]
 [ext_resource type="PackedScene" uid="uid://bc2ej70xjolx2" path="res://LeftShoe.tscn" id="2_iaqfm"]
@@ -8,6 +8,9 @@
 [ext_resource type="Script" uid="uid://g7fnkyhbdemq" path="res://hp_left.gd" id="5_sl5bb"]
 [ext_resource type="PackedScene" uid="uid://dmant07862ycy" path="res://torso.tscn" id="6_7aaa2"]
 [ext_resource type="PackedScene" uid="uid://c5nunyagwdk5f" path="res://pause_menu.tscn" id="7_tfx1a"]
+[ext_resource type="Script" uid="uid://clxhegpqyijug" path="res://xp_to_level.gd" id="7_uqoqu"]
+[ext_resource type="PackedScene" uid="uid://ct4uhithfj3kk" path="res://level_up_screen.tscn" id="8_0w1gf"]
+[ext_resource type="Script" uid="uid://bjf8casb61ncs" path="res://game_over.gd" id="10_xu2iw"]
 
 [node name="CharBody" type="CharacterBody2D"]
 visibility_layer = 2
@@ -51,19 +54,47 @@ text = "Health left:"
 metadata/_edit_use_anchors_ = true
 
 [node name="HPLeft" type="Label" parent="CharBody/Marker2D/Camera2D"]
-offset_left = -197.0
+offset_left = -190.0
 offset_top = -160.0
-offset_right = -157.0
+offset_right = -150.0
 offset_bottom = -137.0
 text = "10"
 script = ExtResource("5_sl5bb")
 metadata/_edit_use_anchors_ = true
 
+[node name="LabelXPLeft" type="Label" parent="CharBody/Marker2D/Camera2D"]
+offset_left = -286.0
+offset_top = -136.0
+offset_right = -162.0
+offset_bottom = -113.0
+text = "XP until NL:"
+
+[node name="XPToLevel" type="Label" parent="CharBody/Marker2D/Camera2D"]
+offset_left = -190.0
+offset_top = -137.0
+offset_right = -150.0
+offset_bottom = -114.0
+text = "10"
+script = ExtResource("7_uqoqu")
+metadata/_edit_use_anchors_ = true
+
 [node name="Pause menu" parent="CharBody/Marker2D/Camera2D" instance=ExtResource("7_tfx1a")]
 visible = false
+z_index = 1
+
+[node name="LevelUpScreen" parent="CharBody/Marker2D/Camera2D" instance=ExtResource("8_0w1gf")]
+process_mode = 2
+visible = false
+z_index = 1
+offset_left = -288.0
+offset_top = -161.0
+offset_right = -288.0
+offset_bottom = -161.0
 
 [node name="GameOver" type="CanvasLayer" parent="CharBody/Marker2D"]
+process_mode = 2
 visible = false
+script = ExtResource("10_xu2iw")
 
 [node name="ColorRect" type="ColorRect" parent="CharBody/Marker2D/GameOver"]
 offset_left = -5.0
@@ -102,6 +133,14 @@ offset_right = 737.0
 offset_bottom = 503.0
 theme_override_font_sizes/font_size = 50
 text = "Enemies killed: "
+
+[node name="Label" type="Label" parent="CharBody/Marker2D/GameOver/ColorRect"]
+layout_mode = 0
+offset_left = 481.0
+offset_top = 566.0
+offset_right = 699.0
+offset_bottom = 589.0
+text = "(Esc to exit, space to restart)"
 
 [node name="Torso" parent="." instance=ExtResource("6_7aaa2")]
 unique_name_in_owner = true

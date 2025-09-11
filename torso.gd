@@ -4,6 +4,9 @@ var tween: Tween
 var move_speed: float = 50.0 * Global.gameSpeed
 var shoulderRotationOffset = 2 #so that the shoulder rotates quicker and adjust to the changing position better, not messing your aim so much, etc.
 
+func _ready():
+	Global.TorsoCollisionNode = $TorsoCollision
+
 func _process(delta: float) -> void:
 	look_at(Global.focus)
 	#look_at(Global.VecUp*500)

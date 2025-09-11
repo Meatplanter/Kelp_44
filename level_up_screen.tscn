@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=3 uid="uid://ct4uhithfj3kk"]
+
+[ext_resource type="Script" uid="uid://dlvox7hj4c2xl" path="res://level_up_screen.gd" id="1_i5ge7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qhkoo"]
+bg_color = Color(0.424688, 0.659625, 0.548648, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5ge7"]
+bg_color = Color(0.424688, 0.659625, 0.548648, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kbaih"]
+bg_color = Color(0.424688, 0.659625, 0.548648, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="LevelUpScreen" type="Control"]
+layout_mode = 3
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = -576.0
+offset_bottom = -324.0
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_i5ge7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 446.0
+offset_right = 1076.0
+offset_bottom = 554.0
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Movement" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_qhkoo")
+text = "Movement
+"
+
+[node name="BulletSpeed" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_i5ge7")
+text = "Bullet speed"
+
+[node name="Hitbox" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_kbaih")
+text = "Hitbox"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 460.0
+offset_top = 110.0
+offset_right = 719.0
+offset_bottom = 193.0
+theme_override_font_sizes/font_size = 60
+text = "Level up!"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 492.0
+offset_top = 208.0
+offset_right = 682.0
+offset_bottom = 257.0
+text = "Pick your improvement!
+(press 1, 2 or 3)"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="HBoxContainer/Movement" to="." method="_on_movement_pressed"]
+[connection signal="pressed" from="HBoxContainer/BulletSpeed" to="." method="_on_bullet_speed_pressed"]
+[connection signal="pressed" from="HBoxContainer/Hitbox" to="." method="_on_hitbox_pressed"]
