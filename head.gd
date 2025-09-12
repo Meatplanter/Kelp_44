@@ -4,6 +4,12 @@ var tween: Tween
 
 var crosshair = preload("res://crosshair.tscn")
 
+var direction = Vector2()
+var enemy_direction = Vector2()
+var angle = 0
+const DETECT_RADIUS = 2000
+const FOV = 220
+
 func look_for_enemy():
 	if EnemyManager.enemies.size() > 0 && EnemyManager.targetEnemyLeft == null:
 		EnemyManager.targetEnemyLeft = EnemyManager.enemies.front()
@@ -21,13 +27,28 @@ func _physics_process(delta):
 
 func _process(delta):
 	EnemyManager.enemy_scope()
+	#EnemyManager.get_visible_enemies()
+	
+	#trying to implement field of vision
+	var pos = Global.midpoint
+	direction = (Global.focus - Global.midpoint).normalized()
+	angle = 90 - rad_to_deg(direction.angle())
+	
+	for enemy in EnemyManager.get_enemies():
+		enemy_direction = (enemy.global_position - Global.midpoint).normalized()
+		if pos.distance_to(enemy.global_position) < DETECT_RADIUS:
+			var angle_to_node = rad_to_deg(direction.angle_to(enemy_direction))
+			if abs(angle_to_node) < FOV/2: #if enemy is visible
+				enemy.modulate.a = min(1,enemy.modulate.a + delta * Global.gameSpeed * 2)
+			else:
+				enemy.modulate.a = max(0.0,enemy.modulate.a - delta * Global.gameSpeed)
 
 
 func select_next_target_left(direction: Vector2):
 	if EnemyManager.targetEnemyLeft == null:
 		return
 	
-	var enemies = EnemyManager.get_enemies()
+	var enemies = EnemyManager.get_visible_enemies()
 	var current_pos = EnemyManager.targetEnemyLeft.global_position
 	
 	var best_enemy: Node2D = null
@@ -39,7 +60,7 @@ func select_next_target_left(direction: Vector2):
 			#
 		var to_enemy = (enemy.global_position - current_pos).normalized()
 		#
-		## Direction check: only consider enemies roughly in that direction
+		# Direction check: only consider enemies roughly in that direction
 		if direction.dot(to_enemy) > 0.5:  # adjust threshold as needed
 			var dist = current_pos.distance_to(enemy.global_position)
 			if dist < best_score:
@@ -54,7 +75,7 @@ func select_next_target_right(direction: Vector2):
 	if EnemyManager.targetEnemyRight == null:
 		return
 	
-	var enemies = EnemyManager.get_enemies()
+	var enemies = EnemyManager.get_visible_enemies()
 	var current_pos = EnemyManager.targetEnemyRight.global_position
 	
 	var best_enemy: Node2D = null

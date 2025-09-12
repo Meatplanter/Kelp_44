@@ -7,8 +7,6 @@ var enemyRange = Global.enemyRange
 var leftCooldown = 1.0
 var rightCooldown = 1.0
 
-var thresholdAim = deg_to_rad(15)
-
 var targetEnemyLeft = EnemyManager.targetEnemyLeft
 var targetEnemyRight = EnemyManager.targetEnemyRight
 

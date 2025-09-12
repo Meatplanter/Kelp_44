@@ -1,6 +1,7 @@
 extends Node
 
 var enemies: Array = []
+var visibleEnemies: Array = []
 var targetEnemyLeft = null
 var targetEnemyRight = null
 
@@ -18,6 +19,14 @@ func unregister_enemy(enemy):
 func get_enemies() -> Array:
 	return enemies
 
+func get_visible_enemies() -> Array:
+	visibleEnemies.clear()
+	get_enemies()
+	for enemy in enemies:
+		if enemy.modulate.a > 0.5:
+			visibleEnemies.append(enemy)
+	return visibleEnemies
+
 func enemy_scope():
 	maxX = Global.midpoint.x
 	minX = Global.midpoint.x
@@ -26,12 +35,13 @@ func enemy_scope():
 	
 	get_enemies()
 	for enemy in enemies:
-		if enemy.global_position.x > maxX:
-			maxX = enemy.global_position.x +32
-		if enemy.global_position.x < minX:
-			minX = enemy.global_position.x -32
-		if enemy.global_position.y > maxY:
-			maxY = enemy.global_position.y +32
-		if enemy.global_position.y < minY:
-			minY = enemy.global_position.y -32
-			
+		if enemy.modulate.a > 0:
+			if enemy.global_position.x > maxX:
+				maxX = enemy.global_position.x +32
+			if enemy.global_position.x < minX:
+				minX = enemy.global_position.x -32
+			if enemy.global_position.y > maxY:
+				maxY = enemy.global_position.y +32
+			if enemy.global_position.y < minY:
+				minY = enemy.global_position.y -32
+				
