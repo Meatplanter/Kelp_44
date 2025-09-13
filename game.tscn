@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=4 uid="uid://i7ssqk3udw6h"]
+[gd_scene load_steps=8 format=4 uid="uid://i7ssqk3udw6h"]
 
 [ext_resource type="Texture2D" uid="uid://3sssh4smi3wv" path="res://Assets/Resized.png" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://cxp434ialc278" path="res://game.gd" id="1_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://bqhvigu27dsbf" path="res://enemy.tscn" id="4_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://vpi5u34tocl" path="res://CharBody.tscn" id="5_7jktm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc0e3"]
@@ -78,6 +79,12 @@ offset_top = -136.0
 offset_right = 27.0
 offset_bottom = -113.0
 text = "-90"
+
+[node name="Enemy" parent="." instance=ExtResource("4_fc0e3")]
+position = Vector2(93, -114)
+
+[node name="Enemy2" parent="." instance=ExtResource("4_fc0e3")]
+position = Vector2(-27, -129)
 
 [connection signal="timeout" from="BulletSpawnTime" to="." method="_on_bullet_spawn_time_timeout"]
 [connection signal="timeout" from="SlomoBulletSpawnTime" to="." method="_on_slomo_bullet_spawn_time_timeout"]

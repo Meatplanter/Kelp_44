@@ -10,22 +10,42 @@ var rightCooldown = 1.0
 var targetEnemyLeft = EnemyManager.targetEnemyLeft
 var targetEnemyRight = EnemyManager.targetEnemyRight
 
+var direction = (Global.focus - Global.midpoint).normalized()
+
 func _draw():
 	if get_parent().has_meta("Player") && EnemyManager.targetEnemyLeft != null && get_parent().has_meta("Left"):
 		var aimFrom = %ShootingPoint.position
 		var aimTo = %ShootingPoint.global_position + Vector2.RIGHT.rotated(%ShootingPoint.rotation) * 50000
-		#var aimDir = (aimTo - aimFrom).normalized()
-		#var targetDir = (EnemyManager.targetEnemyLeft.global_position - aimFrom).normalized()
-		#var angleDiff = aimDir.angle_to(targetDir)
-		#print(EnemyManager.targetEnemyLeft.global_position)
-		#if abs(angleDiff) <= thresholdAim:
-		draw_line(aimFrom,aimTo,Color.KHAKI)
-		#draw_circle(%ShootingPoint.position,10,Color.RED)
+		
+		var direction = (aimTo - aimFrom).normalized()
+		var to_enemy = (to_local(EnemyManager.targetEnemyLeft.global_position) - aimFrom).normalized()
+		
+		var aimAngleDiff = rad_to_deg(abs(direction.angle_to(to_enemy)))
+		
+		if aimAngleDiff < 5:
+			draw_line(aimFrom,aimTo,Color.GREEN)
+			if leftCooldown < 0:
+				shoot()
+				leftCooldown = 1.0
+		else:
+			draw_line(aimFrom,aimTo,Color.KHAKI)
+
 	elif get_parent().has_meta("Player") && EnemyManager.targetEnemyRight != null && get_parent().has_meta("Right"):
 		var aimFrom = %ShootingPoint.position
 		var aimTo = %ShootingPoint.global_position + Vector2.RIGHT.rotated(%ShootingPoint.rotation) * 50000
-		draw_line(aimFrom,aimTo,Color.KHAKI)
 		
+		var direction = (aimTo - aimFrom).normalized()
+		var to_enemy = (to_local(EnemyManager.targetEnemyRight.global_position) - aimFrom).normalized()
+		
+		var aimAngleDiff = rad_to_deg(abs(direction.angle_to(to_enemy)))
+		
+		if aimAngleDiff < 5:
+			draw_line(aimFrom,aimTo,Color.GREEN)
+			if rightCooldown < 0:
+				shoot()
+				rightCooldown = 1.0
+		else:
+			draw_line(aimFrom,aimTo,Color.KHAKI)
 
 func shortest_angle(from: float, to: float) -> float:
 	var delta = fmod(to - from + PI, TAU) - PI
