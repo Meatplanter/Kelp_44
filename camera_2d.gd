@@ -61,8 +61,8 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_pressed("TargettingMode"):
 		targetting_mode(Vector2(EnemyManager.minX,EnemyManager.minY),Vector2(EnemyManager.maxX,EnemyManager.maxY))
 		Global.targettingMode = true
+		Global.gameSpeed = 0.001
 	else:
 		zoom = normal_zoom
 		global_position = Global.midpoint
 		Global.targettingMode = false
-		
