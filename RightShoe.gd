@@ -736,6 +736,7 @@ func _process(delta: float) -> void:
 	var to_angle = Global.midpoint.angle_to_point(%CharBody.focus)
 	var shortest = shortest_angle(from_angle, to_angle)
 	tween.tween_property(self,"rotation",shortest+0.5 * PI,moveTime)
+	moveTime = Global.moveTime
 	
 	if currPos == targPos:
 		Global.rightMoving = false

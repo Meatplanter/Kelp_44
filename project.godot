@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 Global="*res://global.gd"
 EnemyManager="*res://enemy_manager.gd"
+Movement="*res://movement.gd"
+Camera="*res://camera.gd"
 
 [input]
 

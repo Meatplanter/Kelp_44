@@ -45,7 +45,7 @@ func _on_enemy_health_text_changed():
 
 
 func _on_player_health_text_changed():
-	Global.playerHealth = float($PlayerHealth.text)
+	Global.playerHealth = int($PlayerHealth.text)
 
 
 func _on_bullet_time_text_changed():

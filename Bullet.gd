@@ -15,10 +15,12 @@ var bloodTrailScene
 
 func _ready() -> void:
 	shootingPoint = global_position
+	bulletSpeed = randf_range(0.75*bulletSpeed,1.5*bulletSpeed)
 	if Global.bloodTrailScene == true:
 		bloodTrailScene = preload("res://blood_trail_px.tscn")
 	elif Global.bloodTrailScene == false:
 		bloodTrailScene = preload("res://blood_trail_pc.tscn")
+		
 
 
 func _process(delta: float) -> void:
@@ -45,7 +47,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	var direction = Vector2.RIGHT.rotated(rotation)
-	position += direction * randf_range(0.75*bulletSpeed,1.5*bulletSpeed) * delta * Global.gameSpeed * bulletSlowdown
+	position += direction * bulletSpeed * delta * Global.gameSpeed * bulletSlowdown
 	if bulletContact == 0.0: bulletSlowdown = bulletSlowdown * Global.bulletSlowdown
 	travelledDistance += bulletSpeed * delta * Global.gameSpeed
 	
