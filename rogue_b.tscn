@@ -42,6 +42,7 @@ flip_v = true
 shape = SubResource("CapsuleShape2D_bjt74")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
 
 [node name="MovementCooldown" type="Timer" parent="."]
 
