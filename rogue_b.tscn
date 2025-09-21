@@ -42,3 +42,7 @@ flip_v = true
 shape = SubResource("CapsuleShape2D_bjt74")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="MovementCooldown" type="Timer" parent="."]
+
+[connection signal="timeout" from="MovementCooldown" to="." method="_on_movement_cooldown_timeout"]
