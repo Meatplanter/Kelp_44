@@ -55,9 +55,10 @@ zoom = Vector2(2, 2)
 
 [node name="MovementCooldown" type="Timer" parent="."]
 
-[node name="TorsoPolygon" type="Polygon2D" parent="."]
+[node name="AbdomenPolygon" type="Polygon2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(2.98023e-08, 0)
+scale = Vector2(0.75, 1)
 color = Color(0.929412, 0.658824, 0.419608, 0.756863)
 polygon = PackedVector2Array(-24, -8, 24, -8, 29, 0, 24, 8, -24, 8, -29, 0)
 
