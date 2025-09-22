@@ -40,6 +40,13 @@ var DirLeftDown = Vector2(-1,1)
 
 var CurrPosLeft = Vector2(0,0)
 var CurrPosRight = Vector2(32,0)
+var midpoint = Vector2(16,0)
+var focus = Vector2(16,-512)
+var orientation
+
+var vecBefore = Vector2.ZERO
+var vecAfter = Vector2.ZERO
+var cumulativeAngle = 0
 
 #func can_move(dir: Vector2) -> bool:
 	#var dist = moveDistance

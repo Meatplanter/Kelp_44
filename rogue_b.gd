@@ -1,11 +1,14 @@
 extends CharacterBody2D
 
 var moveCooldown = false
+var hasMoved = false
 
+#other shoe based on current
 func other_shoe(body: Node2D):
 	if body == %LeftShoe: return %RightShoe
 	elif body == %RightShoe: return %LeftShoe
 
+#check central point of movement for collisions
 func check_collision(point: Vector2) -> bool:
 	var space_state = get_world_2d().direct_space_state
 	var params = PhysicsPointQueryParameters2D.new()
@@ -27,25 +30,25 @@ func can_move(body: Node2D, dir: Vector2) -> bool:
 	
 	if check_collision(targetPos) == true or dist > Movement.maxMoveDistance or moveCooldown == true: return false
 	else: return true
-	
 
+#is current shoe weighted
 func is_weighted(body: Node2D):
 	
-	if body == %LeftShoe and Movement.leftWeighted == true: return true
-	elif body == %LeftShoe and Movement.leftWeighted == false: return false
-	elif body == %RightShoe and Movement.rightWeighted == true: return true
-	elif body == %RightShoe and Movement.rightWeighted == false: return false
+	if body == %LeftShoe and %LeftShoe.weighted == true: return true
+	elif body == %LeftShoe and %LeftShoe.weighted == false: return false
+	elif body == %RightShoe and %RightShoe.weighted == true: return true
+	elif body == %RightShoe and %RightShoe.weighted == false: return false
 
-#func shift_weight():
-	##if Movement.leftWeighted == true and Movement.rightWeighted == true:
-	#if Movement.leftWeighted == true:
-		#Movement.leftWeighted = false
-		#Movement.rightWeighted = true
-	#elif Movement.rightWeighted == true:
-		#Movement.leftWeighted = true
-		#Movement.rightWeighted = false
-	
+#change weight distribution
+func shift_weight():
+	if %LeftShoe.weighted == true:
+		%LeftShoe.weighted = false
+		%RightShoe.weighted = true
+	elif %RightShoe.weighted == true:
+		%LeftShoe.weighted = true
+		%RightShoe.weighted = false
 
+#establish move type
 func move_type(body: Node2D, dir: Vector2):
 	
 	var other = other_shoe(body)
@@ -58,6 +61,7 @@ func move_type(body: Node2D, dir: Vector2):
 	elif is_weighted(body) == false && dist > Movement.moveDistance: return 3 #Movement.moveComplexOptimal
 	elif is_weighted(body) == true && dist > Movement.moveDistance: return 4 #Movement.moveComplexHeavy
 
+#calculate move time
 func move_time(body: Node2D, dir: Vector2):
 	
 	var diagonal
@@ -69,14 +73,32 @@ func move_time(body: Node2D, dir: Vector2):
 	elif move_type(body, dir) == 3: return Movement.moveComplexOptimal * diagonal
 	elif move_type(body, dir) == 4: return Movement.moveComplexHeavy * diagonal
 
-func shift_weight(body:Node2D,dir:Vector2):
+#calculate weight shift
+func calculate_shift_weight(body:Node2D,dir:Vector2):
 	var moveType = move_type(body,dir)
 	var moveTime = move_time(body,dir)
+	
+	if moveType == 1: return
+	elif moveType == 2: shift_weight()
+	elif moveType == 3: shift_weight()
+	elif moveType == 4:
+		shift_weight()
+		await get_tree().create_timer(moveTime / 2).timeout
+		shift_weight()
 	#Ok, pomysł: poruszanie się ma od 0 do 2 przenosin ciężaru. 
 	#Dzielimy czas ruchu na takie segmenty i wtedy w zależności od momentu zmieniamy ciężar 
 
+#movement
 func move(body:Node2D, dir: Vector2):
 	if can_move(body,dir) == true:
+		Movement.vecBefore = Movement.orientation
+		#establish weight distribution after first step 
+		if hasMoved == false and is_weighted(body) == true:
+			hasMoved = true
+			var other = other_shoe(body)
+			other.weighted = false
+		else: calculate_shift_weight(body,dir)
+		
 		var moveType = move_type(body,dir)
 		var moveTime = move_time(body,dir)
 		
@@ -90,12 +112,38 @@ func move(body:Node2D, dir: Vector2):
 		tween = create_tween()
 		tween.tween_property(body,"position",body.global_position + dir * dist,moveTime).set_trans(Movement.styleTween)
 
-
-
-#func _ready():
-	#if can_move($RightShoe,Movement.DirRight) == true: print("yay")
-	#else: print("oof")
+#update baseline positions
+func update_positions():
+	Movement.CurrPosLeft = %LeftShoe.global_position
+	Movement.CurrPosRight = %RightShoe.global_position
+	Movement.midpoint = (%RightShoe.global_position + %LeftShoe.global_position)/2
 	
+	var directional = %RightShoe.global_position - %LeftShoe.global_position 
+	var normal = (Vector2(-directional.y,directional.x).normalized())
+	Movement.focus = Movement.midpoint + normal * -512
+	
+	Movement.orientation = (Movement.focus - Movement.midpoint).normalized()
+
+func shift_torso():
+	%TorsoPolygon.global_position = Movement.midpoint
+	
+	#print((Movement.orientation.normalized().angle_to(Vector2.UP)))
+	
+	
+	#%TorsoPolygon.rotate(Movement.orientation.normalized().angle_to(Vector2.RIGHT))
+	var tween: Tween
+	tween = create_tween()
+	tween.tween_property(%TorsoPolygon,"rotation",Movement.cumulativeAngle,0.5)#.set_trans(Movement.styleTween)
+	
+	#var target_angle = (Movement.focus - %TorsoPolygon.global_position).angle()
+	#%TorsoPolygon.rotation = lerp_angle(rotation, target_angle, delta * 5.0) # 5.0 = rotation speed
+
+func _process(delta):
+	update_positions()
+	shift_torso()
+	#print("Vec before: ",Movement.vecBefore,"Vec after: ",Movement.vecAfter,"difference: ",Movement.vecBefore.angle_to(Movement.vecAfter))
+	print(rad_to_deg(Movement.cumulativeAngle))
+
 
 func _input(event):
 	if event.is_action_pressed("RS_move_right"): move(%RightShoe,Movement.DirRight)
@@ -120,3 +168,5 @@ func _input(event):
 func _on_movement_cooldown_timeout():
 	moveCooldown = false
 	$MovementCooldown.stop()
+	Movement.vecAfter = Movement.orientation
+	Movement.cumulativeAngle += Movement.vecBefore.angle_to(Movement.vecAfter)

@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctyixwmxls1xf"]
+[gd_scene load_steps=8 format=3 uid="uid://ctyixwmxls1xf"]
 
 [ext_resource type="Script" uid="uid://cmd2574ahhehe" path="res://rogue_b.gd" id="1_67mbl"]
+[ext_resource type="Script" uid="uid://74ugebrbbmct" path="res://debugging_node.gd" id="2_bjt74"]
 [ext_resource type="Texture2D" uid="uid://3sssh4smi3wv" path="res://Assets/Resized.png" id="2_mvfyg"]
+[ext_resource type="Script" uid="uid://cefdsbs03kmvy" path="res://left_shoe.gd" id="3_bjt74"]
 [ext_resource type="Texture2D" uid="uid://mhadgvm6kalh" path="res://Assets/Shoe.png" id="3_mpt7r"]
+[ext_resource type="Script" uid="uid://c685n3bo15euj" path="res://right_shoe.gd" id="5_7fc62"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bjt74"]
 radius = 6.0
@@ -13,12 +16,17 @@ visibility_layer = 2
 script = ExtResource("1_67mbl")
 metadata/Player = true
 
+[node name="DebuggingNode" type="Node2D" parent="."]
+z_index = 999
+script = ExtResource("2_bjt74")
+
 [node name="Resized" type="Sprite2D" parent="."]
 position = Vector2(16, 16)
 texture = ExtResource("2_mvfyg")
 
 [node name="LeftShoe" type="Area2D" parent="."]
 unique_name_in_owner = true
+script = ExtResource("3_bjt74")
 
 [node name="LeftShoeSprite" type="Sprite2D" parent="LeftShoe"]
 texture_filter = 1
@@ -31,6 +39,7 @@ shape = SubResource("CapsuleShape2D_bjt74")
 [node name="RightShoe" type="Area2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(32, 0)
+script = ExtResource("5_7fc62")
 
 [node name="RightShoeSprite" type="Sprite2D" parent="RightShoe"]
 texture_filter = 1
@@ -45,5 +54,11 @@ shape = SubResource("CapsuleShape2D_bjt74")
 zoom = Vector2(2, 2)
 
 [node name="MovementCooldown" type="Timer" parent="."]
+
+[node name="TorsoPolygon" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(2.98023e-08, 0)
+color = Color(0.929412, 0.658824, 0.419608, 0.756863)
+polygon = PackedVector2Array(-24, -8, 24, -8, 29, 0, 24, 8, -24, 8, -29, 0)
 
 [connection signal="timeout" from="MovementCooldown" to="." method="_on_movement_cooldown_timeout"]
