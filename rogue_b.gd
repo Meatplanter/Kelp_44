@@ -3,6 +3,9 @@ extends CharacterBody2D
 var moveCooldown = false
 var hasMoved = false
 
+var vecBefore = Vector2.ZERO
+var vecAfter = Vector2.ZERO
+
 #other shoe based on current
 func other_shoe(body: Node2D):
 	if body == %LeftShoe: return %RightShoe
@@ -91,7 +94,6 @@ func calculate_shift_weight(body:Node2D,dir:Vector2):
 #movement
 func move(body:Node2D, dir: Vector2):
 	if can_move(body,dir) == true:
-		Movement.vecBefore = Movement.orientation
 		
 		#establish weight distribution, esp. first step 
 		if hasMoved == false and is_weighted(body) == true:
@@ -125,30 +127,38 @@ func update_positions():
 	
 	Movement.orientation = (Movement.focus - Movement.midpoint).normalized()
 
+#Move hips in line with shoes
 func shift_abdomen():
 	%AbdomenPolygon.global_position = Movement.midpoint
 	%AbdomenPolygon.look_at(Movement.focus)
 	%AbdomenPolygon.rotate(-PI/2)
 	
-	if is_weighted(%LeftShoe): %AbdomenPolygon.global_position = %AbdomenPolygon.global_position.move_toward(Movement.midpoint.lerp(Movement.CurrPosLeft,0.8),5)
-	elif is_weighted(%RightShoe): %AbdomenPolygon.global_position = %AbdomenPolygon.global_position.move_toward(Movement.midpoint.lerp(Movement.CurrPosRight,0.8),5)
-	#print((Movement.orientation.normalized().angle_to(Vector2.UP)))
-	
-	
-	#%AbdomenPolygon.rotate(Movement.orientation.normalized().angle_to(Vector2.RIGHT))
-	#var tween: Tween
-	#tween = create_tween()
-	#tween.tween_property(%AbdomenPolygon,"rotation",Movement.cumulativeAngle,0.5)#.set_trans(Movement.styleTween)
-	
-	#var target_angle = (Movement.focus - %AbdomenPolygon.global_position).angle()
-	#%AbdomenPolygon.rotation = lerp_angle(rotation, target_angle, delta * 5.0) # 5.0 = rotation speed
+	if is_weighted(%LeftShoe) and is_weighted(%RightShoe):
+		var tween: Tween
+		tween = create_tween()
+		tween.tween_property(%AbdomenPolygon,"position",Movement.midpoint,Movement.placingWeight)#.set_trans(Movement.styleTween)
+	elif is_weighted(%LeftShoe): 
+		var tween: Tween
+		tween = create_tween()
+		tween.tween_property(%AbdomenPolygon,"position",Movement.midpoint.lerp(Movement.CurrPosLeft,0.7),Movement.placingWeight)#.set_trans(Movement.styleTween)
+	elif is_weighted(%RightShoe): 
+		var tween: Tween
+		tween = create_tween()
+		tween.tween_property(%AbdomenPolygon,"position",Movement.midpoint.lerp(Movement.CurrPosRight,0.7),Movement.placingWeight)#.set_trans(Movement.styleTween)
+
+
+func _ready():
+	vecBefore = Movement.orientation
+	vecAfter = Movement.orientation
+
 
 func _process(delta):
+	vecBefore = Movement.orientation
 	update_positions()
 	shift_abdomen()
-	#print("Vec before: ",Movement.vecBefore,"Vec after: ",Movement.vecAfter,"difference: ",Movement.vecBefore.angle_to(Movement.vecAfter))
-	print(rad_to_deg(Movement.cumulativeAngle))
-	
+	vecAfter = Movement.orientation
+	var diff = vecBefore.angle_to(vecAfter)
+	Movement.cumulativeAngle += diff
 
 
 func _input(event):
@@ -174,5 +184,3 @@ func _input(event):
 func _on_movement_cooldown_timeout():
 	moveCooldown = false
 	$MovementCooldown.stop()
-	Movement.vecAfter = Movement.orientation
-	Movement.cumulativeAngle += Movement.vecBefore.angle_to(Movement.vecAfter)

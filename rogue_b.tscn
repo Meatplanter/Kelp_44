@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctyixwmxls1xf"]
+[gd_scene load_steps=13 format=3 uid="uid://ctyixwmxls1xf"]
 
 [ext_resource type="Script" uid="uid://cmd2574ahhehe" path="res://rogue_b.gd" id="1_67mbl"]
 [ext_resource type="Script" uid="uid://74ugebrbbmct" path="res://debugging_node.gd" id="2_bjt74"]
@@ -6,6 +6,11 @@
 [ext_resource type="Script" uid="uid://cefdsbs03kmvy" path="res://left_shoe.gd" id="3_bjt74"]
 [ext_resource type="Texture2D" uid="uid://mhadgvm6kalh" path="res://Assets/Shoe.png" id="3_mpt7r"]
 [ext_resource type="Script" uid="uid://c685n3bo15euj" path="res://right_shoe.gd" id="5_7fc62"]
+[ext_resource type="Script" uid="uid://bfrfmnvcxdukh" path="res://camera_2d_new.gd" id="7_y7bk3"]
+[ext_resource type="Script" uid="uid://g7fnkyhbdemq" path="res://hp_left.gd" id="8_e3tf4"]
+[ext_resource type="Script" uid="uid://clxhegpqyijug" path="res://xp_to_level.gd" id="9_m64x7"]
+[ext_resource type="PackedScene" uid="uid://c5nunyagwdk5f" path="res://pause_menu.tscn" id="10_t0gij"]
+[ext_resource type="PackedScene" uid="uid://ct4uhithfj3kk" path="res://level_up_screen.tscn" id="11_qhx67"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bjt74"]
 radius = 6.0
@@ -50,9 +55,6 @@ flip_v = true
 [node name="RightCollision" type="CollisionShape2D" parent="RightShoe"]
 shape = SubResource("CapsuleShape2D_bjt74")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
-
 [node name="MovementCooldown" type="Timer" parent="."]
 
 [node name="AbdomenPolygon" type="Polygon2D" parent="."]
@@ -61,5 +63,60 @@ position = Vector2(2.98023e-08, 0)
 scale = Vector2(0.75, 1)
 color = Color(0.929412, 0.658824, 0.419608, 0.756863)
 polygon = PackedVector2Array(-24, -8, 24, -8, 29, 0, 24, 8, -24, 8, -29, 0)
+
+[node name="Camera2DNew" type="Camera2D" parent="."]
+ignore_rotation = false
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 3.0
+script = ExtResource("7_y7bk3")
+
+[node name="LabelHealthLeft" type="Label" parent="Camera2DNew"]
+offset_left = -286.0
+offset_top = -160.0
+offset_right = -234.0
+offset_bottom = -137.0
+text = "Health left:"
+metadata/_edit_use_anchors_ = true
+
+[node name="HPLeft" type="Label" parent="Camera2DNew"]
+offset_left = -190.0
+offset_top = -160.0
+offset_right = -150.0
+offset_bottom = -137.0
+text = "10"
+script = ExtResource("8_e3tf4")
+metadata/_edit_use_anchors_ = true
+
+[node name="LabelXPLeft" type="Label" parent="Camera2DNew"]
+offset_left = -286.0
+offset_top = -136.0
+offset_right = -162.0
+offset_bottom = -113.0
+text = "XP until NL:"
+
+[node name="XPToLevel" type="Label" parent="Camera2DNew"]
+offset_left = -190.0
+offset_top = -137.0
+offset_right = -150.0
+offset_bottom = -114.0
+text = "10"
+script = ExtResource("9_m64x7")
+metadata/_edit_use_anchors_ = true
+
+[node name="Pause menu" parent="Camera2DNew" instance=ExtResource("10_t0gij")]
+visible = false
+z_index = 1
+
+[node name="LevelUpScreen" parent="Camera2DNew" instance=ExtResource("11_qhx67")]
+process_mode = 2
+visible = false
+z_index = 1
+offset_left = -288.0
+offset_top = -161.0
+offset_right = -288.0
+offset_bottom = -161.0
 
 [connection signal="timeout" from="MovementCooldown" to="." method="_on_movement_cooldown_timeout"]
