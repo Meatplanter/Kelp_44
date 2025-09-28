@@ -1,6 +1,7 @@
 extends Camera2D
 
-var lastRotationAngle = Movement.cumulativeAngle
+var lastRotationAngle = 0
+var rotThreshold = 90
 
 #var normal_zoom := Vector2(2,2)
 #
@@ -30,15 +31,45 @@ var lastRotationAngle = Movement.cumulativeAngle
 		#else:
 			#zoom = normal_zoom / max(scale,1.0)
 
-func rotate_camera(right: bool):
-	
-	lastRotationAngle = Movement.cumulativeAngle
+
+
+func rotate_camera(clockwise: bool): #if true turn camera right, if false turn left
+	if clockwise == true: 
+		self.rotate(PI/2)
+		Camera.cameraState = wrapf(Camera.cameraState+1,0,4)
+		Movement.rotOffset += PI/2
+		
+	elif clockwise == false: 
+		self.rotate(-PI/2)
+		Camera.cameraState = wrapf(Camera.cameraState-1,0,4)
+		Movement.rotOffset -= PI/2
+
 
 func _ready():
 	lastRotationAngle = Movement.cumulativeAngle
 
 func _process(delta):
 	self.global_position = Movement.midpoint
+	if round(Movement.cumulativeAngle) + lastRotationAngle == rotThreshold: 
+		rotate_camera(true)
+		lastRotationAngle -= 90
+		
+		var tween: Tween
+		tween = create_tween()
+		tween.set_parallel()
+		tween.tween_property(%LeftShoe,"rotation",%LeftShoe.rotation+PI/2,0.5).set_trans(Movement.styleTween)
+		tween.tween_property(%RightShoe,"rotation",%RightShoe.rotation+PI/2,0.5).set_trans(Movement.styleTween)
+		
+	elif round(Movement.cumulativeAngle) + lastRotationAngle == -rotThreshold:
+		rotate_camera(false)
+		lastRotationAngle += 90
+		
+		var tween: Tween
+		tween = create_tween()
+		tween.set_parallel()
+		tween.tween_property(%LeftShoe,"rotation",%LeftShoe.rotation-PI/2,0.5).set_trans(Movement.styleTween)
+		tween.tween_property(%RightShoe,"rotation",%RightShoe.rotation-PI/2,0.5).set_trans(Movement.styleTween)
+	
 	#normalizing vector for camera states
 	if Global.cameraState == 0:
 		Global.VecRight = Vector2.RIGHT

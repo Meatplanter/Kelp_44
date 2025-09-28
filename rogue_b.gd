@@ -57,17 +57,25 @@ func move_type(body: Node2D, dir: Vector2):
 	var other = other_shoe(body)
 	
 	var targetPos = body.global_position + dir * Movement.moveDistance
-	var dist = targetPos.distance_to(other.global_position)
+	var dist = round(targetPos.distance_to(other.global_position))
 	
-	if is_weighted(body) == false && dist == Movement.moveDistance: return 1 #Movement.moveSimpleOptimal
+	var diagonal
+	if dir == Movement.DirRight or dir == Movement.DirLeft or dir == Movement.DirUp or dir == Movement.DirDown: diagonal = false
+	else: diagonal = true
+	
+	if is_weighted(body) == false && dist == Movement.moveDistance && diagonal == false: return 1 #Movement.moveSimpleOptimal
+	elif is_weighted(body) == false && dist == Movement.moveDistance && diagonal == true: return 3 #Movement.moveComplexOptimal - but turning
+	elif is_weighted(body) == true && dist == Movement.moveDistance && diagonal == true: return 4 #Movement.moveComplexHeavy - but turning
 	elif is_weighted(body) == true && dist == Movement.moveDistance: return 2 #Movement.moveSimpleHeavy
 	elif is_weighted(body) == false && dist > Movement.moveDistance: return 3 #Movement.moveComplexOptimal
 	elif is_weighted(body) == true && dist > Movement.moveDistance: return 4 #Movement.moveComplexHeavy
+	
+
 
 #calculate move time
 func move_time(body: Node2D, dir: Vector2):
 	
-	var diagonal
+	var diagonal = 1
 	if dir == Movement.DirRight or dir == Movement.DirLeft or dir == Movement.DirUp or dir == Movement.DirDown: diagonal = 1
 	else: diagonal = sqrt(2)
 	
@@ -76,24 +84,32 @@ func move_time(body: Node2D, dir: Vector2):
 	elif move_type(body, dir) == 3: return Movement.moveComplexOptimal * diagonal
 	elif move_type(body, dir) == 4: return Movement.moveComplexHeavy * diagonal
 
+
 #calculate weight shift
 func calculate_shift_weight(body:Node2D,dir:Vector2):
 	var moveType = move_type(body,dir)
 	var moveTime = move_time(body,dir)
 	
 	if moveType == 1: return
-	elif moveType == 2: shift_weight()
-	elif moveType == 3: shift_weight()
+	elif moveType == 2:
+		await get_tree().create_timer(moveTime / 2).timeout
+		shift_weight()
+	elif moveType == 3:
+		await get_tree().create_timer(moveTime / 2).timeout
+		shift_weight()
 	elif moveType == 4:
 		shift_weight()
 		await get_tree().create_timer(moveTime / 2).timeout
 		shift_weight()
-	#Ok, pomysł: poruszanie się ma od 0 do 2 przenosin ciężaru. 
-	#Dzielimy czas ruchu na takie segmenty i wtedy w zależności od momentu zmieniamy ciężar 
+	#elif moveType == 5:
+
 
 #movement
 func move(body:Node2D, dir: Vector2):
 	if can_move(body,dir) == true:
+		
+		var moveType = move_type(body,dir)
+		var moveTime = move_time(body,dir)
 		
 		#establish weight distribution, esp. first step 
 		if hasMoved == false and is_weighted(body) == true:
@@ -102,8 +118,7 @@ func move(body:Node2D, dir: Vector2):
 			other.weighted = false
 		else: calculate_shift_weight(body,dir)
 		
-		var moveType = move_type(body,dir)
-		var moveTime = move_time(body,dir)
+		print(moveTime)
 		
 		moveCooldown = true
 		$MovementCooldown.wait_time = moveTime
@@ -140,11 +155,11 @@ func shift_abdomen():
 	elif is_weighted(%LeftShoe): 
 		var tween: Tween
 		tween = create_tween()
-		tween.tween_property(%AbdomenPolygon,"position",Movement.midpoint.lerp(Movement.CurrPosLeft,0.7),Movement.placingWeight)#.set_trans(Movement.styleTween)
+		tween.tween_property(%AbdomenPolygon,"position",Movement.midpoint.lerp(Movement.CurrPosLeft,0.7),Movement.placingWeight*2)#.set_trans(Movement.styleTween)
 	elif is_weighted(%RightShoe): 
 		var tween: Tween
 		tween = create_tween()
-		tween.tween_property(%AbdomenPolygon,"position",Movement.midpoint.lerp(Movement.CurrPosRight,0.7),Movement.placingWeight)#.set_trans(Movement.styleTween)
+		tween.tween_property(%AbdomenPolygon,"position",Movement.midpoint.lerp(Movement.CurrPosRight,0.7),Movement.placingWeight*2)#.set_trans(Movement.styleTween)
 
 
 func _ready():
@@ -157,8 +172,9 @@ func _process(delta):
 	update_positions()
 	shift_abdomen()
 	vecAfter = Movement.orientation
-	var diff = vecBefore.angle_to(vecAfter)
+	var diff = rad_to_deg(vecBefore.angle_to(vecAfter))
 	Movement.cumulativeAngle += diff
+	#print(round(Movement.cumulativeAngle))
 
 
 func _input(event):

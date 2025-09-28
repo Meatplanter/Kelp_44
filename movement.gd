@@ -9,17 +9,13 @@ var placingWeight = 0.2 #in seconds
 var moveTime = 0.4
 
 var moveSimpleOptimal: #e.g. walking forward, first half of movement, raising foot
-	get:
-		return pureMovement
-var moveComplexOptimal: #e.g. walking forward, planting foot in front
-	get:
-		return pureMovement + placingWeight
+	get: return pureMovement
 var moveSimpleHeavy: #e.g. retracting step after planting foot
-	get:
-		return placingWeight + pureMovement
+	get: return placingWeight + pureMovement
+var moveComplexOptimal: #e.g. walking forward, planting foot in front
+	get: return pureMovement + placingWeight
 var moveComplexHeavy: #e.g. moving same foot outwards twice
-	get:
-		return placingWeight + pureMovement + placingWeight
+	get: return placingWeight + pureMovement + placingWeight
 
 var leftMoving = false
 var rightMoving = false
@@ -29,14 +25,23 @@ var rightWeighted = true
 var weightedShoe = "both"
 
 #normalized directions
-var DirRight = Vector2.RIGHT
-var DirLeft = Vector2.LEFT
-var DirUp = Vector2.UP
-var DirDown = Vector2.DOWN
-var DirRightUp = Vector2(1,-1)
-var DirRightDown = Vector2(1,1)
-var DirLeftUp = Vector2(-1,-1)
-var DirLeftDown = Vector2(-1,1)
+var rotOffset = 0*PI/2
+var DirRight:
+	get: return Vector2.RIGHT.rotated(rotOffset)
+var DirLeft:
+	get: return Vector2.LEFT.rotated(rotOffset)
+var DirUp:
+	get: return Vector2.UP.rotated(rotOffset)
+var DirDown:
+	get: return Vector2.DOWN.rotated(rotOffset)
+var DirRightUp:
+	get: return DirRight + DirUp
+var DirRightDown:
+	get: return DirRight + DirDown
+var DirLeftUp:
+	get: return DirLeft + DirUp
+var DirLeftDown:
+	get: return DirLeft + DirDown
 
 var CurrPosLeft = Vector2(0,0)
 var CurrPosRight = Vector2(32,0)
