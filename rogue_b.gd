@@ -118,7 +118,7 @@ func move(body:Node2D, dir: Vector2):
 			other.weighted = false
 		else: calculate_shift_weight(body,dir)
 		
-		print(moveTime)
+		#print(moveTime)
 		
 		moveCooldown = true
 		$MovementCooldown.wait_time = moveTime
@@ -151,15 +151,21 @@ func shift_abdomen():
 	if is_weighted(%LeftShoe) and is_weighted(%RightShoe):
 		var tween: Tween
 		tween = create_tween()
+		tween.set_parallel()
 		tween.tween_property(%AbdomenPolygon,"position",Movement.midpoint,Movement.placingWeight)#.set_trans(Movement.styleTween)
+		tween.tween_property($AbdomenMidpoint,"position",Movement.midpoint,Movement.placingWeight)#.set_trans(Movement.styleTween)
 	elif is_weighted(%LeftShoe): 
 		var tween: Tween
 		tween = create_tween()
+		tween.set_parallel()
 		tween.tween_property(%AbdomenPolygon,"position",Movement.midpoint.lerp(Movement.CurrPosLeft,0.7),Movement.placingWeight*2)#.set_trans(Movement.styleTween)
+		tween.tween_property($AbdomenMidpoint,"position",Movement.midpoint.lerp(Movement.CurrPosLeft,0.7),Movement.placingWeight*2)
 	elif is_weighted(%RightShoe): 
 		var tween: Tween
 		tween = create_tween()
+		tween.set_parallel()
 		tween.tween_property(%AbdomenPolygon,"position",Movement.midpoint.lerp(Movement.CurrPosRight,0.7),Movement.placingWeight*2)#.set_trans(Movement.styleTween)
+		tween.tween_property($AbdomenMidpoint,"position",Movement.midpoint.lerp(Movement.CurrPosRight,0.7),Movement.placingWeight*2)
 
 
 func _ready():

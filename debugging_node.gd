@@ -11,9 +11,11 @@ func _draw():
 	elif %RightShoe.weighted  == false:
 		draw_circle(%RightShoe.global_position,5.0,Color.GREEN)
 		
-	#draw_circle(Movement.focus,5.0,Color.AQUA)
+	#draw_circle(Movement.shoulderFocus,5.0,Color.AQUA)
 	
-	draw_line(Movement.CurrPosLeft,Movement.CurrPosRight,Color.AQUA)
+	#draw_line(Movement.CurrPosLeft,Movement.CurrPosRight,Color.AQUA)
+	
+	
 
 func _process(delta):
 	#print("Left shoe weighted: ",%LeftShoe.weighted)

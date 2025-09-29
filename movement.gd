@@ -50,6 +50,11 @@ var focus = Vector2(16,-512)
 var orientation = Vector2.UP
 
 var cumulativeAngle = 0
+var neck = Vector2(16,0)
+var lefShoulder = Vector2(-8,0)
+var rightShoulder = Vector2(40,0)
+var shoulderFocus = Vector2(16,0)
+var shoulderOrientation = Vector2.UP
 
 #func can_move(dir: Vector2) -> bool:
 	#var dist = moveDistance
