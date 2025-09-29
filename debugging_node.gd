@@ -11,13 +11,14 @@ func _draw():
 	elif %RightShoe.weighted  == false:
 		draw_circle(%RightShoe.global_position,5.0,Color.GREEN)
 		
-	#draw_circle(Movement.shoulderFocus,5.0,Color.AQUA)
+	draw_circle($"../RightShoulderJoint".global_position,1.0,Color.AQUA)
 	
 	#draw_line(Movement.CurrPosLeft,Movement.CurrPosRight,Color.AQUA)
 	
 	
 
 func _process(delta):
-	#print("Left shoe weighted: ",%LeftShoe.weighted)
+	#print($"../RightShoulderJoint".global_position)
 	#print("Right shoe weighted: ",%RightShoe.weighted)
+	#print($"../RightShoulder".global_position.distance_to($"../RightShoulderJoint".global_position))
 	queue_redraw()
