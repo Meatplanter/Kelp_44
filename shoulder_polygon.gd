@@ -5,19 +5,22 @@ var rightShoulder = Vector2.ZERO
 var shoulderMidpoint = Vector2.ZERO
 var shoulderFocus = Vector2.ZERO
 
-#get global position of specific point in shoulder polygon
-func point_position(point_number: int):
-	var points = %ShoulderPolygon.polygon
+#get global position of specific point in polygon
+func point_position(shape: Node2D,point_number: int):
+	var points = shape.polygon
 	var local_point = points[point_number]
-	var global_point = %ShoulderPolygon.to_global(local_point)
+	var global_point = shape.to_global(local_point)
 	return global_point
 
 func update_positions():
-	leftShoulder = (point_position(0)+point_position(4))/2
+	leftShoulder = (point_position(%ShoulderPolygon,0)+point_position(%ShoulderPolygon,4))/2
 	$"../LeftShoulder".global_position = leftShoulder
+	$"../LeftShoulder".rotation = Movement.cumulativeAngle
 	
-	rightShoulder = (point_position(1)+point_position(3))/2
+	rightShoulder = (point_position(%ShoulderPolygon,1)+point_position(%ShoulderPolygon,3))/2
 	$"../RightShoulder".global_position = rightShoulder
+	$"../RightShoulder".rotation = Movement.cumulativeAngle
+	$"../RightElbow".global_position = (point_position(%RightBiceps,2)+point_position(%RightBiceps,4))/2
 	
 	shoulderMidpoint = (leftShoulder+rightShoulder)/2
 	Movement.neck = shoulderMidpoint
@@ -42,28 +45,33 @@ func rotate_towards_abdomen():
 	tween = create_tween()
 	tween.tween_property(%ShoulderPolygon,"rotation",%ShoulderPolygon.rotation+diff,1).set_ease(Tween.EASE_IN_OUT)
 
-func join_shoulder(torso_joint:Node2D,shoulder_joint:Node2D,delta:float):
-	var pivot_rest_pos = torso_joint.global_position
-	var radius = 50.0
-	var stiffness = 5.0
-	var damping = 0.8
+func chase_joint(parent:Node2D,joint:Node2D,stiff:float,delta:float):
+	var tween: Tween
+	tween = create_tween()
+	tween.tween_property(joint,"position",parent.global_position,stiff)
+
+func joint_rotation(): #parent:Node2D,joint:Node2D):
+	var target = get_global_mouse_position()
+	var targetAngle = (target - $"../RightShoulder".global_position).angle() + deg_to_rad(Movement.cumulativeAngle)
+	print(rad_to_deg(targetAngle))
+	var angleShoulder = clamp(targetAngle,deg_to_rad(Movement.cumulativeAngle)-PI*0.75,deg_to_rad(Movement.cumulativeAngle))
+	var angleElbow
 	
-	var pivot_offset = Vector2.ZERO
-	var pivot_velocity = Vector2.ZERO
-	
-	var input_offset = torso_joint.global_position - shoulder_joint.global_position
-	
-	pivot_velocity += input_offset * stiffness * delta
-	pivot_velocity *= damping
-	
-	pivot_offset += pivot_velocity * delta
-	
-	if pivot_offset.length() > radius: pivot_offset.normalized() * radius
-	
-	shoulder_joint.global_position = pivot_rest_pos + pivot_offset
+	var tween: Tween
+	tween = create_tween()
+	tween.set_parallel()
+	tween.tween_property($"../RightShoulderJoint","rotation",angleShoulder,1)
+	tween.tween_property($"../RightElbowJoint","rotation",targetAngle,0.5)
+
+
+func _ready():
+	$"../RightShoulderJoint".global_position = Movement.rightShoulder
 
 func _process(delta):
 	update_positions()
 	chase_abdomen()
 	rotate_towards_abdomen()
-	join_shoulder($"../RightShoulder",$"../RightShoulderJoint",delta)
+	chase_joint($"../RightShoulder",$"../RightShoulderJoint",0.1,delta)
+	chase_joint($"../RightElbow",$"../RightElbowJoint",0.05,delta)
+	
+	joint_rotation()
