@@ -39,7 +39,7 @@ func update_positions():
 	$"../ShoulderMidpoint".global_position = shoulderMidpoint
 	Movement.shoulderOrientation = find_orientation(rightShoulder,leftShoulder)
 	
-	target = Vector2(40,-50)
+	target = get_global_mouse_position()
 
 
 func chase_abdomen():
@@ -59,14 +59,26 @@ func chase_joint(parent:Node2D,joint:Node2D,stiff:float,delta:float):
 	tween = create_tween()
 	tween.tween_property(joint,"position",parent.global_position,stiff)
 
-func joint_rotation(joint: Node2D, target: Vector2, duration: float, min: float, max: float): #parent:Node2D,joint:Node2D):
+func right_joint_rotation(joint: Node2D, target: Vector2, duration: float, min: float, max: float):
 	var targetAngle = (target - joint.global_position).angle()
 	
 	targetAngle = lerp_angle(joint.rotation,targetAngle,1.0)
 	targetAngle = clamp(targetAngle,deg_to_rad(Movement.cumulativeAngle)-min,deg_to_rad(Movement.cumulativeAngle)+max)
-	var tween = create_tween()
+	
+	var tween: Tween
+	tween = create_tween()
 	tween.tween_property(joint,"rotation",targetAngle,duration)
 	
+func left_joint_rotation(joint: Node2D, target: Vector2, duration: float, min: float, max: float):
+	var targetAngle = (target - joint.global_position).angle()+PI
+	
+	targetAngle = lerp_angle(joint.rotation,targetAngle,1.0)
+	targetAngle = clamp(targetAngle,deg_to_rad(Movement.cumulativeAngle)-min,deg_to_rad(Movement.cumulativeAngle)+max)
+	#print(rad_to_deg(targetAngle))
+	
+	var tween: Tween
+	tween = create_tween()
+	tween.tween_property(joint,"rotation",targetAngle,duration)
 
 func _ready():
 	$"../RightShoulderJoint".global_position = Movement.rightShoulder
@@ -76,19 +88,19 @@ func _process(delta):
 	chase_abdomen()
 	rotate_towards_abdomen()
 	
-	print(rad_to_deg((target - $"../RightShoulderJoint".global_position).angle()))
-	
 	#left shoulder
 	chase_joint($"../LeftShoulder",$"../LeftShoulderJoint",0.1,delta)
-	joint_rotation($"../LeftShoulderJoint",target,1.0,-PI,PI*0.75)
+	left_joint_rotation($"../LeftShoulderJoint",target,1.0,0,PI*0.75)
 	
 	#left elbow
 	chase_joint($"../LeftElbow",$"../LeftElbowJoint",0.05,delta)
+	left_joint_rotation($"../LeftElbowJoint",target,0.5,$"../LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle),PI)
+	#left_joint_rotation($"../LeftElbowJoint",target,0.5,-($"../LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)+PI*0.4),$"../LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle))
 	
 	#right shoulder
 	chase_joint($"../RightShoulder",$"../RightShoulderJoint",0.1,delta)
-	joint_rotation($"../RightShoulderJoint",target,1.0,PI*0.75,0)
+	right_joint_rotation($"../RightShoulderJoint",target,1.0,PI*0.75,0)
 	
 	#right elbow
 	chase_joint($"../RightElbow",$"../RightElbowJoint",0.05,delta)
-	joint_rotation($"../RightElbowJoint",target,0.5,-($"../RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)-PI*0.4),$"../RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle))
+	right_joint_rotation($"../RightElbowJoint",target,0.5,-($"../RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)-PI*0.4),$"../RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle))
