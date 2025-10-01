@@ -18,9 +18,11 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://global.gd"
+TimeManager="*res://time_manager.gd"
 EnemyManager="*res://enemy_manager.gd"
 Movement="*res://movement.gd"
 Camera="*res://camera.gd"
+WeaponManager="*res://weapon_manager.gd"
 
 [input]
 

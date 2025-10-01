@@ -98,20 +98,20 @@ func select_next_target_right(direction: Vector2):
 	if best_enemy:
 		EnemyManager.targetEnemyRight = best_enemy
 
-#func _unhandled_input(event):
-	#if event.is_action_pressed("TargetLGRight"):
-		#select_next_target_left(Global.VecRight)
-	#elif event.is_action_pressed("TargetLGLeft"):
-		#select_next_target_left(Global.VecLeft)
-	#elif event.is_action_pressed("TargetLGUp"):
-		#select_next_target_left(Global.VecUp)
-	#elif event.is_action_pressed("TargetLGDown"):
-		#select_next_target_left(Global.VecDown)
-	#elif event.is_action_pressed("TargetRGRight"):
-		#select_next_target_right(Global.VecRight)
-	#elif event.is_action_pressed("TargetRGLeft"):
-		#select_next_target_right(Global.VecLeft)
-	#elif event.is_action_pressed("TargetRGUp"):
-		#select_next_target_right(Global.VecUp)
-	#elif event.is_action_pressed("TargetRGDown"):
-		#select_next_target_right(Global.VecDown)
+func _unhandled_input(event):
+	if event.is_action_pressed("TargetLGRight"):
+		select_next_target_left(Global.VecRight)
+	elif event.is_action_pressed("TargetLGLeft"):
+		select_next_target_left(Global.VecLeft)
+	elif event.is_action_pressed("TargetLGUp"):
+		select_next_target_left(Global.VecUp)
+	elif event.is_action_pressed("TargetLGDown"):
+		select_next_target_left(Global.VecDown)
+	elif event.is_action_pressed("TargetRGRight"):
+		select_next_target_right(Global.VecRight)
+	elif event.is_action_pressed("TargetRGLeft"):
+		select_next_target_right(Global.VecLeft)
+	elif event.is_action_pressed("TargetRGUp"):
+		select_next_target_right(Global.VecUp)
+	elif event.is_action_pressed("TargetRGDown"):
+		select_next_target_right(Global.VecDown)

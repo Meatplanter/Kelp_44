@@ -11,7 +11,7 @@ func _draw():
 	elif %RightShoe.weighted  == false:
 		draw_circle(%RightShoe.global_position,5.0,Color.GREEN)
 		
-	draw_circle($"../RightElbow".global_position,1.0,Color.AQUA)
+	draw_circle(%ShoulderPolygon.target,5.0,Color.AQUA)
 	
 	#draw_line(Movement.CurrPosLeft,Movement.CurrPosRight,Color.AQUA)
 	

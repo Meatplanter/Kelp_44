@@ -171,6 +171,20 @@ func shift_abdomen():
 func _ready():
 	vecBefore = Movement.orientation
 	vecAfter = Movement.orientation
+	
+	WeaponManager.weaponCooldown = 1.0
+	var normalTimer = TimeManager.add_normal_timer(WeaponManager.weaponCooldown)
+	normalTimer.timeout.connect(func():
+		WeaponManager.shoot()
+		)
+	var slomoTimer = TimeManager.add_slomo_timer(WeaponManager.weaponCooldown)
+	slomoTimer.timeout.connect(func():
+		WeaponManager.shoot()
+		WeaponManager.shoot()
+		WeaponManager.shoot()
+		WeaponManager.shoot()
+		WeaponManager.shoot()
+		)
 
 
 func _process(delta):

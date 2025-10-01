@@ -69,28 +69,7 @@ func _process(delta):
 		tween.set_parallel()
 		tween.tween_property(%LeftShoe,"rotation",%LeftShoe.rotation-PI/2,0.5).set_trans(Movement.styleTween)
 		tween.tween_property(%RightShoe,"rotation",%RightShoe.rotation-PI/2,0.5).set_trans(Movement.styleTween)
-	
-	#normalizing vector for camera states
-	if Global.cameraState == 0:
-		Global.VecRight = Vector2.RIGHT
-		Global.VecLeft = Vector2.LEFT
-		Global.VecUp = Vector2.UP
-		Global.VecDown = Vector2.DOWN
-	elif Global.cameraState == 1:
-		Global.VecRight = Vector2.DOWN
-		Global.VecLeft = Vector2.UP
-		Global.VecUp = Vector2.RIGHT
-		Global.VecDown = Vector2.LEFT
-	elif Global.cameraState == 2:
-		Global.VecRight = Vector2.LEFT
-		Global.VecLeft = Vector2.RIGHT
-		Global.VecUp = Vector2.DOWN
-		Global.VecDown = Vector2.UP
-	elif Global.cameraState == 3:
-		Global.VecRight = Vector2.UP
-		Global.VecLeft = Vector2.DOWN
-		Global.VecUp = Vector2.LEFT
-		Global.VecDown = Vector2.RIGHT
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Esc"):
