@@ -10,7 +10,6 @@ var targetEnemyRight = EnemyManager.targetEnemyRight
 
 var shootingPoint = Vector2.ZERO
 
-
 func shoot():
 	const BULLET = preload("res://Bullet.tscn")
 	var new_bullet = BULLET.instantiate()

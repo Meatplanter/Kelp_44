@@ -7,6 +7,9 @@ var shoulderFocus = Vector2.ZERO
 
 var target = Vector2.ZERO
 
+var shoulderSpeed = 1.0
+var elbowSpeed = 0.5
+
 #get global position of specific point in polygon
 func point_position(shape: Node2D,point_number: int):
 	var points = shape.polygon
@@ -90,17 +93,17 @@ func _process(delta):
 	
 	#left shoulder
 	chase_joint($"../LeftShoulder",$"../LeftShoulderJoint",0.1,delta)
-	left_joint_rotation($"../LeftShoulderJoint",target,1.0,0,PI*0.75)
+	left_joint_rotation($"../LeftShoulderJoint",target,shoulderSpeed,0,PI*0.75)
 	
 	#left elbow
-	chase_joint($"../LeftElbow",$"../LeftElbowJoint",0.05,delta)
-	left_joint_rotation($"../LeftElbowJoint",target,0.5,$"../LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle),PI)
+	chase_joint($"../LeftElbow",$"../LeftElbowJoint",0.04,delta)
+	left_joint_rotation($"../LeftElbowJoint",target,elbowSpeed,-($"../LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)),($"../LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)+PI*0.4))#PI)
 	#left_joint_rotation($"../LeftElbowJoint",target,0.5,-($"../LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)+PI*0.4),$"../LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle))
 	
 	#right shoulder
 	chase_joint($"../RightShoulder",$"../RightShoulderJoint",0.1,delta)
-	right_joint_rotation($"../RightShoulderJoint",target,1.0,PI*0.75,0)
+	right_joint_rotation($"../RightShoulderJoint",target,shoulderSpeed,PI*0.75,0)
 	
 	#right elbow
-	chase_joint($"../RightElbow",$"../RightElbowJoint",0.05,delta)
-	right_joint_rotation($"../RightElbowJoint",target,0.5,-($"../RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)-PI*0.4),$"../RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle))
+	chase_joint($"../RightElbow",$"../RightElbowJoint",0.04,delta)
+	right_joint_rotation($"../RightElbowJoint",target,elbowSpeed,-($"../RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)-PI*0.4),$"../RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle))
