@@ -42,7 +42,9 @@ func update_positions():
 	$"../ShoulderMidpoint".global_position = shoulderMidpoint
 	Movement.shoulderOrientation = find_orientation(rightShoulder,leftShoulder)
 	
-	target = get_global_mouse_position()
+	#target = get_global_mouse_position()
+	$"../TargetNode".global_position = target
+	target = Vector2(100,-100)
 
 
 func chase_abdomen():
@@ -77,11 +79,21 @@ func left_joint_rotation(joint: Node2D, target: Vector2, duration: float, min: f
 	
 	targetAngle = lerp_angle(joint.rotation,targetAngle,1.0)
 	targetAngle = clamp(targetAngle,deg_to_rad(Movement.cumulativeAngle)-min,deg_to_rad(Movement.cumulativeAngle)+max)
-	#print(rad_to_deg(targetAngle))
 	
 	var tween: Tween
 	tween = create_tween()
 	tween.tween_property(joint,"rotation",targetAngle,duration)
+
+func lower_right_elbow(elbow: Node2D, bicep: Node2D, target: Vector2):
+	var dist = elbow.global_position.distance_to(target)
+	bicep.scale.x = clampf(min(dist/75,1),0.3,1)
+	bicep.scale.y = clampf(1.5-dist/75,1,1.5)
+
+func lower_left_elbow(elbow: Node2D, bicep: Node2D, target: Vector2):
+	var dist = elbow.global_position.distance_to(target)
+	bicep.position.x =  - 27 * clampf(min(dist/75,1),0.3,1)
+	bicep.scale.x = clampf(min(dist/75,1),0.3,1)
+	bicep.scale.y = clampf(1.5-dist/75,1,1.5)
 
 func _ready():
 	$"../RightShoulderJoint".global_position = Movement.rightShoulder
@@ -97,8 +109,8 @@ func _process(delta):
 	
 	#left elbow
 	chase_joint($"../LeftElbow",$"../LeftElbowJoint",0.04,delta)
-	left_joint_rotation($"../LeftElbowJoint",target,elbowSpeed,-($"../LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)),($"../LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)+PI*0.4))#PI)
-	#left_joint_rotation($"../LeftElbowJoint",target,0.5,-($"../LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)+PI*0.4),$"../LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle))
+	left_joint_rotation($"../LeftElbowJoint",target,elbowSpeed,-($"../LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)),($"../LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)+PI*0.4))
+	lower_left_elbow($"../LeftElbow",%LeftBiceps,target)
 	
 	#right shoulder
 	chase_joint($"../RightShoulder",$"../RightShoulderJoint",0.1,delta)
@@ -107,3 +119,4 @@ func _process(delta):
 	#right elbow
 	chase_joint($"../RightElbow",$"../RightElbowJoint",0.04,delta)
 	right_joint_rotation($"../RightElbowJoint",target,elbowSpeed,-($"../RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)-PI*0.4),$"../RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle))
+	lower_right_elbow($"../RightElbow",%RightBiceps,target)

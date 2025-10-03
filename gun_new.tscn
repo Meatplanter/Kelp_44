@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6o1fo0ewnjln"]
+[gd_scene load_steps=4 format=3 uid="uid://b6o1fo0ewnjln"]
 
 [ext_resource type="Script" uid="uid://0h2qf7uy8e1f" path="res://gun_new.gd" id="1_t8ckp"]
 [ext_resource type="Texture2D" uid="uid://bs1qakvfa2h7s" path="res://Assets/Revolver.png" id="2_gxueq"]
+[ext_resource type="Script" uid="uid://22vxslkug5mj" path="res://laser_sights.gd" id="3_gxueq"]
 
 [node name="GunNew" type="Area2D"]
 collision_layer = 0
@@ -18,3 +19,6 @@ texture = ExtResource("2_gxueq")
 [node name="ShootingPoint" type="Marker2D" parent="WeaponPivot/Revolver"]
 unique_name_in_owner = true
 position = Vector2(7, 0)
+
+[node name="LaserSights" type="Node2D" parent="."]
+script = ExtResource("3_gxueq")

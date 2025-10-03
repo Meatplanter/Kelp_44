@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ctyixwmxls1xf"]
+[gd_scene load_steps=16 format=3 uid="uid://ctyixwmxls1xf"]
 
 [ext_resource type="Script" uid="uid://cmd2574ahhehe" path="res://rogue_b.gd" id="1_67mbl"]
 [ext_resource type="Script" uid="uid://74ugebrbbmct" path="res://debugging_node.gd" id="2_bjt74"]
@@ -13,14 +13,30 @@
 [ext_resource type="PackedScene" uid="uid://c5nunyagwdk5f" path="res://pause_menu.tscn" id="10_t0gij"]
 [ext_resource type="PackedScene" uid="uid://ct4uhithfj3kk" path="res://level_up_screen.tscn" id="11_qhx67"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_e3tf4"]
+radius = 24.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bjt74"]
 radius = 6.0
 height = 26.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e3tf4"]
+radius = 4.0
+height = 28.0
 
 [node name="RogueB" type="CharacterBody2D"]
 visibility_layer = 2
 script = ExtResource("1_67mbl")
 metadata/Player = true
+
+[node name="TargetNode" type="Marker2D" parent="."]
+position = Vector2(24, -49)
+
+[node name="Area2D" type="Area2D" parent="TargetNode"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetNode/Area2D"]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_e3tf4")
 
 [node name="DebuggingNode" type="Node2D" parent="."]
 z_index = 999
@@ -100,6 +116,13 @@ position = Vector2(-27, 0)
 color = Color(0.38372, 0.216172, 0.0617191, 1)
 polygon = PackedVector2Array(0, 0, 3, -4, 27, -4, 30, 0, 27, 4, 3, 4)
 
+[node name="Area2D" type="Area2D" parent="LeftElbowJoint/LeftForearm"]
+
+[node name="LeftForearm" type="CollisionShape2D" parent="LeftElbowJoint/LeftForearm/Area2D"]
+position = Vector2(15, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_e3tf4")
+
 [node name="RightShoulder" type="Marker2D" parent="."]
 position = Vector2(2.98023e-08, 0)
 
@@ -121,6 +144,11 @@ position = Vector2(2.98023e-08, 0)
 position = Vector2(-3, 0)
 color = Color(0.38372, 0.216172, 0.0617191, 1)
 polygon = PackedVector2Array(0, 0, 3, -4, 27, -4, 30, 0, 27, 4, 3, 4)
+
+[node name="RightForearm" type="CollisionShape2D" parent="RightElbowJoint/RightForearm"]
+position = Vector2(15, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_e3tf4")
 
 [node name="Camera2DNew" type="Camera2D" parent="."]
 position = Vector2(24, 0)
