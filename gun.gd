@@ -87,7 +87,6 @@ func _input(event):
 		rightCooldown = 1.0
 
 func _physics_process(delta: float) -> void:
-	
 	if get_parent().has_meta("Enemy"): #enemy has gun, points it at player
 		if global_position.distance_to(Global.midpoint) <= enemyRange: #player in range
 			show()
@@ -100,6 +99,7 @@ func _physics_process(delta: float) -> void:
 			show()
 		else: #enemy outside of range
 			hide()
+			
 		
 
 

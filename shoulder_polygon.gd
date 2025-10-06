@@ -42,6 +42,11 @@ func update_positions():
 	$"../ShoulderMidpoint".global_position = shoulderMidpoint
 	Movement.shoulderOrientation = find_orientation(rightShoulder,leftShoulder)
 	
+	%GunLeft.global_position = (point_position(%LeftForearm,1)+point_position(%LeftForearm,5))/2
+	%GunLeft.global_rotation = $"../LeftElbowJoint".global_rotation + PI
+	%GunRight.global_position = (point_position(%RightForearm,2)+point_position(%RightForearm,4))/2
+	%GunRight.global_rotation = $"../RightElbowJoint".global_rotation
+	
 	#target = get_global_mouse_position()
 	$"../TargetNode".global_position = target
 	target = Vector2(100,-100)
@@ -89,11 +94,13 @@ func lower_right_elbow(elbow: Node2D, bicep: Node2D, target: Vector2):
 	bicep.scale.x = clampf(min(dist/75,1),0.3,1)
 	bicep.scale.y = clampf(1.5-dist/75,1,1.5)
 
+
 func lower_left_elbow(elbow: Node2D, bicep: Node2D, target: Vector2):
 	var dist = elbow.global_position.distance_to(target)
 	bicep.position.x =  - 27 * clampf(min(dist/75,1),0.3,1)
 	bicep.scale.x = clampf(min(dist/75,1),0.3,1)
 	bicep.scale.y = clampf(1.5-dist/75,1,1.5)
+
 
 func _ready():
 	$"../RightShoulderJoint".global_position = Movement.rightShoulder

@@ -23,12 +23,12 @@ func look_for_enemy():
 		
 
 func _physics_process(delta):
-	#look_for_enemy()
-	self.global_position = Movement.neck
+	look_for_enemy()
+	self.global_position = Global.midpoint
 
 func _process(delta):
 	EnemyManager.enemy_scope()
-	#EnemyManager.get_visible_enemies()
+	EnemyManager.get_visible_enemies()
 	
 	#trying to implement field of vision
 	var pos = Global.midpoint

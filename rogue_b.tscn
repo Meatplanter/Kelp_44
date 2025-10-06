@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bw2kcvbt4evcb" path="res://shoulder_polygon.gd" id="7_e3tf4"]
 [ext_resource type="Script" uid="uid://bfrfmnvcxdukh" path="res://camera_2d_new.gd" id="7_y7bk3"]
 [ext_resource type="Script" uid="uid://g7fnkyhbdemq" path="res://hp_left.gd" id="8_e3tf4"]
+[ext_resource type="PackedScene" uid="uid://b6o1fo0ewnjln" path="res://gun_new.tscn" id="8_m64x7"]
 [ext_resource type="Script" uid="uid://clxhegpqyijug" path="res://xp_to_level.gd" id="9_m64x7"]
 [ext_resource type="PackedScene" uid="uid://c5nunyagwdk5f" path="res://pause_menu.tscn" id="10_t0gij"]
 [ext_resource type="PackedScene" uid="uid://ct4uhithfj3kk" path="res://level_up_screen.tscn" id="11_qhx67"]
@@ -19,10 +20,6 @@ radius = 24.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bjt74"]
 radius = 6.0
 height = 26.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e3tf4"]
-radius = 4.0
-height = 28.0
 
 [node name="RogueB" type="CharacterBody2D"]
 visibility_layer = 2
@@ -112,16 +109,10 @@ polygon = PackedVector2Array(0, 0, 3, -4, 27, -4, 30, 0, 27, 4, 3, 4)
 [node name="LeftElbowJoint" type="Marker2D" parent="."]
 
 [node name="LeftForearm" type="Polygon2D" parent="LeftElbowJoint"]
+unique_name_in_owner = true
 position = Vector2(-27, 0)
 color = Color(0.38372, 0.216172, 0.0617191, 1)
 polygon = PackedVector2Array(0, 0, 3, -4, 27, -4, 30, 0, 27, 4, 3, 4)
-
-[node name="Area2D" type="Area2D" parent="LeftElbowJoint/LeftForearm"]
-
-[node name="LeftForearm" type="CollisionShape2D" parent="LeftElbowJoint/LeftForearm/Area2D"]
-position = Vector2(15, 0)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_e3tf4")
 
 [node name="RightShoulder" type="Marker2D" parent="."]
 position = Vector2(2.98023e-08, 0)
@@ -141,19 +132,21 @@ polygon = PackedVector2Array(0, 0, 3, -4, 27, -4, 30, 0, 27, 4, 3, 4)
 position = Vector2(2.98023e-08, 0)
 
 [node name="RightForearm" type="Polygon2D" parent="RightElbowJoint"]
+unique_name_in_owner = true
 position = Vector2(-3, 0)
 color = Color(0.38372, 0.216172, 0.0617191, 1)
 polygon = PackedVector2Array(0, 0, 3, -4, 27, -4, 30, 0, 27, 4, 3, 4)
 
-[node name="RightForearm" type="CollisionShape2D" parent="RightElbowJoint/RightForearm"]
-position = Vector2(15, 0)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_e3tf4")
+[node name="GunRight" parent="." instance=ExtResource("8_m64x7")]
+unique_name_in_owner = true
+
+[node name="GunLeft" parent="." instance=ExtResource("8_m64x7")]
+unique_name_in_owner = true
 
 [node name="Camera2DNew" type="Camera2D" parent="."]
 position = Vector2(24, 0)
 ignore_rotation = false
-zoom = Vector2(4, 4)
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 rotation_smoothing_enabled = true
