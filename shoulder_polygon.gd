@@ -7,8 +7,12 @@ var shoulderFocus = Vector2.ZERO
 
 var target = Vector2.ZERO
 
+#joint rotation speed
 var shoulderSpeed = 1.0
+var leftShoulderSpeedModifier = 1.0
+var rightShoulderSpeedModifier = 1.0
 var elbowSpeed = 0.5
+
 
 #get global position of specific point in polygon
 func point_position(shape: Node2D,point_number: int):
@@ -16,6 +20,7 @@ func point_position(shape: Node2D,point_number: int):
 	var local_point = points[point_number]
 	var global_point = shape.to_global(local_point)
 	return global_point
+
 
 #Get a normalized perpendicular vector
 func find_orientation(pointA:Vector2, pointB: Vector2):
@@ -25,6 +30,14 @@ func find_orientation(pointA:Vector2, pointB: Vector2):
 	var focus = midpoint + normal * -512
 	var orientation = (focus - midpoint).normalized()
 	return orientation
+
+
+func find_angle_between(pointA:Node2D, middle: Node2D, pointB: Node2D):
+	var lineA = (pointA.global_position - middle.global_position).normalized()
+	var lineB = (pointB.global_position - middle.global_position).normalized()
+	var angle = rad_to_deg(lineA.angle_to(lineB))
+	return angle
+
 
 func update_positions():
 	leftShoulder = (point_position(%ShoulderPolygon,0)+point_position(%ShoulderPolygon,4))/2
@@ -47,15 +60,16 @@ func update_positions():
 	%GunRight.global_position = (point_position(%RightForearm,2)+point_position(%RightForearm,4))/2
 	%GunRight.global_rotation = $"../RightElbowJoint".global_rotation
 	
-	#target = get_global_mouse_position()
+	target = get_global_mouse_position()
 	$"../TargetNode".global_position = target
-	target = Vector2(100,-100)
+	#target = Vector2(100,-100)
 
 
 func chase_abdomen():
 	var tween: Tween
 	tween = create_tween()
 	tween.tween_property(%ShoulderPolygon,"global_position",$"../AbdomenMidpoint".global_position,Movement.placingWeight*2)#.set_trans(Movement.styleTween)
+
 
 func rotate_towards_abdomen():
 	var diff = Movement.shoulderOrientation.angle_to(Movement.orientation)
@@ -64,10 +78,12 @@ func rotate_towards_abdomen():
 	tween = create_tween()
 	tween.tween_property(%ShoulderPolygon,"rotation",%ShoulderPolygon.rotation+diff,1).set_ease(Tween.EASE_IN_OUT)
 
+
 func chase_joint(parent:Node2D,joint:Node2D,stiff:float,delta:float):
 	var tween: Tween
 	tween = create_tween()
 	tween.tween_property(joint,"position",parent.global_position,stiff)
+
 
 func right_joint_rotation(joint: Node2D, target: Vector2, duration: float, min: float, max: float):
 	var targetAngle = (target - joint.global_position).angle()
@@ -77,8 +93,9 @@ func right_joint_rotation(joint: Node2D, target: Vector2, duration: float, min: 
 	
 	var tween: Tween
 	tween = create_tween()
-	tween.tween_property(joint,"rotation",targetAngle,duration)
-	
+	tween.tween_property(joint,"rotation",targetAngle,duration).set_ease(Tween.EASE_OUT_IN)
+
+
 func left_joint_rotation(joint: Node2D, target: Vector2, duration: float, min: float, max: float):
 	var targetAngle = (target - joint.global_position).angle()+PI
 	
@@ -87,7 +104,8 @@ func left_joint_rotation(joint: Node2D, target: Vector2, duration: float, min: f
 	
 	var tween: Tween
 	tween = create_tween()
-	tween.tween_property(joint,"rotation",targetAngle,duration)
+	tween.tween_property(joint,"rotation",targetAngle,duration).set_ease(Tween.EASE_OUT_IN)
+
 
 func lower_right_elbow(elbow: Node2D, bicep: Node2D, target: Vector2):
 	var dist = elbow.global_position.distance_to(target)
@@ -102,17 +120,25 @@ func lower_left_elbow(elbow: Node2D, bicep: Node2D, target: Vector2):
 	bicep.scale.y = clampf(1.5-dist/75,1,1.5)
 
 
+#to make shoulder rotate faster once the elbow is already stretched
+#func set_shoulder_speed_modifier():
+	#rightShoulderSpeedModifier = max(find_angle_between($"../RightShoulder",$"../RightElbow",%GunRight)-140,0)/20
+	#leftShoulderSpeedModifier =find_angle_between($"../LeftShoulder",$"../LeftElbow",%GunLeft)
+
+
 func _ready():
 	$"../RightShoulderJoint".global_position = Movement.rightShoulder
+
 
 func _process(delta):
 	update_positions()
 	chase_abdomen()
 	rotate_towards_abdomen()
+	#set_shoulder_speed_modifier()
 	
 	#left shoulder
 	chase_joint($"../LeftShoulder",$"../LeftShoulderJoint",0.1,delta)
-	left_joint_rotation($"../LeftShoulderJoint",target,shoulderSpeed,0,PI*0.75)
+	left_joint_rotation($"../LeftShoulderJoint",target,shoulderSpeed*leftShoulderSpeedModifier,0,PI*0.75)
 	
 	#left elbow
 	chase_joint($"../LeftElbow",$"../LeftElbowJoint",0.04,delta)
@@ -121,9 +147,11 @@ func _process(delta):
 	
 	#right shoulder
 	chase_joint($"../RightShoulder",$"../RightShoulderJoint",0.1,delta)
-	right_joint_rotation($"../RightShoulderJoint",target,shoulderSpeed,PI*0.75,0)
+	right_joint_rotation($"../RightShoulderJoint",target,shoulderSpeed/rightShoulderSpeedModifier,PI*0.75,0)
 	
 	#right elbow
 	chase_joint($"../RightElbow",$"../RightElbowJoint",0.04,delta)
 	right_joint_rotation($"../RightElbowJoint",target,elbowSpeed,-($"../RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)-PI*0.4),$"../RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle))
 	lower_right_elbow($"../RightElbow",%RightBiceps,target)
+	
+	#print(rightShoulderSpeedModifier)
