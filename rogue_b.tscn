@@ -154,6 +154,7 @@ rotation_smoothing_speed = 3.0
 script = ExtResource("7_y7bk3")
 
 [node name="LabelHealthLeft" type="Label" parent="Camera2DNew"]
+visible = false
 offset_left = -286.0
 offset_top = -160.0
 offset_right = -234.0
@@ -162,6 +163,7 @@ text = "Health left:"
 metadata/_edit_use_anchors_ = true
 
 [node name="HPLeft" type="Label" parent="Camera2DNew"]
+visible = false
 offset_left = -190.0
 offset_top = -160.0
 offset_right = -150.0
@@ -171,6 +173,7 @@ script = ExtResource("8_e3tf4")
 metadata/_edit_use_anchors_ = true
 
 [node name="LabelXPLeft" type="Label" parent="Camera2DNew"]
+visible = false
 offset_left = -286.0
 offset_top = -136.0
 offset_right = -162.0
@@ -178,6 +181,7 @@ offset_bottom = -113.0
 text = "XP until NL:"
 
 [node name="XPToLevel" type="Label" parent="Camera2DNew"]
+visible = false
 offset_left = -190.0
 offset_top = -137.0
 offset_right = -150.0

@@ -79,10 +79,10 @@ func move_time(body: Node2D, dir: Vector2):
 	if dir == Movement.DirRight or dir == Movement.DirLeft or dir == Movement.DirUp or dir == Movement.DirDown: diagonal = 1
 	else: diagonal = sqrt(2)
 	
-	if move_type(body, dir) == 1: return Movement.moveSimpleOptimal * diagonal
-	elif move_type(body, dir) == 2: return Movement.moveSimpleHeavy * diagonal
-	elif move_type(body, dir) == 3: return Movement.moveComplexOptimal * diagonal
-	elif move_type(body, dir) == 4: return Movement.moveComplexHeavy * diagonal
+	if move_type(body, dir) == 1: return Movement.moveSimpleOptimal * diagonal * TimeManager.gameSpeed
+	elif move_type(body, dir) == 2: return Movement.moveSimpleHeavy * diagonal * TimeManager.gameSpeed
+	elif move_type(body, dir) == 3: return Movement.moveComplexOptimal * diagonal * TimeManager.gameSpeed
+	elif move_type(body, dir) == 4: return Movement.moveComplexHeavy * diagonal * TimeManager.gameSpeed
 
 
 #calculate weight shift
@@ -92,16 +92,15 @@ func calculate_shift_weight(body:Node2D,dir:Vector2):
 	
 	if moveType == 1: return
 	elif moveType == 2:
-		await get_tree().create_timer(moveTime / 2).timeout
+		await get_tree().create_timer(moveTime / 2 / TimeManager.gameSpeed).timeout
 		shift_weight()
 	elif moveType == 3:
-		await get_tree().create_timer(moveTime / 2).timeout
+		await get_tree().create_timer(moveTime / 2 / TimeManager.gameSpeed).timeout
 		shift_weight()
 	elif moveType == 4:
 		shift_weight()
-		await get_tree().create_timer(moveTime / 2).timeout
+		await get_tree().create_timer(moveTime / 2 / TimeManager.gameSpeed).timeout
 		shift_weight()
-	#elif moveType == 5:
 
 
 #movement
@@ -121,14 +120,14 @@ func move(body:Node2D, dir: Vector2):
 		#print(moveTime)
 		
 		moveCooldown = true
-		$MovementCooldown.wait_time = moveTime
+		$MovementCooldown.wait_time = moveTime / TimeManager.gameSpeed
 		$MovementCooldown.start()
 		
 		var dist = Movement.moveDistance
 		
 		var tween: Tween
 		tween = create_tween()
-		tween.tween_property(body,"position",body.global_position + dir * dist,moveTime).set_trans(Movement.styleTween)
+		tween.tween_property(body,"position",body.global_position + dir * dist,moveTime / TimeManager.gameSpeed).set_trans(Movement.styleTween)
 
 #update baseline positions
 func update_positions():
@@ -152,49 +151,52 @@ func shift_abdomen():
 		var tween: Tween
 		tween = create_tween()
 		tween.set_parallel()
-		tween.tween_property(%AbdomenPolygon,"position",Movement.midpoint,Movement.placingWeight)#.set_trans(Movement.styleTween)
-		tween.tween_property($AbdomenMidpoint,"position",Movement.midpoint,Movement.placingWeight)#.set_trans(Movement.styleTween)
+		tween.tween_property(%AbdomenPolygon,"position",Movement.midpoint,Movement.placingWeight / TimeManager.gameSpeed)#.set_trans(Movement.styleTween)
+		tween.tween_property($AbdomenMidpoint,"position",Movement.midpoint,Movement.placingWeight / TimeManager.gameSpeed)#.set_trans(Movement.styleTween)
 	elif is_weighted(%LeftShoe): 
 		var tween: Tween
 		tween = create_tween()
 		tween.set_parallel()
-		tween.tween_property(%AbdomenPolygon,"position",Movement.midpoint.lerp(Movement.CurrPosLeft,0.7),Movement.placingWeight*2)#.set_trans(Movement.styleTween)
-		tween.tween_property($AbdomenMidpoint,"position",Movement.midpoint.lerp(Movement.CurrPosLeft,0.7),Movement.placingWeight*2)
+		tween.tween_property(%AbdomenPolygon,"position",Movement.midpoint.lerp(Movement.CurrPosLeft,0.7),Movement.placingWeight*2 / TimeManager.gameSpeed)#.set_trans(Movement.styleTween)
+		tween.tween_property($AbdomenMidpoint,"position",Movement.midpoint.lerp(Movement.CurrPosLeft,0.7),Movement.placingWeight*2 / TimeManager.gameSpeed)
 	elif is_weighted(%RightShoe): 
 		var tween: Tween
 		tween = create_tween()
 		tween.set_parallel()
-		tween.tween_property(%AbdomenPolygon,"position",Movement.midpoint.lerp(Movement.CurrPosRight,0.7),Movement.placingWeight*2)#.set_trans(Movement.styleTween)
-		tween.tween_property($AbdomenMidpoint,"position",Movement.midpoint.lerp(Movement.CurrPosRight,0.7),Movement.placingWeight*2)
+		tween.tween_property(%AbdomenPolygon,"position",Movement.midpoint.lerp(Movement.CurrPosRight,0.7),Movement.placingWeight*2 / TimeManager.gameSpeed)#.set_trans(Movement.styleTween)
+		tween.tween_property($AbdomenMidpoint,"position",Movement.midpoint.lerp(Movement.CurrPosRight,0.7),Movement.placingWeight*2 / TimeManager.gameSpeed)
+
+
+func set_game_speed_when_moving():
+	if moveCooldown == false: TimeManager.gameSpeed = TimeManager.bulletTime
+	elif moveCooldown == true: TimeManager.gameSpeed = TimeManager.normalTime
 
 
 func _ready():
 	vecBefore = Movement.orientation
 	vecAfter = Movement.orientation
 	
-	WeaponManager.weaponCooldown = 1.0
-	#var normalTimer = TimeManager.add_normal_timer(WeaponManager.weaponCooldown)
-	#normalTimer.timeout.connect(func():
-		#WeaponManager.shoot()
-		#)
-	#var slomoTimer = TimeManager.add_slomo_timer(WeaponManager.weaponCooldown)
-	#slomoTimer.timeout.connect(func():
-		#WeaponManager.shoot()
-		#WeaponManager.shoot()
-		#WeaponManager.shoot()
-		#WeaponManager.shoot()
-		#WeaponManager.shoot()
-		#)
+	WeaponManager.weaponCooldown = 5.0
+	var normalTimer = TimeManager.add_normal_timer(WeaponManager.weaponCooldown)
+	normalTimer.timeout.connect(func():
+		WeaponManager.shoot(%GunRight)
+		WeaponManager.shoot(%GunLeft)
+		)
+	var slomoTimer = TimeManager.add_slomo_timer(WeaponManager.weaponCooldown)
+	slomoTimer.timeout.connect(func():
+		WeaponManager.shoot(%GunRight)
+		WeaponManager.shoot(%GunLeft)
+		)
 
 
 func _process(delta):
+	set_game_speed_when_moving()
 	vecBefore = Movement.orientation
 	update_positions()
 	shift_abdomen()
 	vecAfter = Movement.orientation
 	var diff = rad_to_deg(vecBefore.angle_to(vecAfter))
 	Movement.cumulativeAngle += diff
-	#print(round(Movement.cumulativeAngle))
 
 
 func _input(event):
@@ -215,6 +217,7 @@ func _input(event):
 	elif event.is_action_pressed("LS_move_rightdown"): move(%LeftShoe,Movement.DirRightDown)
 	elif event.is_action_pressed("LS_move_leftup"): move(%LeftShoe,Movement.DirLeftUp)
 	elif event.is_action_pressed("LS_move_leftdown"): move(%LeftShoe,Movement.DirLeftDown)
+	
 
 
 func _on_movement_cooldown_timeout():

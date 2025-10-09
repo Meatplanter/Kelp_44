@@ -1,7 +1,7 @@
 extends Node
 
 var normalTime = 1.0
-var bulletTime = 0.05
+var bulletTime = 0.10
 var timeReverse = -0.3
 var targettingMode = false
 var timeReverseMode = false
