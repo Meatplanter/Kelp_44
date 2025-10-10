@@ -1,1 +1,1 @@
-extends Area2D
+extends "res://gun_base.gd"

@@ -175,18 +175,6 @@ func set_game_speed_when_moving():
 func _ready():
 	vecBefore = Movement.orientation
 	vecAfter = Movement.orientation
-	
-	WeaponManager.weaponCooldown = 5.0
-	var normalTimer = TimeManager.add_normal_timer(WeaponManager.weaponCooldown)
-	normalTimer.timeout.connect(func():
-		WeaponManager.shoot(%GunRight)
-		WeaponManager.shoot(%GunLeft)
-		)
-	var slomoTimer = TimeManager.add_slomo_timer(WeaponManager.weaponCooldown)
-	slomoTimer.timeout.connect(func():
-		WeaponManager.shoot(%GunRight)
-		WeaponManager.shoot(%GunLeft)
-		)
 
 
 func _process(delta):
