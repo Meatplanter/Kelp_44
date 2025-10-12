@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ctyixwmxls1xf"]
+[gd_scene load_steps=16 format=3 uid="uid://ctyixwmxls1xf"]
 
 [ext_resource type="Script" uid="uid://cmd2574ahhehe" path="res://rogue_b.gd" id="1_67mbl"]
 [ext_resource type="Script" uid="uid://74ugebrbbmct" path="res://debugging_node.gd" id="2_bjt74"]
@@ -14,6 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://c5nunyagwdk5f" path="res://pause_menu.tscn" id="10_t0gij"]
 [ext_resource type="PackedScene" uid="uid://ct4uhithfj3kk" path="res://level_up_screen.tscn" id="11_qhx67"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_m64x7"]
+radius = 5.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bjt74"]
 radius = 6.0
 height = 26.0
@@ -25,8 +28,14 @@ metadata/Player = true
 
 [node name="TargetNode" type="Marker2D" parent="."]
 position = Vector2(24, -49)
+metadata/Enemy = true
 
-[node name="Area2D" type="Area2D" parent="TargetNode"]
+[node name="TargetCollisionArea" type="Area2D" parent="TargetNode"]
+metadata/Enemy = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetNode/TargetCollisionArea"]
+shape = SubResource("CircleShape2D_m64x7")
+metadata/Enemy = true
 
 [node name="DebuggingNode" type="Node2D" parent="."]
 z_index = 999

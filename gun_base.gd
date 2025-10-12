@@ -12,10 +12,20 @@ var slomoTimer
 
 func _draw():
 	if Laser_sights == true:
-		var aimFrom = to_local(%ShootingPoint.global_position)
-		var aimTo = %ShootingPoint.global_position + Vector2.RIGHT.rotated(%ShootingPoint.rotation) * 50000
+		var ray = %LaserSights
 		
-		draw_line(aimFrom,aimTo,Color.KHAKI)
+		var aimFrom = to_local(ray.global_position)
+		var aimTo
+		var color = Color.KHAKI
+		
+		if ray.is_colliding() and ray.get_collider().has_meta("Enemy"):
+			var contact_point = ray.get_collision_point()
+			aimTo = to_local(contact_point)
+			color = Color.GREEN
+		else:
+			aimTo =  %LaserSights.target_position
+			
+		draw_line(aimFrom,aimTo,color)
 
 
 func adjust_cooldown_to_time():
@@ -28,6 +38,7 @@ func adjust_cooldown_to_time():
 
 
 func _ready():
+	#add timers for normal / slomo time
 	normalTimer = TimeManager.add_normal_timer(Firerate/100)
 	normalTimer.timeout.connect(func():
 		cooldown -= 1
