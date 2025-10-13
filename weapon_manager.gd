@@ -1,14 +1,16 @@
 extends Node
 
-var weaponCooldown = 10.0
-
-var leftCooldown = weaponCooldown
-var rightCooldown = weaponCooldown
-
-var targetEnemyLeft = EnemyManager.targetEnemyLeft
-var targetEnemyRight = EnemyManager.targetEnemyRight
 
 var shootingPoint = Vector2.ZERO
+
+#bullet's defaults
+var bulletSpeed = 120
+var bulletRange = 700
+var bulletSlowdown = 0.998
+
+var bloodTrailVisible = true
+var bloodTrailScene = false #true is pixels, false is sprite
+
 
 func shoot(Gun:Node2D):
 	const BULLET = preload("res://bullet_new.tscn")

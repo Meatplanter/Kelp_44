@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var health = Global.enemyHealth
+var health = EnemyManager.enemyHealth
 
 @onready var playerLocation = get_node("/root/Game/CharacterBody2D/CharBody")
 
@@ -10,8 +10,6 @@ func _ready() -> void:
 	
 
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if EnemyManager.targetEnemyLeft == self && Global.leftCanShoot == true:
 		$Crosshair_greenLeft.show()

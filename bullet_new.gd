@@ -1,10 +1,10 @@
 extends Area2D
 
 var travelledDistance = 0
-var bulletSpeed = Global.bulletSpeed
-var bulletRange = Global.bulletRange
-var bulletContact = 1 - Global.bulletSlowdown
-var bulletSlowdown = Global.bulletSlowdown + bulletContact
+var bulletSpeed = 120.0 #overwritten by gun via shooting function
+var bulletRange = WeaponManager.bulletRange
+var bulletContact = 1 - WeaponManager.bulletSlowdown
+var bulletSlowdown = WeaponManager.bulletSlowdown + bulletContact
 
 var bulletEntryPoint = Vector2.ZERO
 var bulletEntryDistance
@@ -15,20 +15,18 @@ var bloodTrailScene
 
 func _ready() -> void:
 	shootingPoint = global_position
-	bulletSpeed = randf_range(0.75*bulletSpeed,1.5*bulletSpeed)
+	$SubViewport/Tracer2.position.x = -162 #so the tracer doesn't appear behind on the first frame
 	if Global.bloodTrailScene == true:
 		bloodTrailScene = preload("res://blood_trail_px.tscn")
 	elif Global.bloodTrailScene == false:
 		bloodTrailScene = preload("res://blood_trail_pc.tscn")
 		
 
-
 func _process(delta: float) -> void:
-	#get_parent().get_parent().add_child(bloodTrail)
-	if Global.gameSpeed == Global.bulletTime:
+	if TimeManager.gameSpeed == TimeManager.bulletTime:
 			$SplatterTimer.set_paused(1)
 			$SlomoSplatterTimer.set_paused(0)
-	elif Global.gameSpeed == Global.normalTime:
+	elif TimeManager.gameSpeed == TimeManager.normalTime:
 			$SlomoSplatterTimer.set_paused(1)
 			$SplatterTimer.set_paused(0)
 	
@@ -47,17 +45,15 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	var direction = Vector2.RIGHT.rotated(rotation)
-	position += direction * bulletSpeed * delta * Global.gameSpeed * bulletSlowdown
-	if bulletContact == 0.0: bulletSlowdown = bulletSlowdown * Global.bulletSlowdown
-	travelledDistance += bulletSpeed * delta * Global.gameSpeed
+	position += direction * bulletSpeed * delta * TimeManager.gameSpeed * bulletSlowdown
+	if bulletContact == 0.0: bulletSlowdown = bulletSlowdown * TimeManager.bulletSlowdown
+	travelledDistance += bulletSpeed * delta * TimeManager.gameSpeed
 	
-	if travelledDistance > bulletRange*bulletSlowdown:
+	if travelledDistance > bulletRange * bulletSlowdown:
 		Global.bulletsDodged += 1
 		queue_free()
 		if Global.gameMode == 0:
 			Global.currentExp += Global.xp4bullet
-	#print(bulletRange*bulletSlowdown,"  ",bulletSlowdown, " trav dist ",travelledDistance)
-	#print(2/(pow(bulletSlowdown,5)))
 	#$SubViewport.size = Vector2(160,3) - Vector2(delta,3)
 	
 

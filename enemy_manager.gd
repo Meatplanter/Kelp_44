@@ -5,6 +5,8 @@ var visibleEnemies: Array = []
 var targetEnemyLeft = null
 var targetEnemyRight = null
 
+var enemyHealth = 2
+
 var maxX = 0
 var minX = 0
 var maxY = 0

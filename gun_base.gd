@@ -4,11 +4,9 @@ extends Node2D
 @export var Firerate := 1.0
 @export var Bullet_speed := 120.0
 
-var cooldown = 100
+var cooldown = Firerate
 var canShoot = true
 
-var normalTimer
-var slomoTimer
 
 func _draw():
 	if Laser_sights == true:
@@ -28,30 +26,9 @@ func _draw():
 		draw_line(aimFrom,aimTo,color)
 
 
-func adjust_cooldown_to_time():
-	if TimeManager.gameSpeed == TimeManager.normalTime:
-		normalTimer.set_paused(0)
-		slomoTimer.set_paused(1)
-	elif TimeManager.gameSpeed == TimeManager.bulletTime:
-		normalTimer.set_paused(1)
-		slomoTimer.set_paused(0)
-
-
-func _ready():
-	#add timers for normal / slomo time
-	normalTimer = TimeManager.add_normal_timer(Firerate/100)
-	normalTimer.timeout.connect(func():
-		cooldown -= 1
-		)
-	slomoTimer = TimeManager.add_slomo_timer(Firerate/100)
-	slomoTimer.timeout.connect(func():
-		cooldown -= 1
-		)
-
-
 func _process(delta):
+	cooldown -= delta * TimeManager.gameSpeed / Firerate
 	if cooldown <= 0: 
+		cooldown = randf_range(0.98,1.02)
 		WeaponManager.shoot(self)
-		cooldown = int(randf_range(98,102))
-	adjust_cooldown_to_time()
 	queue_redraw()

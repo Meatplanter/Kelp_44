@@ -206,6 +206,8 @@ func _input(event):
 	elif event.is_action_pressed("LS_move_leftup"): move(%LeftShoe,Movement.DirLeftUp)
 	elif event.is_action_pressed("LS_move_leftdown"): move(%LeftShoe,Movement.DirLeftDown)
 	
+	if event.is_action_pressed("Space"): moveCooldown = true
+	if event.is_action_released("Space"): moveCooldown = false
 
 
 func _on_movement_cooldown_timeout():

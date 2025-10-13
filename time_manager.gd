@@ -9,16 +9,18 @@ var pausePoint = 0
 
 var gameSpeed = 1.0
 
-func add_normal_timer(time: float):
-	var normalTimer := Timer.new()
-	normalTimer.wait_time = time / TimeManager.normalTime
-	normalTimer.autostart = true
-	add_child(normalTimer)
-	return normalTimer
-	
-func add_slomo_timer(time: float):
-	var slomoTimer := Timer.new()
-	slomoTimer.wait_time = time / TimeManager.bulletTime
-	slomoTimer.autostart = true
-	add_child(slomoTimer)
-	return slomoTimer
+#func add_normal_timer(time: float):
+	#var normalTimer := Timer.new()
+	#normalTimer.wait_time = time / TimeManager.normalTime
+	#normalTimer.autostart = true
+	#add_child(normalTimer)
+	#print("Normal:",normalTimer.wait_time)
+	#return normalTimer
+	#
+#func add_slomo_timer(time: float):
+	#var slomoTimer := Timer.new()
+	#slomoTimer.wait_time = time / TimeManager.bulletTime
+	#slomoTimer.autostart = true
+	#add_child(slomoTimer)
+	#print("Slomo:",slomoTimer.wait_time)
+	#return slomoTimer
