@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 	$Tracer.position.x = - shootingDistance
 	$SubViewport/Tracer2.position.x = shootingDistance - 162
 	
-	if $Bullet.is_visible_in_tree() == false: #tracer disappears as bullet enters body
+	if self.is_visible_in_tree() == false: #tracer disappears as bullet enters body
 		bulletEntryDistance = bulletEntryPoint.distance_to(global_position)
 		$SubViewport.size.x = 160 - (bulletEntryDistance + (160 - shootingDistance))
 		
@@ -46,7 +46,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	var direction = Vector2.RIGHT.rotated(rotation)
 	position += direction * bulletSpeed * delta * TimeManager.gameSpeed * bulletSlowdown
-	if bulletContact == 0.0: bulletSlowdown = bulletSlowdown * TimeManager.bulletSlowdown
+	if bulletContact == 0.0: bulletSlowdown = bulletSlowdown * WeaponManager.bulletSlowdown
 	travelledDistance += bulletSpeed * delta * TimeManager.gameSpeed
 	
 	if travelledDistance > bulletRange * bulletSlowdown:
@@ -58,7 +58,7 @@ func _physics_process(delta: float) -> void:
 	
 
 func _on_body_entered(body: Node2D) -> void:
-	$Bullet.hide()
+	self.hide()
 	bulletEntryPoint = global_position
 	bulletContact = 0.0
 	const WOUND = preload("res://wound.tscn")
@@ -70,7 +70,7 @@ func _on_body_entered(body: Node2D) -> void:
 		
 
 func _on_splatter_timer_timeout() -> void:
-	if $Bullet.is_visible_in_tree() == false && Global.bloodTrailVisible == true:
+	if self.is_visible_in_tree() == false && Global.bloodTrailVisible == true:
 		var bloodTrail = bloodTrailScene.instantiate()
 		bloodTrail.rotation_degrees = randf_range(0,360)
 		bloodTrail.scale = Vector2(randf_range(0.5,2),randf_range(0.5,2))
@@ -78,7 +78,7 @@ func _on_splatter_timer_timeout() -> void:
 		get_parent().add_child(bloodTrail)
 
 func _on_slomo_splatter_timer_timeout() -> void:
-	if $Bullet.is_visible_in_tree() == false && Global.bloodTrailVisible == true:
+	if self.is_visible_in_tree() == false && Global.bloodTrailVisible == true:
 		var bloodTrail = bloodTrailScene.instantiate()
 		bloodTrail.rotation_degrees = randf_range(0,360)
 		bloodTrail.scale = Vector2(randf_range(0.5,2),randf_range(0.5,2))

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://3sssh4smi3wv" path="res://Assets/Resized.png" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://cxp434ialc278" path="res://game.gd" id="1_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://vpi5u34tocl" path="res://CharBody.tscn" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://ctyixwmxls1xf" path="res://rogue_b.tscn" id="3_feb5d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc0e3"]
 texture = ExtResource("1_e2o6t")
@@ -28,9 +28,6 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAD+/wAAAAAAAAAAAAD+//7/AAAAAAA
 tile_set = SubResource("TileSet_7jktm")
 rendering_quadrant_size = 32
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("5_7jktm")]
-unique_name_in_owner = true
-
 [node name="Path2D" type="Path2D" parent="."]
 scale = Vector2(0.825, 0.825)
 curve = SubResource("Curve2D_feb5d")
@@ -47,37 +44,7 @@ autostart = true
 wait_time = 2.0
 autostart = true
 
-[node name="Label" type="Label" parent="."]
-visible = false
-offset_left = -12.0
-offset_top = 115.0
-offset_right = 28.0
-offset_bottom = 138.0
-text = "90"
-
-[node name="Label2" type="Label" parent="."]
-visible = false
-offset_left = -106.0
-offset_top = -13.0
-offset_right = -66.0
-offset_bottom = 10.0
-text = "180/-180"
-
-[node name="Label3" type="Label" parent="."]
-visible = false
-offset_left = 124.0
-offset_top = -14.0
-offset_right = 164.0
-offset_bottom = 9.0
-text = "0"
-
-[node name="Label4" type="Label" parent="."]
-visible = false
-offset_left = -13.0
-offset_top = -136.0
-offset_right = 27.0
-offset_bottom = -113.0
-text = "-90"
+[node name="RogueB" parent="." instance=ExtResource("3_feb5d")]
 
 [connection signal="timeout" from="BulletSpawnTime" to="." method="_on_bullet_spawn_time_timeout"]
 [connection signal="timeout" from="SlomoBulletSpawnTime" to="." method="_on_slomo_bullet_spawn_time_timeout"]

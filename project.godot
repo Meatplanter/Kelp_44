@@ -24,6 +24,10 @@ Movement="*res://movement.gd"
 Camera="*res://camera.gd"
 WeaponManager="*res://weapon_manager.gd"
 
+[global_group]
+
+Enemy=""
+
 [input]
 
 LS_move_left={

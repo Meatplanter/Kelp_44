@@ -13,13 +13,15 @@ func _draw():
 		var ray = %LaserSights
 		
 		var aimFrom = to_local(ray.global_position)
-		var aimTo
+		var aimTo =  %LaserSights.target_position
 		var color = Color.KHAKI
 		
-		if ray.is_colliding() and ray.get_collider().has_meta("Enemy"):
-			var contact_point = ray.get_collision_point()
-			aimTo = to_local(contact_point)
-			color = Color.GREEN
+		if ray.is_colliding():
+			var collider = ray.get_collider()
+			if collider and collider.is_in_group("Enemy"):
+				var contact_point = ray.get_collision_point()
+				aimTo = to_local(contact_point)
+				color = Color.GREEN
 		else:
 			aimTo =  %LaserSights.target_position
 			

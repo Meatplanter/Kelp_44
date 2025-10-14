@@ -18,6 +18,7 @@ func check_collision(point: Vector2) -> bool:
 	params.position = point   # your Vector2 point
 	params.collide_with_areas = true
 	params.collide_with_bodies = true
+	params.collision_mask = 1 << 7
 	var result = space_state.intersect_point(params)
 	
 	if result.size() > 0: return true

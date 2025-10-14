@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://hccyxo0hsydq" path="res://Assets/bullet.png" id="3_8anfi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8st5"]
-radius = 2.0
+radius = 1.0
 height = 6.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7281b"]
@@ -13,6 +13,8 @@ viewport_path = NodePath("SubViewport")
 
 [node name="BulletNew" type="Area2D"]
 top_level = true
+light_mask = 2
+visibility_layer = 2
 script = ExtResource("1_3qgql")
 
 [node name="SubViewport" type="SubViewport" parent="."]

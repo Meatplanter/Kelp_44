@@ -9,28 +9,21 @@ var gameSpeed
 var enemy_count = 0
 
 func spawn_bullet():
-	var new_bullet = preload("res://Bullet.tscn").instantiate()
+	var new_bullet = preload("res://bullet_new.tscn").instantiate()
 	%PathFollow2D.progress_ratio = randf()
-	new_bullet.global_position = %PathFollow2D.global_position + Global.midpoint
-	new_bullet.look_at(Global.midpoint)
+	new_bullet.global_position = %PathFollow2D.global_position + Movement.midpoint
+	new_bullet.look_at(Movement.midpoint)
+	new_bullet.bulletSpeed = randf_range(0.75*new_bullet.bulletSpeed,1.5*new_bullet.bulletSpeed)
 	add_child(new_bullet)
 
 func spawn_enemy():
 	var new_enemy = preload("res://enemy.tscn").instantiate()
 	%PathFollow2D.progress_ratio = randf()
-	new_enemy.global_position = %PathFollow2D.global_position + Global.midpoint
+	new_enemy.global_position = %PathFollow2D.global_position + Movement.midpoint
 	if enemy_count < 5:
 		add_child(new_enemy)
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
-#func _draw():
-	#draw_circle(Vector2(EnemyManager.minX,EnemyManager.minY),10,Color.RED)
-	#draw_circle(Vector2(EnemyManager.maxX,EnemyManager.maxY),10,Color.RED)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	queue_redraw()
 	
@@ -38,43 +31,19 @@ func _process(delta: float) -> void:
 	for child in get_children():
 		if child.has_meta("Enemy"):
 			enemy_count += 1
-	if Global.leftMoving == false && Global.rightMoving == false:
-		Global.canMove = true
-	else:
-		Global.canMove = false
 	
-	if Global.canMove == true:
-		gameSpeed = Global.bulletTime
+	if TimeManager.gameSpeed == TimeManager.bulletTime:
 		$BulletSpawnTime.set_paused(1)
 		$SlomoBulletSpawnTime.set_paused(0)
-	else:
-		gameSpeed = Global.normalTime
+	elif TimeManager.gameSpeed == TimeManager.normalTime:
 		$SlomoBulletSpawnTime.set_paused(1)
 		$BulletSpawnTime.set_paused(0)
-	Global.gameSpeed = gameSpeed
+		
 	
-	if Global.leftWeighted == true && Global.rightWeighted == true:
-		Global.weightedShoe = "both"
-	elif Global.leftWeighted == true && Global.rightWeighted == false:
-		Global.weightedShoe = "left"
-	elif Global.leftWeighted == false && Global.rightWeighted == true:
-		Global.weightedShoe = "right"
-		
-		
-	if Input.is_action_pressed("Space") && Global.pausePoint < 0:
-		Global.timeReverseMode = true
-	else:
-		Global.timeReverseMode = false
-		
-	if Global.timeReverseMode == true:
-		Global.gameSpeed = Global.timeReverse
-		
-	Global.pausePoint -= Global.gameSpeed
-	
-	if Global.currentExp >= Global.expToLevel:
-		Global.currentExp -= Global.expToLevel
-		get_tree().paused = true
-		%CharacterBody2D/CharBody/Marker2D/Camera2D/LevelUpScreen.show()
+	#if Global.currentExp >= Global.expToLevel:
+		#Global.currentExp -= Global.expToLevel
+		#get_tree().paused = true
+		#%CharacterBody2D/CharBody/Marker2D/Camera2D/LevelUpScreen.show()
 		
 
 	
