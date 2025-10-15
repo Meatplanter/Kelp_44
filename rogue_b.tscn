@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ctyixwmxls1xf"]
+[gd_scene load_steps=17 format=3 uid="uid://ctyixwmxls1xf"]
 
 [ext_resource type="Script" uid="uid://cmd2574ahhehe" path="res://rogue_b.gd" id="1_67mbl"]
 [ext_resource type="Script" uid="uid://74ugebrbbmct" path="res://debugging_node.gd" id="2_bjt74"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bfrfmnvcxdukh" path="res://camera_2d_new.gd" id="7_y7bk3"]
 [ext_resource type="Script" uid="uid://g7fnkyhbdemq" path="res://hp_left.gd" id="8_e3tf4"]
 [ext_resource type="PackedScene" uid="uid://b6o1fo0ewnjln" path="res://gun_new.tscn" id="8_m64x7"]
+[ext_resource type="PackedScene" uid="uid://dx06ua82xghkg" path="res://aiming_style_1.tscn" id="8_t0gij"]
 [ext_resource type="Script" uid="uid://clxhegpqyijug" path="res://xp_to_level.gd" id="9_m64x7"]
 [ext_resource type="PackedScene" uid="uid://c5nunyagwdk5f" path="res://pause_menu.tscn" id="10_t0gij"]
 [ext_resource type="PackedScene" uid="uid://ct4uhithfj3kk" path="res://level_up_screen.tscn" id="11_qhx67"]
@@ -30,6 +31,7 @@ script = ExtResource("1_67mbl")
 metadata/Player = true
 
 [node name="TargetNode" type="Marker2D" parent="."]
+visible = false
 position = Vector2(24, -49)
 
 [node name="TargetCollisionArea" type="Area2D" parent="TargetNode" groups=["Enemy"]]
@@ -155,6 +157,9 @@ Laser_sights = true
 [node name="GunLeft" parent="." instance=ExtResource("8_m64x7")]
 unique_name_in_owner = true
 Laser_sights = true
+
+[node name="AimingStyle1" parent="." instance=ExtResource("8_t0gij")]
+unique_name_in_owner = true
 
 [node name="Camera2DNew" type="Camera2D" parent="."]
 position = Vector2(24, 0)

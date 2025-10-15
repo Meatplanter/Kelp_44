@@ -62,8 +62,10 @@ func update_positions():
 	%GunRight.global_position = (point_position(%RightForearm,2)+point_position(%RightForearm,4))/2
 	%GunRight.global_rotation = $"../../RightElbowJoint".global_rotation
 	
-	target = get_global_mouse_position()
-	$"../../TargetNode".global_position = target
+	target = %AimingStyle1.global_position
+	
+	#target = get_global_mouse_position()
+	#$"../../TargetNode".global_position = target
 	#target = Vector2(100,-100)
 
 
