@@ -7,6 +7,11 @@ extends Node2D
 var cooldown = Firerate
 var canShoot = true
 
+func aiming_at():
+	if %LaserSights.is_colliding():
+		var collider = %LaserSights.get_collider()
+		return collider
+
 
 func _draw():
 	if Laser_sights == true:
@@ -30,7 +35,9 @@ func _draw():
 
 func _process(delta):
 	cooldown -= delta * TimeManager.gameSpeed / Firerate
-	if cooldown <= 0: 
+	
+	if cooldown <= 0 and get_parent().is_in_group("Enemy") and aiming_at() and aiming_at().is_in_group("Player"): 
 		cooldown = randf_range(0.98,1.02)
 		WeaponManager.shoot(self)
+		
 	queue_redraw()

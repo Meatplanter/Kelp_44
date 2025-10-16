@@ -1,40 +1,19 @@
 extends CharacterBody2D
 
 var health = EnemyManager.enemyHealth
+var firerate = EnemyManager.enemyFirerate
 
-@onready var playerLocation = get_node("/root/Game/CharacterBody2D/CharBody")
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	EnemyManager.register_enemy(self)
-	
-
+	firerate = randf_range(firerate*0.75,firerate*1.5)
+	%GunNew.Firerate = firerate
 
 func _process(delta: float) -> void:
-	if EnemyManager.targetEnemyLeft == self && Global.leftCanShoot == true:
-		$Crosshair_greenLeft.show()
-		$CrosshairLeft.hide()
-	elif EnemyManager.targetEnemyLeft == self && Global.leftCanShoot == false:
-		$Crosshair_greenLeft.hide()
-		$CrosshairLeft.show()
-	else:
-		$Crosshair_greenLeft.hide()
-		$CrosshairLeft.hide()
-		
-	if EnemyManager.targetEnemyRight == self && Global.rightCanShoot == true:
-		$Crosshair_greenRight.show()
-		$CrosshairRight.hide()
-	elif EnemyManager.targetEnemyRight == self && Global.rightCanShoot == false:
-		$Crosshair_greenRight.hide()
-		$CrosshairRight.show()
-	else:
-		$Crosshair_greenRight.hide()
-		$CrosshairRight.hide()
 	
-	look_at(Global.midpoint)
-	var direction = global_position.direction_to(playerLocation.midpoint)
-	if global_position.distance_to(playerLocation.midpoint) > 300:
-		velocity = direction * Global.gameSpeed * 30.0
+	look_at(Movement.midpoint)
+	var direction = global_position.direction_to(Movement.midpoint)
+	if global_position.distance_to(Movement.midpoint) > 300:
+		velocity = direction * TimeManager.gameSpeed * 30.0
 	else:
 		velocity = direction * 0.0
 	move_and_slide()

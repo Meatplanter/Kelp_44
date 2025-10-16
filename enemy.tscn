@@ -1,15 +1,15 @@
 [gd_scene load_steps=7 format=3 uid="uid://bqhvigu27dsbf"]
 
 [ext_resource type="Script" uid="uid://cey3hoiu0kp28" path="res://enemy.gd" id="1_4gyqm"]
-[ext_resource type="PackedScene" uid="uid://27towt3jaocl" path="res://gun.tscn" id="2_iifgy"]
 [ext_resource type="Texture2D" uid="uid://b7oifqaddjc5d" path="res://Assets/Sombr.png" id="2_qi2p4"]
 [ext_resource type="PackedScene" uid="uid://djlscpladb4be" path="res://crosshair.tscn" id="4_iifgy"]
+[ext_resource type="PackedScene" uid="uid://b6o1fo0ewnjln" path="res://gun_new.tscn" id="5_3yqyl"]
 [ext_resource type="PackedScene" uid="uid://cv6rrvjpkfwc4" path="res://crosshair_green.tscn" id="5_epg4t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iifgy"]
 radius = 20.0
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 modulate = Color(1, 1, 1, 0.392157)
 script = ExtResource("1_4gyqm")
 metadata/Enemy = true
@@ -21,9 +21,6 @@ texture = ExtResource("2_qi2p4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_iifgy")
 metadata/Enemy = true
-
-[node name="Gun" parent="." instance=ExtResource("2_iifgy")]
-position = Vector2(34, 0)
 
 [node name="CrosshairLeft" parent="." instance=ExtResource("4_iifgy")]
 visible = false
@@ -38,3 +35,7 @@ visible = false
 [node name="Crosshair_greenRight" parent="." instance=ExtResource("5_epg4t")]
 visible = false
 rotation = 0.785398
+
+[node name="GunNew" parent="." instance=ExtResource("5_3yqyl")]
+unique_name_in_owner = true
+position = Vector2(34, 0)

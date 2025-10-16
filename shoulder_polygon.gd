@@ -158,9 +158,7 @@ func _process(delta):
 	
 	#right elbow
 	chase_joint($"../../RightElbow",$"../../RightElbowJoint",0.04)
-	right_joint_rotation($"../../RightElbowJoint",target,elbowSpeed * rightElbowSpeedModifier,-($"../../RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)-PI*0.4),$"../../RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle))
-	#lower_right_elbow($"../RightElbow",%RightBiceps,target)
-	
+	right_joint_rotation($"../../RightElbowJoint",target,elbowSpeed * rightElbowSpeedModifier,-($"../../RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)-PI*0.4),$"../../RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle))	
 	
 	#For calculating the rotational direction (minus values means turning left, plus values means turning right)
 	var RAangleAfter = find_angle_between($"../../LeftShoulder",$"../../RightShoulder",%GunRight)
@@ -169,7 +167,6 @@ func _process(delta):
 	var LAangleAfter = find_angle_between($"../../RightShoulder",$"../../LeftShoulder",%GunLeft)
 	var LBangleAfter = find_angle_between($"../../RightShoulder",$"../../LeftShoulder",$"../../LeftElbow")
 	var LEangleAfter = find_angle_between($"../../LeftShoulder",$"../../LeftElbow",%GunLeft)
-	
 	var RAdiff = RAangleAfter - RAangleBefore
 	var RBdiff = RBangleAfter - RBangleBefore
 	var REdiff = REangleAfter - REangleBefore
@@ -188,6 +185,3 @@ func _process(delta):
 	else: rightElbowSpeedModifier = 1.0
 	if LAdiff < 0 and LBdiff < 1: leftElbowSpeedModifier = 0.5
 	else: leftElbowSpeedModifier = 1.0
-
-func take_damage():
-	Global.playerHealth -= 1

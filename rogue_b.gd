@@ -6,6 +6,16 @@ var hasMoved = false
 var vecBefore = Vector2.ZERO
 var vecAfter = Vector2.ZERO
 
+#hide arms / aiming mechanism for when you're only dodging bullets
+func hide_arms():
+	$LeftShoulderJoint.hide()
+	$LeftElbowJoint.hide()
+	$RightShoulderJoint.hide()
+	$RightElbowJoint.hide()
+	%GunRight.hide()
+	%GunLeft.hide()
+	%AimingStyle1.hide()
+
 #other shoe based on current
 func other_shoe(body: Node2D):
 	if body == %LeftShoe: return %RightShoe
@@ -176,6 +186,7 @@ func set_game_speed_when_moving():
 func _ready():
 	vecBefore = Movement.orientation
 	vecAfter = Movement.orientation
+	if Global.gameMode == 0: hide_arms()
 
 
 func _process(delta):

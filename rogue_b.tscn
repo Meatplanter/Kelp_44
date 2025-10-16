@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://cefdsbs03kmvy" path="res://left_shoe.gd" id="3_bjt74"]
 [ext_resource type="Texture2D" uid="uid://mhadgvm6kalh" path="res://Assets/Shoe.png" id="3_mpt7r"]
 [ext_resource type="Script" uid="uid://c685n3bo15euj" path="res://right_shoe.gd" id="5_7fc62"]
+[ext_resource type="Script" uid="uid://ci5jyfcx2bkuv" path="res://shoulder_shape.gd" id="6_t0gij"]
 [ext_resource type="Script" uid="uid://bw2kcvbt4evcb" path="res://shoulder_polygon.gd" id="7_e3tf4"]
 [ext_resource type="Script" uid="uid://bfrfmnvcxdukh" path="res://camera_2d_new.gd" id="7_y7bk3"]
 [ext_resource type="Script" uid="uid://g7fnkyhbdemq" path="res://hp_left.gd" id="8_e3tf4"]
@@ -14,9 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://c5nunyagwdk5f" path="res://pause_menu.tscn" id="10_t0gij"]
 [ext_resource type="PackedScene" uid="uid://ct4uhithfj3kk" path="res://level_up_screen.tscn" id="11_qhx67"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_m64x7"]
-radius = 7.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bjt74"]
 radius = 6.0
 height = 26.0
@@ -25,21 +23,13 @@ height = 26.0
 radius = 8.0
 height = 48.0
 
-[node name="RogueB" type="CharacterBody2D"]
+[node name="RogueB" type="CharacterBody2D" groups=["Player"]]
 visibility_layer = 2
 script = ExtResource("1_67mbl")
 metadata/Player = true
 
-[node name="TargetNode" type="Marker2D" parent="."]
-visible = false
-position = Vector2(24, -49)
-
-[node name="TargetCollisionArea" type="Area2D" parent="TargetNode" groups=["Enemy"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetNode/TargetCollisionArea"]
-shape = SubResource("CircleShape2D_m64x7")
-
 [node name="DebuggingNode" type="Node2D" parent="."]
+visible = false
 z_index = 999
 script = ExtResource("2_bjt74")
 
@@ -86,11 +76,12 @@ polygon = PackedVector2Array(-24, -8, 24, -8, 29, 0, 24, 8, -24, 8, -29, 0)
 position = Vector2(2.98023e-08, 0)
 scale = Vector2(0.75, 1)
 
-[node name="ShoulderShape" type="CharacterBody2D" parent="."]
+[node name="ShoulderShape" type="CharacterBody2D" parent="." groups=["Player"]]
 unique_name_in_owner = true
 position = Vector2(2.98023e-08, 0)
 collision_layer = 3
 collision_mask = 3
+script = ExtResource("6_t0gij")
 
 [node name="ShoulderPolygon" type="Polygon2D" parent="ShoulderShape"]
 unique_name_in_owner = true
@@ -152,11 +143,9 @@ polygon = PackedVector2Array(0, 0, 3, -4, 27, -4, 30, 0, 27, 4, 3, 4)
 
 [node name="GunRight" parent="." instance=ExtResource("8_m64x7")]
 unique_name_in_owner = true
-Laser_sights = true
 
 [node name="GunLeft" parent="." instance=ExtResource("8_m64x7")]
 unique_name_in_owner = true
-Laser_sights = true
 
 [node name="AimingStyle1" parent="." instance=ExtResource("8_t0gij")]
 unique_name_in_owner = true

@@ -6,6 +6,7 @@ var targetEnemyLeft = null
 var targetEnemyRight = null
 
 var enemyHealth = 2
+var enemyFirerate = 1.0
 
 var maxX = 0
 var minX = 0

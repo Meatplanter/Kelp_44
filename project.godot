@@ -27,6 +27,7 @@ WeaponManager="*res://weapon_manager.gd"
 [global_group]
 
 Enemy=""
+Player=""
 
 [input]
 
