@@ -59,6 +59,7 @@ func _process(delta):
 		tween.set_parallel()
 		tween.tween_property(%LeftShoe,"rotation",%LeftShoe.rotation+PI/2,0.5).set_trans(Movement.styleTween)
 		tween.tween_property(%RightShoe,"rotation",%RightShoe.rotation+PI/2,0.5).set_trans(Movement.styleTween)
+		tween.tween_property(%HeadNew,"rotation",%HeadNew.rotation+PI/2,0.5).set_trans(Movement.styleTween)
 		
 	elif round(Movement.cumulativeAngle) + lastRotationAngle == -rotThreshold:
 		rotate_camera(false)
@@ -69,6 +70,7 @@ func _process(delta):
 		tween.set_parallel()
 		tween.tween_property(%LeftShoe,"rotation",%LeftShoe.rotation-PI/2,0.5).set_trans(Movement.styleTween)
 		tween.tween_property(%RightShoe,"rotation",%RightShoe.rotation-PI/2,0.5).set_trans(Movement.styleTween)
+		tween.tween_property(%HeadNew,"rotation",%HeadNew.rotation-PI/2,0.5).set_trans(Movement.styleTween)
 
 
 func _input(event: InputEvent) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ctyixwmxls1xf"]
+[gd_scene load_steps=19 format=3 uid="uid://ctyixwmxls1xf"]
 
 [ext_resource type="Script" uid="uid://cmd2574ahhehe" path="res://rogue_b.gd" id="1_67mbl"]
 [ext_resource type="Script" uid="uid://74ugebrbbmct" path="res://debugging_node.gd" id="2_bjt74"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://mhadgvm6kalh" path="res://Assets/Shoe.png" id="3_mpt7r"]
 [ext_resource type="Script" uid="uid://c685n3bo15euj" path="res://right_shoe.gd" id="5_7fc62"]
 [ext_resource type="Script" uid="uid://ci5jyfcx2bkuv" path="res://shoulder_shape.gd" id="6_t0gij"]
-[ext_resource type="Script" uid="uid://bw2kcvbt4evcb" path="res://shoulder_polygon.gd" id="7_e3tf4"]
 [ext_resource type="Script" uid="uid://bfrfmnvcxdukh" path="res://camera_2d_new.gd" id="7_y7bk3"]
 [ext_resource type="Script" uid="uid://g7fnkyhbdemq" path="res://hp_left.gd" id="8_e3tf4"]
 [ext_resource type="PackedScene" uid="uid://b6o1fo0ewnjln" path="res://gun_new.tscn" id="8_m64x7"]
@@ -14,6 +13,8 @@
 [ext_resource type="Script" uid="uid://clxhegpqyijug" path="res://xp_to_level.gd" id="9_m64x7"]
 [ext_resource type="PackedScene" uid="uid://c5nunyagwdk5f" path="res://pause_menu.tscn" id="10_t0gij"]
 [ext_resource type="PackedScene" uid="uid://ct4uhithfj3kk" path="res://level_up_screen.tscn" id="11_qhx67"]
+[ext_resource type="Script" uid="uid://cyitxyi8t2nf" path="res://head_new.gd" id="14_qhx67"]
+[ext_resource type="Texture2D" uid="uid://bbqhe4bkrpp8a" path="res://Assets/HatCompressed.png" id="15_eklly"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bjt74"]
 radius = 6.0
@@ -22,6 +23,9 @@ height = 26.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e3tf4"]
 radius = 8.0
 height = 48.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_txm64"]
+radius = 300.0
 
 [node name="RogueB" type="CharacterBody2D" groups=["Player"]]
 visibility_layer = 2
@@ -87,7 +91,6 @@ script = ExtResource("6_t0gij")
 unique_name_in_owner = true
 color = Color(0.929412, 0.658824, 0.419608, 0.756863)
 polygon = PackedVector2Array(-24, -8, 24, -8, 29, 0, 24, 8, -24, 8, -29, 0)
-script = ExtResource("7_e3tf4")
 
 [node name="Hurtbox" type="CollisionShape2D" parent="ShoulderShape"]
 rotation = 1.5708
@@ -209,5 +212,18 @@ offset_left = -288.0
 offset_top = -161.0
 offset_right = -288.0
 offset_bottom = -161.0
+
+[node name="HeadNew" type="Area2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("14_qhx67")
+
+[node name="HatCompressed" type="Sprite2D" parent="HeadNew"]
+texture_filter = 1
+texture = ExtResource("15_eklly")
+flip_v = true
+
+[node name="HeadPerspective" type="CollisionShape2D" parent="HeadNew"]
+visible = false
+shape = SubResource("CircleShape2D_txm64")
 
 [connection signal="timeout" from="MovementCooldown" to="." method="_on_movement_cooldown_timeout"]
