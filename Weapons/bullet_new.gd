@@ -17,9 +17,9 @@ func _ready() -> void:
 	shootingPoint = global_position
 	$SubViewport/Tracer2.position.x = -162 #so the tracer doesn't appear behind on the first frame
 	if Global.bloodTrailScene == true:
-		bloodTrailScene = preload("res://blood_trail_px.tscn")
+		bloodTrailScene = preload("res://Visuals/blood_trail_px.tscn")
 	elif Global.bloodTrailScene == false:
-		bloodTrailScene = preload("res://blood_trail_pc.tscn")
+		bloodTrailScene = preload("res://Visuals/blood_trail_pc.tscn")
 		
 
 func _process(delta: float) -> void:
@@ -61,7 +61,7 @@ func _on_body_entered(body: Node2D) -> void:
 	self.hide()
 	bulletEntryPoint = global_position
 	bulletContact = 0.0
-	const WOUND = preload("res://wound.tscn")
+	const WOUND = preload("res://Visuals/wound.tscn")
 	var new_wound = WOUND.instantiate()
 	if body.has_method("take_damage"):
 		body.take_damage()

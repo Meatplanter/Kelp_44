@@ -3,6 +3,8 @@ extends Camera2D
 var lastRotationAngle = 0
 var rotThreshold = 90
 
+signal cameraRotated(direction)
+
 #var normal_zoom := Vector2(2,2)
 #
 #func targetting_mode(a: Vector2, b: Vector2):
@@ -53,24 +55,13 @@ func _process(delta):
 	if round(Movement.cumulativeAngle) + lastRotationAngle == rotThreshold: 
 		rotate_camera(true)
 		lastRotationAngle -= 90
-		
-		var tween: Tween
-		tween = create_tween()
-		tween.set_parallel()
-		tween.tween_property(%LeftShoe,"rotation",%LeftShoe.rotation+PI/2,0.5).set_trans(Movement.styleTween)
-		tween.tween_property(%RightShoe,"rotation",%RightShoe.rotation+PI/2,0.5).set_trans(Movement.styleTween)
-		tween.tween_property(%HeadNew,"rotation",%HeadNew.rotation+PI/2,0.5).set_trans(Movement.styleTween)
+		emit_signal("cameraRotated","right")
 		
 	elif round(Movement.cumulativeAngle) + lastRotationAngle == -rotThreshold:
 		rotate_camera(false)
 		lastRotationAngle += 90
+		emit_signal("cameraRotated","left")
 		
-		var tween: Tween
-		tween = create_tween()
-		tween.set_parallel()
-		tween.tween_property(%LeftShoe,"rotation",%LeftShoe.rotation-PI/2,0.5).set_trans(Movement.styleTween)
-		tween.tween_property(%RightShoe,"rotation",%RightShoe.rotation-PI/2,0.5).set_trans(Movement.styleTween)
-		tween.tween_property(%HeadNew,"rotation",%HeadNew.rotation-PI/2,0.5).set_trans(Movement.styleTween)
 
 
 func _input(event: InputEvent) -> void:

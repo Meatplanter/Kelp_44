@@ -48,6 +48,7 @@ var CurrPosRight = Vector2(32,0)
 var midpoint = Vector2(16,0)
 var focus = Vector2(16,-512)
 var orientation = Vector2.UP
+var abdomenMidpoint = Vector2(16,0)
 
 var cumulativeAngle = 0
 var neck = Vector2(16,0)

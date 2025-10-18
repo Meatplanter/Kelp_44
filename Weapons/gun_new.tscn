@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b6o1fo0ewnjln"]
 
-[ext_resource type="Script" uid="uid://djcw7wj71xxe8" path="res://gun_new.gd" id="1_t8ckp"]
+[ext_resource type="Script" uid="uid://djcw7wj71xxe8" path="res://Weapons/gun_new.gd" id="1_t8ckp"]
 [ext_resource type="Texture2D" uid="uid://bs1qakvfa2h7s" path="res://Assets/Revolver.png" id="2_gxueq"]
 
 [node name="GunNew" type="Area2D"]

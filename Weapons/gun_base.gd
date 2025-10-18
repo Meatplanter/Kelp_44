@@ -12,6 +12,8 @@ func aiming_at():
 		var collider = %LaserSights.get_collider()
 		return collider
 
+func _ready():
+	if Global.gameMode == 0 and get_parent().is_in_group("Player"): self.hide()
 
 func _draw():
 	if Laser_sights == true:

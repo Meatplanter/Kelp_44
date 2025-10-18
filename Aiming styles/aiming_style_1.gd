@@ -23,6 +23,7 @@ func cooldown_color():
 func _ready():
 	if %GunLeft: %GunLeft.Laser_sights = true
 	if %GunRight: %GunRight.Laser_sights = true
+	if Global.gameMode == 0 and get_parent().is_in_group("Player"): self.hide()
 
 func _process(delta):
 	update_positions()

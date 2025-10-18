@@ -2,7 +2,7 @@ extends Area2D
 
 var tween: Tween
 
-var crosshair = preload("res://crosshair.tscn")
+var crosshair = preload("res://Visuals/crosshair.tscn")
 
 var direction = Vector2()
 var enemy_direction = Vector2()
@@ -28,3 +28,14 @@ func _process(delta):
 				enemy.modulate.a = min(1,enemy.modulate.a + delta * TimeManager.gameSpeed * 2)
 			else:
 				enemy.modulate.a = max(0.0,enemy.modulate.a - delta * TimeManager.gameSpeed)
+
+
+func _on_camera_2d_new_camera_rotated(direction):
+	if direction == "right":
+		var tween: Tween
+		tween = create_tween()
+		tween.tween_property(%HeadNew,"rotation",%HeadNew.rotation+PI/2,0.5).set_trans(Movement.styleTween)
+	if direction == "left":
+		var tween: Tween
+		tween = create_tween()
+		tween.tween_property(%HeadNew,"rotation",%HeadNew.rotation-PI/2,0.5).set_trans(Movement.styleTween)

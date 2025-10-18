@@ -2,7 +2,7 @@ extends Area2D
 
 var tween: Tween
 
-var crosshair = preload("res://crosshair.tscn")
+var crosshair = preload("res://Visuals/crosshair.tscn")
 
 var direction = Vector2()
 var enemy_direction = Vector2()

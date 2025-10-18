@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://bqhvigu27dsbf"]
 
-[ext_resource type="Script" uid="uid://cey3hoiu0kp28" path="res://enemy.gd" id="1_4gyqm"]
+[ext_resource type="Script" uid="uid://cey3hoiu0kp28" path="res://Enemies/enemy.gd" id="1_4gyqm"]
 [ext_resource type="Texture2D" uid="uid://b7oifqaddjc5d" path="res://Assets/Sombr.png" id="2_qi2p4"]
-[ext_resource type="PackedScene" uid="uid://djlscpladb4be" path="res://crosshair.tscn" id="4_iifgy"]
-[ext_resource type="PackedScene" uid="uid://b6o1fo0ewnjln" path="res://gun_new.tscn" id="5_3yqyl"]
-[ext_resource type="PackedScene" uid="uid://cv6rrvjpkfwc4" path="res://crosshair_green.tscn" id="5_epg4t"]
+[ext_resource type="PackedScene" uid="uid://djlscpladb4be" path="res://Visuals/crosshair.tscn" id="4_iifgy"]
+[ext_resource type="PackedScene" uid="uid://b6o1fo0ewnjln" path="res://Weapons/gun_new.tscn" id="5_3yqyl"]
+[ext_resource type="PackedScene" uid="uid://cv6rrvjpkfwc4" path="res://Visuals/crosshair_green.tscn" id="5_epg4t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iifgy"]
 radius = 20.0

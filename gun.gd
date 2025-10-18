@@ -141,7 +141,7 @@ func _process(delta: float) -> void:
 
 
 func shoot():
-	const BULLET = preload("res://Bullet.tscn")
+	const BULLET = preload("res://Weapons/Bullet.tscn")
 	var new_bullet = BULLET.instantiate()
 	new_bullet.global_position = %ShootingPoint.global_position
 	new_bullet.global_rotation = get_parent().global_rotation

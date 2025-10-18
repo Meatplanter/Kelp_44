@@ -13,16 +13,16 @@ config_version=5
 config/name="Kelp_44"
 run/main_scene="uid://dti6ul7mc0mum"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Assets/icon.svg"
 
 [autoload]
 
-Global="*res://global.gd"
-TimeManager="*res://time_manager.gd"
-EnemyManager="*res://enemy_manager.gd"
-Movement="*res://movement.gd"
+Global="*res://Main/global.gd"
+TimeManager="*res://Main/time_manager.gd"
+EnemyManager="*res://Enemies/enemy_manager.gd"
+Movement="*res://Movement styles/movement.gd"
 Camera="*res://camera.gd"
-WeaponManager="*res://weapon_manager.gd"
+WeaponManager="*res://Weapons/weapon_manager.gd"
 
 [global_group]
 

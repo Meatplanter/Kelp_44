@@ -13,7 +13,7 @@ var bloodTrailScene = false #true is pixels, false is sprite
 
 
 func shoot(Gun:Node2D):
-	const BULLET = preload("res://bullet_new.tscn")
+	const BULLET = preload("res://Weapons/bullet_new.tscn")
 	var new_bullet = BULLET.instantiate()
 	var shooting_point = Gun.get_node("%ShootingPoint")
 	new_bullet.global_position = shooting_point.global_position

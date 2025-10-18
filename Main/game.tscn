@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=4 uid="uid://i7ssqk3udw6h"]
 
 [ext_resource type="Texture2D" uid="uid://3sssh4smi3wv" path="res://Assets/Resized.png" id="1_e2o6t"]
-[ext_resource type="Script" uid="uid://cxp434ialc278" path="res://game.gd" id="1_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://ctyixwmxls1xf" path="res://rogue_b.tscn" id="3_feb5d"]
+[ext_resource type="Script" uid="uid://cxp434ialc278" path="res://Main/game.gd" id="1_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://ctyixwmxls1xf" path="res://Character/rogue_b.tscn" id="3_feb5d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc0e3"]
 texture = ExtResource("1_e2o6t")

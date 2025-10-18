@@ -9,7 +9,7 @@ var gameSpeed
 var enemy_count = 0
 
 func spawn_bullet():
-	var new_bullet = preload("res://bullet_new.tscn").instantiate()
+	var new_bullet = preload("res://Weapons/bullet_new.tscn").instantiate()
 	%PathFollow2D.progress_ratio = randf()
 	new_bullet.global_position = %PathFollow2D.global_position + Movement.midpoint
 	new_bullet.look_at(Movement.midpoint)
@@ -17,7 +17,7 @@ func spawn_bullet():
 	add_child(new_bullet)
 
 func spawn_enemy():
-	var new_enemy = preload("res://enemy.tscn").instantiate()
+	var new_enemy = preload("res://Enemies/enemy.tscn").instantiate()
 	%PathFollow2D.progress_ratio = randf()
 	new_enemy.global_position = %PathFollow2D.global_position + Movement.midpoint
 	if enemy_count < 5:

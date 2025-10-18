@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx06ua82xghkg"]
+
+[ext_resource type="Script" uid="uid://c1up7s3iy3gck" path="res://Aiming styles/aiming_style_1.gd" id="1_txe2w"]
+[ext_resource type="Texture2D" uid="uid://cxdlhlj18ycb6" path="res://Assets/Crosshair.png" id="2_jia0o"]
+
+[node name="AimingStyle1" type="Node2D"]
+script = ExtResource("1_txe2w")
+
+[node name="Target" type="Marker2D" parent="."]
+
+[node name="Crosshair" type="Sprite2D" parent="Target"]
+z_index = 99
+texture_filter = 1
+texture = ExtResource("2_jia0o")

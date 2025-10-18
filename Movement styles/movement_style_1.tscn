@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://dvnli7euh2sh5"]
+
+[ext_resource type="Script" uid="uid://cefdsbs03kmvy" path="res://left_shoe.gd" id="1_erlqy"]
+[ext_resource type="Script" uid="uid://uywm0k410f3q" path="res://Movement styles/movement_style_1.gd" id="1_mfysb"]
+[ext_resource type="Texture2D" uid="uid://mhadgvm6kalh" path="res://Assets/Shoe.png" id="2_mfysb"]
+[ext_resource type="Script" uid="uid://c685n3bo15euj" path="res://right_shoe.gd" id="3_8fgma"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e7sbo"]
+radius = 6.0
+height = 26.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t0y3k"]
+radius = 6.0
+height = 26.0
+
+[node name="MovementStyle1" type="Node2D"]
+script = ExtResource("1_mfysb")
+
+[node name="LeftShoe" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("1_erlqy")
+
+[node name="LeftShoeSprite" type="Sprite2D" parent="LeftShoe"]
+texture_filter = 1
+texture = ExtResource("2_mfysb")
+flip_v = true
+
+[node name="LeftCollision" type="CollisionShape2D" parent="LeftShoe"]
+shape = SubResource("CapsuleShape2D_e7sbo")
+
+[node name="RightShoe" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(32, 0)
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("3_8fgma")
+
+[node name="RightShoeSprite" type="Sprite2D" parent="RightShoe"]
+texture_filter = 1
+texture = ExtResource("2_mfysb")
+flip_h = true
+flip_v = true
+
+[node name="RightCollision" type="CollisionShape2D" parent="RightShoe"]
+shape = SubResource("CapsuleShape2D_t0y3k")
+
+[node name="MovementCooldown" type="Timer" parent="."]
+
+[node name="AbdomenPolygon" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(2.98023e-08, 0)
+scale = Vector2(0.75, 1)
+color = Color(0, 0, 0, 0.756863)
+polygon = PackedVector2Array(-24, -8, 24, -8, 29, 0, 24, 8, -24, 8, -29, 0)
+
+[node name="AbdomenMidpoint" type="Marker2D" parent="."]
+position = Vector2(2.98023e-08, 0)
+scale = Vector2(0.75, 1)
+
+[connection signal="timeout" from="MovementCooldown" to="." method="_on_movement_cooldown_timeout"]
