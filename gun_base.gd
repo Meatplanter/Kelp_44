@@ -23,7 +23,7 @@ func _draw():
 		
 		if ray.is_colliding():
 			var collider = ray.get_collider()
-			if collider and collider.is_in_group("Enemy"):
+			if collider and collider.is_in_group("Enemy") and cooldown <= 0:
 				var contact_point = ray.get_collision_point()
 				aimTo = to_local(contact_point)
 				color = Color.GREEN

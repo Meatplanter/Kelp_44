@@ -9,5 +9,6 @@ script = ExtResource("1_pbo58")
 [node name="Target" type="Marker2D" parent="."]
 
 [node name="Crosshair" type="Sprite2D" parent="Target"]
+z_index = 99
 texture_filter = 1
 texture = ExtResource("2_metlm")

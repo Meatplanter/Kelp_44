@@ -33,7 +33,6 @@ script = ExtResource("1_67mbl")
 metadata/Player = true
 
 [node name="DebuggingNode" type="Node2D" parent="."]
-visible = false
 z_index = 999
 script = ExtResource("2_bjt74")
 
