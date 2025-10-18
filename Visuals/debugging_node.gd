@@ -7,7 +7,7 @@ extends Node2D
 		#draw_circle(%LeftShoe.global_position,5.0,Color.GREEN)
 	#
 	#if %RightShoe.weighted == true:
-		#draw_circle(%RightShoe.global_position,5.0,Color.RED)
+		#draw_circle(%RightShoe.global_poition,5.0,Color.RED)
 	#elif %RightShoe.weighted  == false:
 		#draw_circle(%RightShoe.global_position,5.0,Color.GREEN)
 		

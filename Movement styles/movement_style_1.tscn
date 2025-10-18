@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://dvnli7euh2sh5"]
 
-[ext_resource type="Script" uid="uid://cefdsbs03kmvy" path="res://left_shoe.gd" id="1_erlqy"]
+[ext_resource type="Script" uid="uid://cefdsbs03kmvy" path="res://Movement styles/left_shoe.gd" id="1_erlqy"]
 [ext_resource type="Script" uid="uid://uywm0k410f3q" path="res://Movement styles/movement_style_1.gd" id="1_mfysb"]
 [ext_resource type="Texture2D" uid="uid://mhadgvm6kalh" path="res://Assets/Shoe.png" id="2_mfysb"]
-[ext_resource type="Script" uid="uid://c685n3bo15euj" path="res://right_shoe.gd" id="3_8fgma"]
+[ext_resource type="Script" uid="uid://c685n3bo15euj" path="res://Movement styles/right_shoe.gd" id="3_8fgma"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e7sbo"]
 radius = 6.0

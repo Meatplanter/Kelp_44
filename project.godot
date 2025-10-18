@@ -21,7 +21,7 @@ Global="*res://Main/global.gd"
 TimeManager="*res://Main/time_manager.gd"
 EnemyManager="*res://Enemies/enemy_manager.gd"
 Movement="*res://Movement styles/movement.gd"
-Camera="*res://camera.gd"
+Camera="*res://Camera styles/camera.gd"
 WeaponManager="*res://Weapons/weapon_manager.gd"
 
 [global_group]
