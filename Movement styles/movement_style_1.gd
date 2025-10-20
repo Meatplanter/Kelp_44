@@ -108,7 +108,6 @@ func calculate_shift_weight(body:Node2D,dir:Vector2):
 func move(body:Node2D, dir: Vector2):
 	if can_move(body,dir) == true:
 		
-		var moveType = move_type(body,dir)
 		var moveTime = move_time(body,dir)
 		
 		#establish weight distribution, esp. first step 
@@ -176,6 +175,7 @@ func set_game_speed_when_moving():
 func _ready():
 	vecBefore = Movement.orientation
 	vecAfter = Movement.orientation
+	SignalBus.connect("cameraRotated", Callable(self, "_on_camera_2d_new_camera_rotated"))
 
 
 func _process(delta):

@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://cd7bd2fnud82r"]
+
+[ext_resource type="Script" uid="uid://d21xaev5r7np2" path="res://Aiming styles/aiming_style_2.gd" id="1_chrti"]
+[ext_resource type="Texture2D" uid="uid://cxdlhlj18ycb6" path="res://Assets/Crosshair.png" id="2_dfduy"]
+[ext_resource type="Script" uid="uid://cyitxyi8t2nf" path="res://Character/head_new.gd" id="3_vnu2v"]
+[ext_resource type="Texture2D" uid="uid://bbqhe4bkrpp8a" path="res://Assets/HatCompressed.png" id="4_ri3jk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_olijn"]
+radius = 300.0
+
+[node name="AimingStyle2" type="Node2D"]
+script = ExtResource("1_chrti")
+
+[node name="Target" type="Marker2D" parent="."]
+
+[node name="Crosshair" type="Sprite2D" parent="Target"]
+z_index = 99
+texture_filter = 1
+texture = ExtResource("2_dfduy")
+
+[node name="HeadNew" type="Area2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_vnu2v")
+
+[node name="HatCompressed" type="Sprite2D" parent="HeadNew"]
+unique_name_in_owner = true
+texture_filter = 1
+texture = ExtResource("4_ri3jk")
+flip_v = true
+
+[node name="HeadPerspective" type="CollisionShape2D" parent="HeadNew"]
+visible = false
+shape = SubResource("CircleShape2D_olijn")

@@ -23,6 +23,8 @@ EnemyManager="*res://Enemies/enemy_manager.gd"
 Movement="*res://Movement styles/movement.gd"
 Camera="*res://Camera styles/camera.gd"
 WeaponManager="*res://Weapons/weapon_manager.gd"
+AimingManager="*res://Aiming styles/aiming_manager.gd"
+SignalBus="*res://Main/signal_bus.gd"
 
 [global_group]
 

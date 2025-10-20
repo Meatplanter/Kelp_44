@@ -10,6 +10,8 @@ var angle = 0
 const DETECT_RADIUS = 2000
 const FOV = 220
 
+func _ready():
+	SignalBus.connect("cameraRotated", Callable(self, "_on_camera_2d_new_camera_rotated"))
 
 func _process(delta):
 	EnemyManager.enemy_scope()
@@ -30,12 +32,11 @@ func _process(delta):
 				enemy.modulate.a = max(0.0,enemy.modulate.a - delta * TimeManager.gameSpeed)
 
 
-func _on_camera_2d_new_camera_rotated(direction):
-	if direction == "right":
-		var tween: Tween
+
+func _on_camera_2d_new_camera_rotated(turning):
+	if turning == "right":
 		tween = create_tween()
 		tween.tween_property(%HeadNew,"rotation",%HeadNew.rotation+PI/2,0.5).set_trans(Movement.styleTween)
-	if direction == "left":
-		var tween: Tween
+	if turning == "left":
 		tween = create_tween()
 		tween.tween_property(%HeadNew,"rotation",%HeadNew.rotation-PI/2,0.5).set_trans(Movement.styleTween)

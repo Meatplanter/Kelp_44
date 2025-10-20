@@ -3,8 +3,6 @@ extends Camera2D
 var lastRotationAngle = 0
 var rotThreshold = 90
 
-signal cameraRotated(direction)
-
 #var normal_zoom := Vector2(2,2)
 #
 #func targetting_mode(a: Vector2, b: Vector2):
@@ -55,12 +53,12 @@ func _process(delta):
 	if round(Movement.cumulativeAngle) + lastRotationAngle == rotThreshold: 
 		rotate_camera(true)
 		lastRotationAngle -= 90
-		emit_signal("cameraRotated","right")
+		SignalBus.emit_signal("cameraRotated","right")
 		
 	elif round(Movement.cumulativeAngle) + lastRotationAngle == -rotThreshold:
 		rotate_camera(false)
 		lastRotationAngle += 90
-		emit_signal("cameraRotated","left")
+		SignalBus.emit_signal("cameraRotated","left")
 		
 
 

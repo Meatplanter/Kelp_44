@@ -7,7 +7,11 @@ var target = Vector2.ZERO
 
 func update_positions():
 	target = get_global_mouse_position()
-	self.global_position = target
+	%Target.global_position = target
+	AimingManager.targetLeft = target
+	AimingManager.targetRight = target
+	
+	%HeadNew.global_position = AimingManager.neck
 
 
 func cooldown_color():
@@ -21,14 +25,17 @@ func cooldown_color():
 
 
 func _ready():
-	if %GunLeft: %GunLeft.Laser_sights = true
-	if %GunRight: %GunRight.Laser_sights = true
-	if Global.gameMode == 0 and get_parent().is_in_group("Player"): self.hide()
+	if %GunLeft: 
+		%GunLeft.Laser_sights = true
+		AimingManager.targetLeft = Vector2.ZERO
+	if %GunRight: 
+		%GunRight.Laser_sights = true
+		AimingManager.targetRight = Vector2.ZERO
+	if Global.gameMode == 0 and get_parent().is_in_group("Player"): %Target.hide()
 
 func _process(delta):
 	update_positions()
 	cooldown_color()
-
 
 func _input(event):
 	if event.is_action_pressed("LeftMouse") and %GunLeft.cooldown <= 0:

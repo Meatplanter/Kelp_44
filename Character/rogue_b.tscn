@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ctyixwmxls1xf"]
+[gd_scene load_steps=11 format=3 uid="uid://ctyixwmxls1xf"]
 
 [ext_resource type="Script" uid="uid://74ugebrbbmct" path="res://Visuals/debugging_node.gd" id="2_bjt74"]
 [ext_resource type="PackedScene" uid="uid://dvnli7euh2sh5" path="res://Movement styles/movement_style_1.tscn" id="5_m64x7"]
@@ -10,11 +10,6 @@
 [ext_resource type="Script" uid="uid://clxhegpqyijug" path="res://UI/xp_to_level.gd" id="9_m64x7"]
 [ext_resource type="PackedScene" uid="uid://c5nunyagwdk5f" path="res://UI/pause_menu.tscn" id="10_t0gij"]
 [ext_resource type="PackedScene" uid="uid://ct4uhithfj3kk" path="res://UI/level_up_screen.tscn" id="11_qhx67"]
-[ext_resource type="Script" uid="uid://cyitxyi8t2nf" path="res://Character/head_new.gd" id="14_qhx67"]
-[ext_resource type="Texture2D" uid="uid://bbqhe4bkrpp8a" path="res://Assets/HatCompressed.png" id="15_eklly"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_txm64"]
-radius = 300.0
 
 [node name="RogueB" type="CharacterBody2D" groups=["Player"]]
 visibility_layer = 2
@@ -30,13 +25,13 @@ unique_name_in_owner = true
 [node name="GunLeft" parent="." instance=ExtResource("8_m64x7")]
 unique_name_in_owner = true
 
-[node name="AimingStyle1" parent="." instance=ExtResource("8_t0gij")]
-unique_name_in_owner = true
-
 [node name="MovementStyle1" parent="." instance=ExtResource("5_m64x7")]
 unique_name_in_owner = true
 
 [node name="TorsoStyle1" parent="." instance=ExtResource("6_t0gij")]
+unique_name_in_owner = true
+
+[node name="AimingStyle1" parent="." instance=ExtResource("8_t0gij")]
 unique_name_in_owner = true
 
 [node name="Camera2DNew" type="Camera2D" parent="."]
@@ -98,20 +93,3 @@ offset_left = -288.0
 offset_top = -161.0
 offset_right = -288.0
 offset_bottom = -161.0
-
-[node name="HeadNew" type="Area2D" parent="."]
-unique_name_in_owner = true
-script = ExtResource("14_qhx67")
-
-[node name="HatCompressed" type="Sprite2D" parent="HeadNew"]
-unique_name_in_owner = true
-texture_filter = 1
-texture = ExtResource("15_eklly")
-flip_v = true
-
-[node name="HeadPerspective" type="CollisionShape2D" parent="HeadNew"]
-visible = false
-shape = SubResource("CircleShape2D_txm64")
-
-[connection signal="cameraRotated" from="Camera2DNew" to="MovementStyle1" method="_on_camera_2d_new_camera_rotated"]
-[connection signal="cameraRotated" from="Camera2DNew" to="HeadNew" method="_on_camera_2d_new_camera_rotated"]
