@@ -120,17 +120,17 @@ func left_joint_rotation(joint: Node2D, target: Vector2, duration: float, min: f
 	tween.tween_property(joint,"rotation",targetAngle,duration / TimeManager.gameSpeed).set_ease(Tween.EASE_OUT_IN)
 
 
-func lower_right_elbow(elbow: Node2D, bicep: Node2D, target: Vector2):
-	var dist = elbow.global_position.distance_to(target)
-	bicep.scale.x = clampf(min(dist/75,1),0.3,1)
-	bicep.scale.y = clampf(1.5-dist/75,1,1.5)
-
-
-func lower_left_elbow(elbow: Node2D, bicep: Node2D, target: Vector2):
-	var dist = elbow.global_position.distance_to(target)
-	bicep.position.x =  - 27 * clampf(min(dist/75,1),0.3,1)
-	bicep.scale.x = clampf(min(dist/75,1),0.3,1)
-	bicep.scale.y = clampf(1.5-dist/75,1,1.5)
+#func lower_right_elbow(elbow: Node2D, bicep: Node2D, target: Vector2):
+	#var dist = elbow.global_position.distance_to(target)
+	#bicep.scale.x = clampf(min(dist/75,1),0.3,1)
+	#bicep.scale.y = clampf(1.5-dist/75,1,1.5)
+#
+#
+#func lower_left_elbow(elbow: Node2D, bicep: Node2D, target: Vector2):
+	#var dist = elbow.global_position.distance_to(target)
+	#bicep.position.x =  - 27 * clampf(min(dist/75,1),0.3,1)
+	#bicep.scale.x = clampf(min(dist/75,1),0.3,1)
+	#bicep.scale.y = clampf(1.5-dist/75,1,1.5)
 
 
 func _ready():

@@ -1,13 +1,13 @@
 extends Node
 
 var normalTime = 1.0
-var bulletTime = 0.10
+var bulletTime = 0.1
 var timeReverse = -0.3
 var targettingMode = false
 var timeReverseMode = false
 var pausePoint = 0
 
-var gameSpeed = 1.0
+var gameSpeed = 0.1
 
 #func add_normal_timer(time: float):
 	#var normalTimer := Timer.new()

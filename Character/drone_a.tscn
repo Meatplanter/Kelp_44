@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://dvb1p1kus3w7b"]
+
+[ext_resource type="Script" uid="uid://dkkt00v21hvi5" path="res://Character/drone_a.gd" id="1_05wd3"]
+[ext_resource type="Texture2D" uid="uid://pwn2ipqrj4v8" path="res://Assets/drone pixelart resized.png" id="1_n5byf"]
+[ext_resource type="PackedScene" uid="uid://bti6mdje6c26r" path="res://Movement styles/movement_style_2.tscn" id="2_05wd3"]
+[ext_resource type="PackedScene" uid="uid://dx06ua82xghkg" path="res://Aiming styles/aiming_style_1.tscn" id="4_ijq7b"]
+[ext_resource type="PackedScene" uid="uid://b6o1fo0ewnjln" path="res://Weapons/gun_new.tscn" id="5_p56ci"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_05wd3"]
+radius = 4.0
+height = 16.0
+
+[node name="DroneA" type="CharacterBody2D" groups=["Drone", "Player"]]
+script = ExtResource("1_05wd3")
+
+[node name="GunLeft" parent="." instance=ExtResource("5_p56ci")]
+unique_name_in_owner = true
+
+[node name="Drone" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="DronePixelartResized" type="Sprite2D" parent="Drone"]
+texture_filter = 1
+texture = ExtResource("1_n5byf")
+
+[node name="Hurtbox" type="CollisionShape2D" parent="Drone"]
+shape = SubResource("CapsuleShape2D_05wd3")
+
+[node name="MovementStyle2" parent="." instance=ExtResource("2_05wd3")]
+
+[node name="AimingStyle1" parent="." instance=ExtResource("4_ijq7b")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+zoom = Vector2(2, 2)

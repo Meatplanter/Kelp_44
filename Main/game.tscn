@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://3sssh4smi3wv" path="res://Assets/Resized.png" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://cxp434ialc278" path="res://Main/game.gd" id="1_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://ctyixwmxls1xf" path="res://Character/rogue_b.tscn" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://dvb1p1kus3w7b" path="res://Character/drone_a.tscn" id="4_xmdxi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc0e3"]
 texture = ExtResource("1_e2o6t")
@@ -44,7 +44,7 @@ autostart = true
 wait_time = 2.0
 autostart = true
 
-[node name="RogueB" parent="." instance=ExtResource("3_feb5d")]
+[node name="DroneA" parent="." instance=ExtResource("4_xmdxi")]
 
 [connection signal="timeout" from="BulletSpawnTime" to="." method="_on_bullet_spawn_time_timeout"]
 [connection signal="timeout" from="SlomoBulletSpawnTime" to="." method="_on_slomo_bullet_spawn_time_timeout"]

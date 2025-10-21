@@ -24,6 +24,9 @@ func spawn_enemy():
 		add_child(new_enemy)
 
 
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
 func _process(delta: float) -> void:
 	queue_redraw()
 	

@@ -34,7 +34,8 @@ unique_name_in_owner = true
 [node name="AimingStyle1" parent="." instance=ExtResource("8_t0gij")]
 unique_name_in_owner = true
 
-[node name="Camera2DNew" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(24, 0)
 ignore_rotation = false
 zoom = Vector2(2, 2)
@@ -44,7 +45,7 @@ rotation_smoothing_enabled = true
 rotation_smoothing_speed = 3.0
 script = ExtResource("7_y7bk3")
 
-[node name="LabelHealthLeft" type="Label" parent="Camera2DNew"]
+[node name="LabelHealthLeft" type="Label" parent="Camera2D"]
 visible = false
 offset_left = -286.0
 offset_top = -160.0
@@ -53,7 +54,7 @@ offset_bottom = -137.0
 text = "Health left:"
 metadata/_edit_use_anchors_ = true
 
-[node name="HPLeft" type="Label" parent="Camera2DNew"]
+[node name="HPLeft" type="Label" parent="Camera2D"]
 visible = false
 offset_left = -190.0
 offset_top = -160.0
@@ -63,7 +64,7 @@ text = "10"
 script = ExtResource("8_e3tf4")
 metadata/_edit_use_anchors_ = true
 
-[node name="LabelXPLeft" type="Label" parent="Camera2DNew"]
+[node name="LabelXPLeft" type="Label" parent="Camera2D"]
 visible = false
 offset_left = -286.0
 offset_top = -136.0
@@ -71,7 +72,7 @@ offset_right = -162.0
 offset_bottom = -113.0
 text = "XP until NL:"
 
-[node name="XPToLevel" type="Label" parent="Camera2DNew"]
+[node name="XPToLevel" type="Label" parent="Camera2D"]
 visible = false
 offset_left = -190.0
 offset_top = -137.0
@@ -81,11 +82,11 @@ text = "10"
 script = ExtResource("9_m64x7")
 metadata/_edit_use_anchors_ = true
 
-[node name="Pause menu" parent="Camera2DNew" instance=ExtResource("10_t0gij")]
+[node name="Pause menu" parent="Camera2D" instance=ExtResource("10_t0gij")]
 visible = false
 z_index = 1
 
-[node name="LevelUpScreen" parent="Camera2DNew" instance=ExtResource("11_qhx67")]
+[node name="LevelUpScreen" parent="Camera2D" instance=ExtResource("11_qhx67")]
 process_mode = 2
 visible = false
 z_index = 1

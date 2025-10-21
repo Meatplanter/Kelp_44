@@ -11,6 +11,7 @@ const DETECT_RADIUS = 2000
 const FOV = 220
 
 func _ready():
+	if get_parent().get_parent().is_in_group("Drone"):hide()
 	SignalBus.connect("cameraRotated", Callable(self, "_on_camera_2d_new_camera_rotated"))
 
 func _process(delta):
