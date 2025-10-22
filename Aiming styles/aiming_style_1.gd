@@ -4,7 +4,6 @@ extends Node2D
 #Shoot left gun with left mouse button, right with right mouse button
 
 var target = Vector2.ZERO
-@onready var camera = %Camera2D
 
 func gun_rotation(joint: Node2D, target: Vector2, duration: float):
 	var targetAngle = (target - joint.global_position).angle()
@@ -17,7 +16,11 @@ func gun_rotation(joint: Node2D, target: Vector2, duration: float):
 	tween.tween_property(joint,"rotation",targetAngle,duration / TimeManager.gameSpeed).set_ease(Tween.EASE_OUT_IN)
 
 func target_chase_mouse():
-	target = get_global_mouse_position()
+	var center = get_parent().global_position
+	var mouse_pos = get_global_mouse_position()
+	var direction = (mouse_pos - center).normalized()
+	target = center + direction * 100
+	
 	var tween: Tween
 	tween = create_tween()
 	tween.tween_property(%Target,"global_position",target,0.5 / TimeManager.gameSpeed)#.set_trans(Movement.styleTween)

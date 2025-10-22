@@ -1,5 +1,7 @@
 extends Node2D
 
+#MovementStyle1: Move two shoes separately
+
 var moveCooldown = false
 var hasMoved = false
 

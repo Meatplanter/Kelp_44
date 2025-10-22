@@ -25,7 +25,7 @@ func spawn_enemy():
 
 
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 
 func _process(delta: float) -> void:
 	queue_redraw()
@@ -57,6 +57,7 @@ func _input(event):
 	elif event.is_action_pressed("ChangeMode") && Global.gameMode == 1:
 		Global.gameMode = 0
 		print("Mode is now: Spawn bullets")
+		
 
 func _on_bullet_spawn_time_timeout() -> void:
 	if Global.gameMode == 0:

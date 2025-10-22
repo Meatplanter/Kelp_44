@@ -1,5 +1,7 @@
 extends Node2D
 
+#MovementStyle2: Get a velocity increase each time you press a button
+
 var parent
 var speed = 20.0
 var movementCD = 0.5

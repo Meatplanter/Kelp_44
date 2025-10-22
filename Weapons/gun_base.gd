@@ -23,6 +23,11 @@ func _draw():
 		var aimTo =  %LaserSights.target_position
 		var color = Color.KHAKI
 		
+		if cooldown > 0:
+			color = Color.ORANGE_RED
+		elif cooldown <= 0:
+			color = Color.KHAKI
+		
 		if ray.is_colliding():
 			var collider = ray.get_collider()
 			if collider and collider.is_in_group("Enemy") and cooldown <= 0:
