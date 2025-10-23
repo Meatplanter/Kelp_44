@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmtypxadkws4h"]
+
+[ext_resource type="Script" uid="uid://canh7d30dcepa" path="res://Character/drone_b.gd" id="1_bg0jh"]
+
+[node name="DroneB" type="CharacterBody2D"]
+script = ExtResource("1_bg0jh")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="DronePolygon" type="Polygon2D" parent="Area2D"]
+unique_name_in_owner = true
+color = Color(0, 0, 0, 0.756863)
+polygon = PackedVector2Array(-4.5, -4.5, 0, -6, 4.5, -4.5, 6, 0, 4.5, 4.5, 0, 6, -4.5, 4.5, -6, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
