@@ -28,7 +28,6 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 
 func _process(delta: float) -> void:
-	queue_redraw()
 	
 	enemy_count = 0
 	for child in get_children():
