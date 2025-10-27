@@ -9,20 +9,11 @@ const DETECT_RADIUS = 2000
 var FOV = 220
 
 func _ready():
-	if get_parent().get_parent().is_in_group("Drone"):
-		hide()
-		FOV = 90
 	SignalBus.connect("cameraRotated", Callable(self, "_on_camera_2d_new_camera_rotated"))
 
 func _process(delta):
 	EnemyManager.enemy_scope()
 	EnemyManager.get_visible_enemies()
-	
-	if get_parent().get_parent().is_in_group("Drone"):
-		FOV = 90
-		self.look_at(%Target.position.rotated(PI/2))
-		self.global_position = get_parent().global_position
-	
 	
 	#trying to implement field of vision
 	var pos = self.global_position
@@ -37,7 +28,6 @@ func _process(delta):
 				enemy.modulate.a = min(1,enemy.modulate.a + delta * TimeManager.gameSpeed * 2)
 			else:
 				enemy.modulate.a = max(0.0,enemy.modulate.a - delta * TimeManager.gameSpeed)
-
 
 
 

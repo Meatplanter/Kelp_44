@@ -19,7 +19,11 @@ func target_chase_mouse():
 	var center = get_parent().global_position
 	var mouse_pos = get_global_mouse_position()
 	var direction = (mouse_pos - center).normalized()
-	target = center + direction * 100
+	
+	if get_parent().is_in_group("Drone"): #this limits the max range of invisible target, so that it doesn't act too weird when aiming without crosshair
+		target = center + direction * 100
+	else:
+		target = mouse_pos
 	
 	var tween: Tween
 	tween = create_tween()

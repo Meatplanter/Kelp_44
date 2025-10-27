@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d21xaev5r7np2" path="res://Aiming styles/aiming_style_2.gd" id="1_chrti"]
 [ext_resource type="Texture2D" uid="uid://cxdlhlj18ycb6" path="res://Assets/Crosshair.png" id="2_dfduy"]
-[ext_resource type="Script" uid="uid://cyitxyi8t2nf" path="res://Character/head_new.gd" id="3_vnu2v"]
+[ext_resource type="Script" uid="uid://c6wo2qt1seuhb" path="res://Aiming styles/head_as_2.gd" id="3_vnu2v"]
 [ext_resource type="Texture2D" uid="uid://bbqhe4bkrpp8a" path="res://Assets/HatCompressed.png" id="4_ri3jk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_olijn"]
@@ -18,16 +18,16 @@ z_index = 99
 texture_filter = 1
 texture = ExtResource("2_dfduy")
 
-[node name="HeadNew" type="Area2D" parent="."]
+[node name="HeadAS2" type="Area2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_vnu2v")
 
-[node name="HatCompressed" type="Sprite2D" parent="HeadNew"]
+[node name="HatCompressed" type="Sprite2D" parent="HeadAS2"]
 unique_name_in_owner = true
 texture_filter = 1
 texture = ExtResource("4_ri3jk")
 flip_v = true
 
-[node name="HeadPerspective" type="CollisionShape2D" parent="HeadNew"]
+[node name="HeadPerspective" type="CollisionShape2D" parent="HeadAS2"]
 visible = false
 shape = SubResource("CircleShape2D_olijn")
