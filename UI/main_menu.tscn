@@ -266,6 +266,29 @@ offset_right = 350.0
 offset_bottom = 219.0
 scale = Vector2(1.5, 1.5)
 
+[node name="Label15" type="Label" parent="."]
+layout_mode = 0
+offset_left = 412.0
+offset_top = 23.0
+offset_right = 511.0
+offset_bottom = 46.0
+text = "Character:"
+
+[node name="Character" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 519.0
+offset_top = 20.0
+offset_right = 707.0
+offset_bottom = 51.0
+selected = 0
+item_count = 3
+popup/item_0/text = "Drone_A"
+popup/item_0/id = 0
+popup/item_1/text = "Drone_B"
+popup/item_1/id = 1
+popup/item_2/text = "Rogue_B"
+popup/item_2/id = 2
+
 [connection signal="pressed" from="Button" to="." method="_startgame_button_pressed"]
 [connection signal="item_selected" from="GameMode" to="." method="_on_option_button_item_selected"]
 [connection signal="text_changed" from="BulletSpeed" to="." method="_on_bullet_speed_text_changed"]
@@ -281,3 +304,4 @@ scale = Vector2(1.5, 1.5)
 [connection signal="text_changed" from="PlacingWeight" to="." method="_on_placing_weight_text_changed"]
 [connection signal="toggled" from="BloodTrail" to="." method="_on_blood_trail_toggled"]
 [connection signal="toggled" from="BloodTrailPX" to="." method="_on_blood_trail_px_toggled"]
+[connection signal="item_selected" from="Character" to="." method="_on_character_item_selected"]

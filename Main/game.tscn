@@ -1,14 +1,7 @@
-[gd_scene load_steps=16 format=4 uid="uid://i7ssqk3udw6h"]
+[gd_scene load_steps=6 format=4 uid="uid://i7ssqk3udw6h"]
 
 [ext_resource type="Texture2D" uid="uid://3sssh4smi3wv" path="res://Assets/Resized.png" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://cxp434ialc278" path="res://Main/game.gd" id="1_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://ctyixwmxls1xf" path="res://Character/rogue_b.tscn" id="3_a3ye6"]
-[ext_resource type="Shader" uid="uid://dpbxqvx3peki4" path="res://Shaders/test.tres" id="4_ialyd"]
-[ext_resource type="Texture2D" uid="uid://bbqhe4bkrpp8a" path="res://Assets/HatCompressed.png" id="5_n0uw5"]
-[ext_resource type="Shader" uid="uid://bahq04y4bcv2p" path="res://Shaders/test2.gdshader" id="6_txddu"]
-[ext_resource type="Texture2D" uid="uid://b7oifqaddjc5d" path="res://Assets/Sombr.png" id="7_wfgjo"]
-[ext_resource type="Shader" uid="uid://csudvdedn6hb7" path="res://Shaders/colreplacement.tres" id="8_x4xnp"]
-[ext_resource type="Texture2D" uid="uid://mhadgvm6kalh" path="res://Assets/Shoe.png" id="9_kqwmc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc0e3"]
 texture = ExtResource("1_e2o6t")
@@ -24,15 +17,6 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -600, -300, 0, 0, 0, 0, 600, -300, 0, 0, 0, 0, 600, 300, 0, 0, 0, 0, -600, 300, 0, 0, 0, 0, -600, -300)
 }
 point_count = 5
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rmus7"]
-shader = ExtResource("4_ialyd")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tihx1"]
-shader = ExtResource("6_txddu")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v8vhu"]
-shader = ExtResource("8_x4xnp")
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_fc0e3")
@@ -58,30 +42,6 @@ autostart = true
 [node name="SlomoBulletSpawnTime" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
-
-[node name="RogueB" parent="." instance=ExtResource("3_a3ye6")]
-
-[node name="HatCompressed" type="Sprite2D" parent="."]
-texture_filter = 1
-material = SubResource("ShaderMaterial_rmus7")
-position = Vector2(-85, -51)
-texture = ExtResource("5_n0uw5")
-
-[node name="Sombr" type="Sprite2D" parent="."]
-texture_filter = 1
-material = SubResource("ShaderMaterial_tihx1")
-position = Vector2(-180, -55)
-texture = ExtResource("7_wfgjo")
-
-[node name="ColorPicker" type="ColorPicker" parent="."]
-offset_right = 298.0
-offset_bottom = 572.0
-color = Color(0.682353, 0.447059, 0.235294, 1)
-
-[node name="Shoe" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_v8vhu")
-position = Vector2(-119, -23)
-texture = ExtResource("9_kqwmc")
 
 [connection signal="timeout" from="BulletSpawnTime" to="." method="_on_bullet_spawn_time_timeout"]
 [connection signal="timeout" from="SlomoBulletSpawnTime" to="." method="_on_slomo_bullet_spawn_time_timeout"]

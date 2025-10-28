@@ -23,9 +23,17 @@ func spawn_enemy():
 	if enemy_count < 5:
 		add_child(new_enemy)
 
+func spawn_player():
+	var character
+	if Global.character == "Drone_A": character = preload("res://Character/drone_a.tscn").instantiate()
+	elif Global.character == "Drone_B": character = preload("res://Character/drone_b.tscn").instantiate()
+	elif Global.character == "Rogue_B": character = preload("res://Character/rogue_b.tscn").instantiate()
+	add_child(character)
+
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
+	spawn_player()
 
 func _process(delta: float) -> void:
 	

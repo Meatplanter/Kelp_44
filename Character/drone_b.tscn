@@ -1,19 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmtypxadkws4h"]
+[gd_scene load_steps=6 format=3 uid="uid://dmtypxadkws4h"]
 
 [ext_resource type="Script" uid="uid://canh7d30dcepa" path="res://Character/drone_b.gd" id="1_bg0jh"]
+[ext_resource type="Shader" uid="uid://coedy6p7acq7" path="res://Shaders/ColorReverse.tres" id="2_d3j8k"]
 [ext_resource type="PackedScene" uid="uid://cv4l28iwn2tvb" path="res://Movement styles/movement_style_3.tscn" id="2_k3ut1"]
 [ext_resource type="Script" uid="uid://cnqxx0jqqoh52" path="res://Character/drone_polygon.gd" id="2_s6hg2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_01xur"]
+shader = ExtResource("2_d3j8k")
 
 [node name="DroneB" type="CharacterBody2D"]
 script = ExtResource("1_bg0jh")
 
 [node name="DronePolygon" type="Polygon2D" parent="."]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_01xur")
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-4.5, -4.5, 0, -6, 4.5, -4.5, 6, 0, 4.5, 4.5, 0, 6, -4.5, 4.5, -6, 0)
 script = ExtResource("2_s6hg2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
+zoom = Vector2(2, 2)
 
 [node name="MovementStyle3" parent="." instance=ExtResource("2_k3ut1")]

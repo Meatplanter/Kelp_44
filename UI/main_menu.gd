@@ -14,6 +14,15 @@ func _input(event):
 		elif event.keycode == KEY_E:
 			_on_option_button_item_selected(2)
 			$GameMode.selected = 2
+		elif event.keycode == KEY_A:
+			_on_character_item_selected(0)
+			$Character.selected = 0
+		elif event.keycode == KEY_S:
+			_on_character_item_selected(1)
+			$Character.selected = 1
+		elif event.keycode == KEY_D:
+			_on_character_item_selected(2)
+			$Character.selected = 2
 
 func _startgame_button_pressed():
 	get_tree().change_scene_to_file("res://Main/game.tscn")
@@ -80,3 +89,9 @@ func _on_blood_trail_toggled(toggled_on):
 func _on_blood_trail_px_toggled(toggled_on):
 	if toggled_on == true: Global.bloodTrailScene = true
 	elif toggled_on == false: Global.bloodTrailScene = false
+
+
+func _on_character_item_selected(index):
+	if index == 0: Global.character = "Drone_A"
+	if index == 1: Global.character = "Drone_B"
+	if index == 2: Global.character = "Rogue_B"

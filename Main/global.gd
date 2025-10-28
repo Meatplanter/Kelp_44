@@ -20,6 +20,7 @@ var cameraState = 0 #0 looking up, 1 looking right, 2 looking down, 3 looking le
 
 
 #player
+var character = "Drone_A"
 var playerHealth = 10
 
 var midpoint = Vector2(0,16)
