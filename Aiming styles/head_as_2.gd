@@ -25,6 +25,8 @@ func _ready():
 	SignalBus.connect("cameraRotated", Callable(self, "_on_camera_2d_new_camera_rotated"))
 	%VisionRightPeriph.rotate(PI/4)
 	%VisionLeftPeriph.rotate(-PI/4)
+	%VisionRightPeriph2.rotate(PI/8)
+	%VisionLeftPeriph2.rotate(-PI/8)
 
 func _process(delta):
 	EnemyManager.get_visible_enemies()

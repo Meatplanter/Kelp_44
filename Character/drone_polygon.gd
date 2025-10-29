@@ -61,7 +61,7 @@ func _ready():
 
 func _process(_delta):
 	resize_circles()
-	%DronePolygon.rotate(0.02)
+	%DronePolygon.rotate(0.02 * TimeManager.gameSpeed)
 	queue_redraw()
 
 

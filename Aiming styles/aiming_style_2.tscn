@@ -37,7 +37,15 @@ shape = SubResource("CircleShape2D_olijn")
 unique_name_in_owner = true
 target_position = Vector2(0, -200)
 
+[node name="VisionRightPeriph2" type="RayCast2D" parent="HeadAS2"]
+unique_name_in_owner = true
+target_position = Vector2(0, -200)
+
 [node name="VisionLeftPeriph" type="RayCast2D" parent="HeadAS2"]
+unique_name_in_owner = true
+target_position = Vector2(0, -200)
+
+[node name="VisionLeftPeriph2" type="RayCast2D" parent="HeadAS2"]
 unique_name_in_owner = true
 target_position = Vector2(0, -200)
 
