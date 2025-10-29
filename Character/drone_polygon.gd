@@ -59,7 +59,7 @@ func _ready():
 	z_index = 100
 
 
-func _process(delta):
+func _process(_delta):
 	resize_circles()
 	%DronePolygon.rotate(0.02)
 	queue_redraw()

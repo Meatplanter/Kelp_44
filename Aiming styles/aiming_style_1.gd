@@ -5,8 +5,8 @@ extends Node2D
 
 var target = Vector2.ZERO
 
-func gun_rotation(joint: Node2D, target: Vector2, duration: float):
-	var targetAngle = (target - joint.global_position).angle()
+func gun_rotation(joint: Node2D, targetting: Vector2, duration: float):
+	var targetAngle = (targetting - joint.global_position).angle()
 	
 	targetAngle = lerp_angle(joint.rotation,targetAngle,1.0)
 	targetAngle = clamp(targetAngle,deg_to_rad(Movement.cumulativeAngle),deg_to_rad(Movement.cumulativeAngle))
@@ -64,7 +64,7 @@ func _ready():
 	if get_parent().is_in_group("Drone"): %Target.hide()
 
 
-func _process(delta):
+func _process(_delta):
 	update_positions()
 	target_chase_mouse()
 	cooldown_color()

@@ -98,22 +98,22 @@ func chase_joint(parent:Node2D,joint:Node2D,stiff:float):
 	tween.tween_property(joint,"position",parent.global_position,stiff / TimeManager.gameSpeed)
 
 
-func right_joint_rotation(joint: Node2D, target: Vector2, duration: float, min: float, max: float):
+func right_joint_rotation(joint: Node2D, target: Vector2, duration: float, minimum: float, maximum: float):
 	var targetAngle = (target - joint.global_position).angle()
 	
 	targetAngle = lerp_angle(joint.rotation,targetAngle,1.0)
-	targetAngle = clamp(targetAngle,deg_to_rad(Movement.cumulativeAngle)-min,deg_to_rad(Movement.cumulativeAngle)+max)
+	targetAngle = clamp(targetAngle,deg_to_rad(Movement.cumulativeAngle)-minimum,deg_to_rad(Movement.cumulativeAngle)+maximum)
 	
 	var tween: Tween
 	tween = create_tween()
 	tween.tween_property(joint,"rotation",targetAngle,duration / TimeManager.gameSpeed).set_ease(Tween.EASE_OUT_IN)
 
 
-func left_joint_rotation(joint: Node2D, target: Vector2, duration: float, min: float, max: float):
+func left_joint_rotation(joint: Node2D, target: Vector2, duration: float, minimum: float, maximum: float):
 	var targetAngle = (target - joint.global_position).angle()+PI
 	
 	targetAngle = lerp_angle(joint.rotation,targetAngle,1.0)
-	targetAngle = clamp(targetAngle,deg_to_rad(Movement.cumulativeAngle)-min,deg_to_rad(Movement.cumulativeAngle)+max)
+	targetAngle = clamp(targetAngle,deg_to_rad(Movement.cumulativeAngle)-minimum,deg_to_rad(Movement.cumulativeAngle)+maximum)
 	
 	var tween: Tween
 	tween = create_tween()
@@ -137,7 +137,7 @@ func _ready():
 	if Global.gameMode == 0: hide_arms()
 
 
-func _process(delta):
+func _process(_delta):
 	
 	#For calculating the rotational direction
 	var RAangleBefore = find_angle_between($"LeftShoulder",$"RightShoulder",%GunRight) #from body to gun cumulative

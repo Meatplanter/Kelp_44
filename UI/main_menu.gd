@@ -33,9 +33,6 @@ func _on_option_button_item_selected(index):
 	if index == 1: Global.gameMode = 1
 	if index == 2: Global.gameMode = 2
 
-#func _process(delta):
-	#print(Global.pureMovement)
-
 
 func _on_bullet_speed_text_changed():
 	Global.bulletSpeed = float($BulletSpeed.text)

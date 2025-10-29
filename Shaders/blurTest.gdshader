@@ -1,5 +1,5 @@
 shader_type canvas_item;
-uniform vec2 dir = vec2(1,0);
+uniform vec2 dir = vec2(-1,0);
 uniform int quality = 2;
 
 void vertex(){

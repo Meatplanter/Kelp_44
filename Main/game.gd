@@ -35,7 +35,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 	spawn_player()
 
-func _process(delta: float) -> void:
+func _process(_delta):
 	
 	enemy_count = 0
 	for child in get_children():

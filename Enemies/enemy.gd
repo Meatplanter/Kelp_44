@@ -24,7 +24,7 @@ func _ready() -> void:
 	%GunNew.Firerate = firerate
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	look_at(Movement.midpoint)
 	if global_position.distance_to(Movement.midpoint) > 300: 
 		chase_player()

@@ -22,7 +22,7 @@ func _ready() -> void:
 		bloodTrailScene = preload("res://Visuals/blood_trail_pc.tscn")
 		
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if TimeManager.gameSpeed == TimeManager.bulletTime:
 			$SplatterTimer.set_paused(1)
 			$SlomoSplatterTimer.set_paused(0)

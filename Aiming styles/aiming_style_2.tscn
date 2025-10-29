@@ -12,6 +12,7 @@ radius = 300.0
 script = ExtResource("1_chrti")
 
 [node name="Target" type="Marker2D" parent="."]
+unique_name_in_owner = true
 
 [node name="Crosshair" type="Sprite2D" parent="Target"]
 z_index = 99
@@ -31,3 +32,15 @@ flip_v = true
 [node name="HeadPerspective" type="CollisionShape2D" parent="HeadAS2"]
 visible = false
 shape = SubResource("CircleShape2D_olijn")
+
+[node name="VisionRightPeriph" type="RayCast2D" parent="HeadAS2"]
+unique_name_in_owner = true
+target_position = Vector2(0, -200)
+
+[node name="VisionLeftPeriph" type="RayCast2D" parent="HeadAS2"]
+unique_name_in_owner = true
+target_position = Vector2(0, -200)
+
+[node name="VisionCenter" type="RayCast2D" parent="HeadAS2"]
+unique_name_in_owner = true
+target_position = Vector2(0, -200)

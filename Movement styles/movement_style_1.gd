@@ -180,7 +180,7 @@ func _ready():
 	SignalBus.connect("cameraRotated", Callable(self, "_on_camera_2d_new_camera_rotated"))
 
 
-func _process(delta):
+func _process(_delta):
 	set_game_speed_when_moving()
 	vecBefore = Movement.orientation
 	update_positions()

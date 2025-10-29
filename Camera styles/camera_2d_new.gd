@@ -48,7 +48,7 @@ func rotate_camera(clockwise: bool): #if true turn camera right, if false turn l
 func _ready():
 	lastRotationAngle = Movement.cumulativeAngle
 
-func _process(delta):
+func _process(_delta):
 	self.global_position = Movement.midpoint
 	if round(Movement.cumulativeAngle) + lastRotationAngle == rotThreshold: 
 		rotate_camera(true)
