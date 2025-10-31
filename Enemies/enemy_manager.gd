@@ -2,6 +2,7 @@ extends Node
 
 var enemies: Array = []
 var visibleEnemies: Array = []
+
 var targetEnemyLeft = null
 var targetEnemyRight = null
 

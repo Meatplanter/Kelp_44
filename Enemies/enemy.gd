@@ -4,6 +4,7 @@ var health = EnemyManager.enemyHealth
 var firerate = EnemyManager.enemyFirerate
 
 var strafeBool = true
+var enemyState = "Unnoticed"
 
 func chase_player():
 	var direction = global_position.direction_to(Movement.midpoint)

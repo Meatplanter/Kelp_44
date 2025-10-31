@@ -8,7 +8,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_01xur"]
 shader = ExtResource("2_d3j8k")
 
-[node name="DroneB" type="CharacterBody2D"]
+[node name="DroneB" type="CharacterBody2D" groups=["Drone", "Player"]]
 script = ExtResource("1_bg0jh")
 
 [node name="DronePolygon" type="Polygon2D" parent="."]

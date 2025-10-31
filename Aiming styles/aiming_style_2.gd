@@ -1,7 +1,7 @@
 extends Node2D
 
-#AimingStlye2: Character aims automatically.
-#Shooting is automatic and reckless, character fires one shot per enemy in passing.
+#AimingStlye2: Character aims and shoots automatically.
 
-func _process(delta):
+
+func _process(_delta):
 	if %HeadAS2: %HeadAS2.global_position = AimingManager.neck
