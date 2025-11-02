@@ -3,6 +3,11 @@ extends Node
 var enemies: Array = []
 var visibleEnemies: Array = []
 
+var EnemiesNoticed: Array = []
+var EnemiesMemorized: Array = []
+var EnemiesEngaged: Array = []
+var EnemiesShotAt: Array = []
+
 var targetEnemyLeft = null
 var targetEnemyRight = null
 

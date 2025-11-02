@@ -19,6 +19,7 @@ texture = ExtResource("2_dfduy")
 [node name="HeadAS2" type="Area2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_vnu2v")
+detectRadius = 300
 
 [node name="HatCompressed" type="Sprite2D" parent="HeadAS2"]
 unique_name_in_owner = true

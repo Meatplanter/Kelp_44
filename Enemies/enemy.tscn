@@ -39,3 +39,9 @@ rotation = 0.785398
 [node name="GunNew" parent="." instance=ExtResource("5_3yqyl")]
 unique_name_in_owner = true
 position = Vector2(34, 0)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -11.0
+offset_right = 20.0
+offset_bottom = 12.0

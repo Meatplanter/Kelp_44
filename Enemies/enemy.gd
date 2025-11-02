@@ -6,6 +6,9 @@ var firerate = EnemyManager.enemyFirerate
 var strafeBool = true
 var enemyState = "Unnoticed"
 
+var droppedFalloff = 100.0
+var stillMemorized = 100.0
+
 func chase_player():
 	var direction = global_position.direction_to(Movement.midpoint)
 	velocity = direction * TimeManager.gameSpeed * 30.0
@@ -33,6 +36,21 @@ func _process(_delta: float) -> void:
 		strafe(strafeBool)
 	
 	move_and_slide()
+	
+	
+	if enemyState == "Memorized": stillMemorized -= TimeManager.gameSpeed
+	if stillMemorized < 0:
+		enemyState = "Unnoticed"
+		stillMemorized = 100.0
+	if enemyState == "Dropped": droppedFalloff -= TimeManager.gameSpeed
+	if droppedFalloff < 0: 
+		enemyState = "Unnoticed"
+		droppedFalloff = 100.0
+	
+	
+	
+	#debugging stuff
+	$Label.text = enemyState
 
 func take_damage():
 	health -= 1

@@ -154,20 +154,20 @@ func _process(_delta):
 	
 	#left shoulder
 	chase_joint($"LeftShoulder",$"LeftShoulderJoint",0.1)
-	left_joint_rotation($"LeftShoulderJoint",targetLeft,shoulderSpeed * leftShoulderSpeedModifier,0,PI*0.75)
+	left_joint_rotation($"LeftShoulderJoint",AimingManager.targetLeft,shoulderSpeed * leftShoulderSpeedModifier,0,PI*0.75)
 	
 	#left elbow
 	chase_joint($"LeftElbow",$"LeftElbowJoint",0.04)
-	left_joint_rotation($"LeftElbowJoint",targetLeft,elbowSpeed * leftElbowSpeedModifier,-($"LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)),($"LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)+PI*0.4))
+	left_joint_rotation($"LeftElbowJoint",AimingManager.targetLeft,elbowSpeed * leftElbowSpeedModifier,-($"LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)),($"LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)+PI*0.4))
 	#lower_left_elbow($"LeftElbow",%LeftBiceps,target)
 	
 	#right shoulder
 	chase_joint($"RightShoulder",$"RightShoulderJoint",0.1)
-	right_joint_rotation($"RightShoulderJoint",targetRight,shoulderSpeed * rightShoulderSpeedModifier,PI*0.75,0)
+	right_joint_rotation($"RightShoulderJoint",AimingManager.targetRight,shoulderSpeed * rightShoulderSpeedModifier,PI*0.75,0)
 	
 	#right elbow
 	chase_joint($"RightElbow",$"RightElbowJoint",0.04)
-	right_joint_rotation($"RightElbowJoint",targetRight,elbowSpeed * rightElbowSpeedModifier,-($"RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)-PI*0.4),$"RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle))	
+	right_joint_rotation($"RightElbowJoint",AimingManager.targetRight,elbowSpeed * rightElbowSpeedModifier,-($"RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)-PI*0.4),$"RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle))	
 	
 	#For calculating the rotational direction (minus values means turning left, plus values means turning right)
 	var RAangleAfter = find_angle_between($"LeftShoulder",$"RightShoulder",%GunRight)
@@ -194,3 +194,5 @@ func _process(_delta):
 	else: rightElbowSpeedModifier = 1.0
 	if LAdiff < 0 and LBdiff < 1: leftElbowSpeedModifier = 0.5
 	else: leftElbowSpeedModifier = 1.0
+	
+	

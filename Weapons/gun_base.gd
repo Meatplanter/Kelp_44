@@ -43,8 +43,12 @@ func _draw():
 func _process(delta):
 	cooldown -= delta * TimeManager.gameSpeed / Firerate
 	
+	#shoot gun if enemy pointing at player
 	if cooldown <= 0 and get_parent().is_in_group("Enemy") and aiming_at() and aiming_at().is_in_group("Player"): 
 		cooldown = randf_range(0.98,1.02)
 		WeaponManager.shoot(self)
 		
+	if get_parent().is_in_group("Player"):
+		if self == %GunRight: AimingManager.cooldownRight = cooldown
+		elif self == %GunLeft: AimingManager.cooldownLeft = cooldown
 	queue_redraw()

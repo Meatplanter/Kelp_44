@@ -32,7 +32,6 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="AimingStyle2" parent="." instance=ExtResource("5_rmqlk")]
-unique_name_in_owner = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
