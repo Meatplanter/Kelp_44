@@ -12,6 +12,7 @@ var shootingPoint
 var shootingDistance
 
 var bloodTrailScene
+var shooter = Node2D
 
 func _ready() -> void:
 	shootingPoint = global_position
@@ -67,6 +68,8 @@ func _on_body_entered(body: Node2D) -> void:
 		body.take_damage()
 		body.add_child(new_wound)
 		new_wound.global_position = bulletEntryPoint
+		#extra threat for enemy that shot and hit player
+		if body.is_in_group("Player"): shooter.threat += randf_range(80.0,120.0)
 		
 
 func _on_splatter_timer_timeout() -> void:

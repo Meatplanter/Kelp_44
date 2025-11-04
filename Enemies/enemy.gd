@@ -4,10 +4,15 @@ var health = EnemyManager.enemyHealth
 var firerate = EnemyManager.enemyFirerate
 
 var strafeBool = true
-var enemyState = "Unnoticed"
 
+var enemyState = "Unnoticed"
 var droppedFalloff = 100.0
 var stillMemorized = 100.0
+
+var threat = 0.0
+var threatMod = 1.0
+var attention = 0.0
+var attentionMod = 1.0
 
 func chase_player():
 	var direction = global_position.direction_to(Movement.midpoint)
@@ -30,6 +35,8 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	look_at(Movement.midpoint)
+	threat -= TimeManager.gameSpeed 
+	threat = max(0.0,threat)
 	if global_position.distance_to(Movement.midpoint) > 300: 
 		chase_player()
 	else:
@@ -50,7 +57,7 @@ func _process(_delta: float) -> void:
 	
 	
 	#debugging stuff
-	$Label.text = enemyState
+	$Label.text = "Threat: "+str(threat)
 
 func take_damage():
 	health -= 1

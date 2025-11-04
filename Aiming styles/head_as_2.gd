@@ -96,19 +96,26 @@ func forget_enemy():
 		if enemy.enemyState == "Unnoticed":
 			EnemyManager.EnemiesMemorized.erase(enemy)
 
-func _ready():
-	SignalBus.connect("cameraRotated", Callable(self, "_on_camera_2d_new_camera_rotated"))
-	%VisionRightPeriph.rotate(PI/4)
-	%VisionLeftPeriph.rotate(-PI/4)
-	%VisionRightPeriph2.rotate(PI/8)
-	%VisionLeftPeriph2.rotate(-PI/8)
+func vision_baseline():
+	%VisionRightPeriph.rotate(PI/8)
+	%VisionLeftPeriph.rotate(-PI/8)
+	%VisionRightPeriph2.rotate(PI/4)
+	%VisionLeftPeriph2.rotate(-PI/4)
+	%VisionRightPeriph3.rotate(PI*0.375)
+	%VisionLeftPeriph3.rotate(-PI*0.375)
 	%VisionCenter.target_position.y = - detectRadius
 	%VisionRightPeriph.target_position.y = - detectRadius
 	%VisionLeftPeriph.target_position.y = - detectRadius
 	%VisionRightPeriph2.target_position.y = - detectRadius
 	%VisionLeftPeriph2.target_position.y = - detectRadius
-	var VisionTemp = [%VisionRightPeriph,%VisionRightPeriph2,%VisionLeftPeriph,%VisionLeftPeriph2,%VisionCenter]
+	%VisionRightPeriph3.target_position.y = - detectRadius
+	%VisionLeftPeriph3.target_position.y = - detectRadius
+	var VisionTemp = [%VisionRightPeriph,%VisionRightPeriph2,%VisionRightPeriph3,%VisionLeftPeriph,%VisionLeftPeriph2,%VisionLeftPeriph3,%VisionCenter]
 	Vision.append_array(VisionTemp)
+
+func _ready():
+	SignalBus.connect("cameraRotated", Callable(self, "_on_camera_2d_new_camera_rotated"))
+	vision_baseline()
 
 func _process(delta):
 	EnemyManager.get_visible_enemies()

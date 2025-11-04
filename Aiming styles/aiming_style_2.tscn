@@ -35,11 +35,19 @@ target_position = Vector2(0, -200)
 unique_name_in_owner = true
 target_position = Vector2(0, -200)
 
+[node name="VisionRightPeriph3" type="RayCast2D" parent="HeadAS2"]
+unique_name_in_owner = true
+target_position = Vector2(0, -200)
+
 [node name="VisionLeftPeriph" type="RayCast2D" parent="HeadAS2"]
 unique_name_in_owner = true
 target_position = Vector2(0, -200)
 
 [node name="VisionLeftPeriph2" type="RayCast2D" parent="HeadAS2"]
+unique_name_in_owner = true
+target_position = Vector2(0, -200)
+
+[node name="VisionLeftPeriph3" type="RayCast2D" parent="HeadAS2"]
 unique_name_in_owner = true
 target_position = Vector2(0, -200)
 
