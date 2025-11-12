@@ -2,7 +2,7 @@ extends Area2D
 
 var cameraRotationTween: Tween
 var scanningTween: Tween
-var memorizingTween: Tween
+var turningTween: Tween
 
 var direction = Vector2()
 var enemy_direction = Vector2()
@@ -11,29 +11,14 @@ var angle = 0
 var FOV = 220
 
 var Vision: Array = []
-var headState = "Scanning"
+var headScanning = true #head is searching for a new enemy
 var scanningRight = true #false means scanning left
 
-#var EnemyManager.EnemiesNoticed: Array = []
-#var EnemyManager.EnemiesMemorized: Array = []
-
-var untilMemorized = 100.0
-var losingFocus = 100.0
-
-#func stop_rotating_when_moving():
-	#if TimeManager.gameSpeed == TimeManager.normalTime:
-		#if scanningTween: scanningTween.pause()
-		#if memorizingTween: memorizingTween.pause()
-	#elif TimeManager.gameSpeed == TimeManager.bulletTime:
-		#if scanningTween: scanningTween.play()
-		#if memorizingTween: memorizingTween.play()
 
 
 func reset_to_scanning():
 	if scanningTween: scanningTween.play()
-	headState = "Scanning"
-	untilMemorized = 100.0
-	losingFocus = 100.0
+	headScanning = true
 
 
 func scanning():
@@ -51,34 +36,50 @@ func notice_enemy():
 	for ray in Vision:
 		if ray.is_colliding():
 			var collider = ray.get_collider()
-			if collider and collider.is_in_group("Enemy") and collider.enemyState == "Unnoticed":
-				collider.enemyState = "Noticed"
-				EnemyManager.EnemiesNoticed.append(collider)
+			if collider and collider.is_in_group("Enemy"): #gain attention while looked at
+				collider.attention += TimeManager.gameSpeed
+				collider.lastNoticed = 25.0
+	
+	#reset who is being looked at, so that it can be established below
+	if EnemyManager.EnemiesNoticed.is_empty():
+		return null
+	else:
+		for enemy in EnemyManager.EnemiesNoticed:
+			enemy.beingLookedAt = false
+	
+	if %VisionCenter.is_colliding():
+		var collider = %VisionCenter.get_collider()
+		if collider and collider.is_in_group("Enemy"):
+			collider.attention += TimeManager.gameSpeed * 2 #triple the speed of gaining attention when looked at directly
+			collider.beingLookedAt = true
+			if collider.attention >= 100.0: collider.lastMemorized += TimeManager.gameSpeed * 2 #prolong the grace period, so you don't start forgetting the enemy you're accidentaly looking at
+			
 
-func memorize_enemy(target):
+func get_enemy_with_highest(stat): #stat: fear, attention, threat. Returns null if all are 0. 
+	if EnemyManager.EnemiesNoticed.is_empty():
+		return null
+		
+	var highest_enemy = null
+	var highest_stat = 0.0
+	
+	for enemy in EnemyManager.EnemiesNoticed:
+		if enemy.get(stat) > highest_stat:
+			highest_enemy = enemy
+			highest_stat = enemy.get(stat)
+			
+	return highest_enemy
+
+
+func turn_to_enemy(target):
 	if scanningTween: scanningTween.pause()
-	headState = "Memorizing"
+	headScanning = false
+	
 	var headOrientation = (to_global(%VisionCenter.target_position) - %HeadAS2.global_position).normalized()
 	var targetOrientation = (target.global_position - %HeadAS2.global_position).normalized()
 	var angleTo = rad_to_deg(headOrientation.angle_to(targetOrientation))
 	var targetAngle = clampf(%HeadAS2.rotation_degrees + angleTo,Movement.cumulativeAngle - 90,Movement.cumulativeAngle + 90)
-	memorizingTween = create_tween()
-	memorizingTween.tween_property(%HeadAS2,"rotation_degrees",targetAngle, 0.3 / TimeManager.gameSpeed)
-	if %VisionCenter.is_colliding() and %VisionCenter.get_collider() == target:
-		untilMemorized -= TimeManager.gameSpeed
-	else: 
-		losingFocus -= TimeManager.gameSpeed
-		
-	if untilMemorized < 0: 
-		target.enemyState = "Memorized"
-		EnemyManager.EnemiesNoticed.erase(target)
-		EnemyManager.EnemiesMemorized.append(target)
-		reset_to_scanning()
-	if losingFocus < 0:
-		target.enemyState = "Dropped"
-		EnemyManager.EnemiesNoticed.erase(target)
-		reset_to_scanning()
-	#print("until memorized ",untilMemorized,"  losing focus: ",losingFocus,"  dropoff: ",target.droppedFalloff)
+	turningTween = create_tween()
+	turningTween.tween_property(%HeadAS2,"rotation_degrees",targetAngle, 0.3 / TimeManager.gameSpeed)
 
 func remember_enemy():
 	for ray in Vision:
@@ -118,10 +119,22 @@ func _ready():
 	vision_baseline()
 
 func _process(delta):
-	EnemyManager.get_visible_enemies()
-	if headState == "Scanning": scanning()
+	if headScanning == true: scanning()
 	notice_enemy()
-	if EnemyManager.EnemiesNoticed.size() > 0: memorize_enemy(EnemyManager.EnemiesNoticed.front())
+	if EnemyManager.EnemiesNoticed.size() > 0:
+		var topEnemy
+		if get_enemy_with_highest("fear") != null:
+			topEnemy = get_enemy_with_highest("fear")
+		elif get_enemy_with_highest("fear") == null:
+			for enemy in EnemyManager.EnemiesNoticed:
+				if enemy.beingLookedAt == true and enemy.attention < 100:
+					topEnemy = enemy
+				else:
+					topEnemy = get_enemy_with_highest("attention")
+		turn_to_enemy(topEnemy)
+	else: #got to make exception for enemies with 100 attention, so that the scanning occurs
+		reset_to_scanning()
+	
 	remember_enemy()
 	forget_enemy()
 	

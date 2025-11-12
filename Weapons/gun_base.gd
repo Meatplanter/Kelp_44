@@ -46,7 +46,7 @@ func _process(delta):
 	#shoot gun if enemy pointing at player
 	if cooldown <= 0 and get_parent().is_in_group("Enemy") and aiming_at() and aiming_at().is_in_group("Player"): 
 		cooldown = randf_range(0.98,1.02)
-		get_parent().threat += randf_range(40,60)
+		get_parent().threat += randf_range(90.0,110.0)
 		WeaponManager.shoot(self)
 		
 	if get_parent().is_in_group("Player"):

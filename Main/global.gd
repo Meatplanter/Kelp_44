@@ -29,7 +29,7 @@ var focus = Vector2(0,0)
 var xp4bullet = 1
 var xp4enemy = 7
 var currentExp = 0
-var expToLevel = 20
+var expToLevel = 2000
 
 #movement
 var moveTime = 0.4 #useless?

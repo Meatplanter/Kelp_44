@@ -4,9 +4,7 @@ var enemies: Array = []
 var visibleEnemies: Array = []
 
 var EnemiesNoticed: Array = []
-var EnemiesMemorized: Array = []
-var EnemiesEngaged: Array = []
-var EnemiesShotAt: Array = []
+var EnemyStats: Dictionary = {}  # Stores up-to-date data each frame
 
 var targetEnemyLeft = null
 var targetEnemyRight = null
@@ -54,3 +52,19 @@ func enemy_scope():
 			if enemy.global_position.y < minY:
 				minY = enemy.global_position.y -32
 				
+
+func update_enemy_stats():
+	EnemyStats.clear()
+	
+	for enemy in EnemiesNoticed:
+		if not is_instance_valid(enemy):
+			continue  # Skip freed enemies
+			
+		EnemyStats[enemy] = {
+			"fear": enemy.fear,
+			"attention": enemy.attention,
+			"threat": enemy.threat
+	}
+
+func _process(delta: float) -> void:
+	update_enemy_stats()
