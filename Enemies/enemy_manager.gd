@@ -53,18 +53,48 @@ func enemy_scope():
 				minY = enemy.global_position.y -32
 				
 
-func update_enemy_stats():
-	EnemyStats.clear()
-	
-	for enemy in EnemiesNoticed:
-		if not is_instance_valid(enemy):
-			continue  # Skip freed enemies
-			
-		EnemyStats[enemy] = {
-			"fear": enemy.fear,
-			"attention": enemy.attention,
-			"threat": enemy.threat
-	}
+#func update_enemy_stats():
+	#EnemyStats.clear()
+	#
+	#for enemy in EnemiesNoticed:
+		#if not is_instance_valid(enemy):
+			#continue  # Skip freed enemies
+			#
+		#EnemyStats[enemy] = {
+			#"fear": enemy.fear,
+			#"attention": enemy.attention,
+			#"threat": enemy.threat
+	#}
 
-func _process(delta: float) -> void:
-	update_enemy_stats()
+func get_target_priority(enemy) -> int:
+	var attention = enemy.attention
+	var threat = enemy.threat
+	
+	if attention < 100 and attention - threat < 0:
+		return 1
+	elif attention < 100 and attention - threat > 0:
+		return 2
+	elif attention >= 100 and attention - threat < 0:
+		return 3
+	else:
+		return 4
+
+
+func sort_enemies_by_importance(enemies: Array) -> Array:
+	var sorted_enemies = enemies.duplicate()
+	sorted_enemies.sort_custom(func(a, b):
+		var pa = get_target_priority(a)
+		var pb = get_target_priority(b)
+		
+		if pa == pb:
+			var sa = a.attention + a.threat
+			var sb = b.attention + b.threat
+			print("int",int(sb - sa))
+			return int(sb - sa) # higher total first
+		else:
+			return int(pa - pb)
+	)
+	return sorted_enemies
+
+#func _process(delta: float) -> void:
+	#EnemiesPriority = sort_enemies_by_importance(EnemiesNoticed)

@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://g7fnkyhbdemq" path="res://UI/hp_left.gd" id="8_e3tf4"]
 [ext_resource type="PackedScene" uid="uid://b6o1fo0ewnjln" path="res://Weapons/gun_new.tscn" id="8_m64x7"]
 [ext_resource type="Script" uid="uid://clxhegpqyijug" path="res://UI/xp_to_level.gd" id="9_m64x7"]
-[ext_resource type="PackedScene" uid="uid://dx06ua82xghkg" path="res://Aiming styles/aiming_style_1.tscn" id="10_rmqlk"]
+[ext_resource type="PackedScene" uid="uid://cd7bd2fnud82r" path="res://Aiming styles/aiming_style_2.tscn" id="10_rmqlk"]
 [ext_resource type="PackedScene" uid="uid://c5nunyagwdk5f" path="res://UI/pause_menu.tscn" id="10_t0gij"]
 [ext_resource type="PackedScene" uid="uid://ct4uhithfj3kk" path="res://UI/level_up_screen.tscn" id="11_qhx67"]
 
@@ -92,4 +92,4 @@ offset_top = -161.0
 offset_right = -288.0
 offset_bottom = -161.0
 
-[node name="AimingStyle1" parent="." instance=ExtResource("10_rmqlk")]
+[node name="AimingStyle2" parent="." instance=ExtResource("10_rmqlk")]
