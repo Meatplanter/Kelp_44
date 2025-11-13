@@ -8,10 +8,10 @@
 [ext_resource type="Script" uid="uid://form3d2yhc4c" path="res://Aiming styles/dummy_target_r.gd" id="6_olijn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vnu2v"]
-radius = 5.0
+radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ri3jk"]
-radius = 5.0
+radius = 20.0
 
 [node name="AimingStyle2" type="Node2D"]
 script = ExtResource("1_chrti")
@@ -38,41 +38,60 @@ flip_v = true
 [node name="VisionRightPeriph" type="RayCast2D" parent="HeadAS2"]
 unique_name_in_owner = true
 target_position = Vector2(0, -200)
+collision_mask = 9
 
 [node name="VisionRightPeriph2" type="RayCast2D" parent="HeadAS2"]
 unique_name_in_owner = true
 target_position = Vector2(0, -200)
+collision_mask = 9
 
 [node name="VisionRightPeriph3" type="RayCast2D" parent="HeadAS2"]
 unique_name_in_owner = true
 target_position = Vector2(0, -200)
+collision_mask = 9
 
 [node name="VisionLeftPeriph" type="RayCast2D" parent="HeadAS2"]
 unique_name_in_owner = true
 target_position = Vector2(0, -200)
+collision_mask = 9
 
 [node name="VisionLeftPeriph2" type="RayCast2D" parent="HeadAS2"]
 unique_name_in_owner = true
 target_position = Vector2(0, -200)
+collision_mask = 9
 
 [node name="VisionLeftPeriph3" type="RayCast2D" parent="HeadAS2"]
 unique_name_in_owner = true
 target_position = Vector2(0, -200)
+collision_mask = 9
 
 [node name="VisionCenter" type="RayCast2D" parent="HeadAS2"]
 unique_name_in_owner = true
 target_position = Vector2(0, -200)
+collision_mask = 9
 
 [node name="DummyTargetL" type="StaticBody2D" parent="." groups=["Dummy"]]
 position = Vector2(-125, 0)
+collision_layer = 8
+collision_mask = 0
 script = ExtResource("5_ri3jk")
 
 [node name="DTLCollisionShape" type="CollisionShape2D" parent="DummyTargetL"]
 shape = SubResource("CircleShape2D_vnu2v")
 
+[node name="LabelL" type="Label" parent="DummyTargetL"]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="DummyTargetR" type="StaticBody2D" parent="." groups=["Dummy"]]
 position = Vector2(125, 0)
+collision_layer = 8
+collision_mask = 0
 script = ExtResource("6_olijn")
 
 [node name="DTRCollisionShape" type="CollisionShape2D" parent="DummyTargetR"]
 shape = SubResource("CircleShape2D_ri3jk")
+
+[node name="LabelR" type="Label" parent="DummyTargetR"]
+offset_right = 40.0
+offset_bottom = 23.0

@@ -51,14 +51,14 @@ func _ready():
 func _process(_delta):
 	self.global_position = Movement.midpoint
 	if round(Movement.cumulativeAngle) + lastRotationAngle == rotThreshold: 
+		SignalBus.emit_signal("cameraRotated","right")
 		rotate_camera(true)
 		lastRotationAngle -= 90
-		SignalBus.emit_signal("cameraRotated","right")
 		
 	elif round(Movement.cumulativeAngle) + lastRotationAngle == -rotThreshold:
+		SignalBus.emit_signal("cameraRotated","left")
 		rotate_camera(false)
 		lastRotationAngle += 90
-		SignalBus.emit_signal("cameraRotated","left")
 		
 
 

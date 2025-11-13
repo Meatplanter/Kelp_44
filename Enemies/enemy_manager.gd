@@ -4,7 +4,7 @@ var enemies: Array = []
 var visibleEnemies: Array = []
 
 var EnemiesNoticed: Array = []
-var EnemyStats: Dictionary = {}  # Stores up-to-date data each frame
+var EnemiesOutOfReach: Array = []
 
 var targetEnemyLeft = null
 var targetEnemyRight = null
@@ -53,18 +53,6 @@ func enemy_scope():
 				minY = enemy.global_position.y -32
 				
 
-#func update_enemy_stats():
-	#EnemyStats.clear()
-	#
-	#for enemy in EnemiesNoticed:
-		#if not is_instance_valid(enemy):
-			#continue  # Skip freed enemies
-			#
-		#EnemyStats[enemy] = {
-			#"fear": enemy.fear,
-			#"attention": enemy.attention,
-			#"threat": enemy.threat
-	#}
 
 func get_target_priority(enemy) -> int:
 	var attention = enemy.attention
@@ -80,21 +68,20 @@ func get_target_priority(enemy) -> int:
 		return 4
 
 
-func sort_enemies_by_importance(enemies: Array) -> Array:
-	var sorted_enemies = enemies.duplicate()
-	sorted_enemies.sort_custom(func(a, b):
+func sort_enemies_by_importance(enemies: Array):
+	enemies.sort_custom(func(a, b):
 		var pa = get_target_priority(a)
 		var pb = get_target_priority(b)
 		
 		if pa == pb:
 			var sa = a.attention + a.threat
 			var sb = b.attention + b.threat
-			print("int",int(sb - sa))
-			return int(sb - sa) # higher total first
+			if sa > sb: return true
+			else: return false
 		else:
-			return int(pa - pb)
+			if pa < pb: return true
+			else: return false
 	)
-	return sorted_enemies
 
 #func _process(delta: float) -> void:
 	#EnemiesPriority = sort_enemies_by_importance(EnemiesNoticed)

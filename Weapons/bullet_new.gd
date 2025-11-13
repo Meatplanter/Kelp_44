@@ -69,7 +69,7 @@ func _on_body_entered(body: Node2D) -> void:
 		body.add_child(new_wound)
 		new_wound.global_position = bulletEntryPoint
 		#extra threat for enemy that shot and hit player
-		#if body.is_in_group("Player"): shooter.threat += randf_range(180.0,220.0)
+		if body.is_in_group("Player"): shooter.threat += randf_range(90.0,110.0)
 		
 
 func _on_splatter_timer_timeout() -> void:
