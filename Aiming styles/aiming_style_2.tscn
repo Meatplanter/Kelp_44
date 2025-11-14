@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://cd7bd2fnud82r"]
+[gd_scene load_steps=8 format=3 uid="uid://cd7bd2fnud82r"]
 
 [ext_resource type="Script" uid="uid://d21xaev5r7np2" path="res://Aiming styles/aiming_style_2.gd" id="1_chrti"]
-[ext_resource type="Texture2D" uid="uid://cxdlhlj18ycb6" path="res://Assets/Crosshair.png" id="2_dfduy"]
 [ext_resource type="Script" uid="uid://c6wo2qt1seuhb" path="res://Aiming styles/head_as_2.gd" id="3_vnu2v"]
 [ext_resource type="Texture2D" uid="uid://bbqhe4bkrpp8a" path="res://Assets/HatCompressed.png" id="4_ri3jk"]
 [ext_resource type="Script" uid="uid://k4xceb8ppe3p" path="res://Aiming styles/dummy_target_l.gd" id="5_ri3jk"]
@@ -16,18 +15,10 @@ radius = 20.0
 [node name="AimingStyle2" type="Node2D"]
 script = ExtResource("1_chrti")
 
-[node name="Target" type="Marker2D" parent="."]
-unique_name_in_owner = true
-
-[node name="Crosshair" type="Sprite2D" parent="Target"]
-z_index = 99
-texture_filter = 1
-texture = ExtResource("2_dfduy")
-
 [node name="HeadAS2" type="Area2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_vnu2v")
-detectRadius = 300
+detectRadius = 500
 
 [node name="HatCompressed" type="Sprite2D" parent="HeadAS2"]
 unique_name_in_owner = true
@@ -80,6 +71,7 @@ script = ExtResource("5_ri3jk")
 shape = SubResource("CircleShape2D_vnu2v")
 
 [node name="LabelL" type="Label" parent="DummyTargetL"]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 
@@ -93,5 +85,6 @@ script = ExtResource("6_olijn")
 shape = SubResource("CircleShape2D_ri3jk")
 
 [node name="LabelR" type="Label" parent="DummyTargetR"]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0

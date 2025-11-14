@@ -45,11 +45,17 @@ func rotate_camera(clockwise: bool): #if true turn camera right, if false turn l
 		Movement.rotOffset -= PI/2
 
 
+func move_camera_pos():
+	var tween: Tween
+	tween = create_tween()
+	tween.tween_property(self,"position",Movement.midpoint + Movement.DirUp * 75,1)#TimeManager.gameSpeed)
+
 func _ready():
 	lastRotationAngle = Movement.cumulativeAngle
 
 func _process(_delta):
-	self.global_position = Movement.midpoint
+	move_camera_pos()
+	#self.global_position = Movement.midpoint + Movement.DirUp * 75
 	if round(Movement.cumulativeAngle) + lastRotationAngle == rotThreshold: 
 		SignalBus.emit_signal("cameraRotated","right")
 		rotate_camera(true)

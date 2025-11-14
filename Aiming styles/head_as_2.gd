@@ -7,7 +7,7 @@ var turningTween: Tween
 var direction = Vector2()
 var enemy_direction = Vector2()
 var angle = 0
-@export var detectRadius = 2000
+@export var detectRadius = 200
 var FOV = 220
 
 var Vision: Array = []
@@ -40,12 +40,6 @@ func notice_enemy():
 
 
 func vision_baseline():
-	%VisionRightPeriph.rotate(PI/8)
-	%VisionLeftPeriph.rotate(-PI/8)
-	%VisionRightPeriph2.rotate(PI/4)
-	%VisionLeftPeriph2.rotate(-PI/4)
-	%VisionRightPeriph3.rotate(PI*0.375)
-	%VisionLeftPeriph3.rotate(-PI*0.375)
 	%VisionCenter.target_position.y = - detectRadius
 	%VisionRightPeriph.target_position.y = - detectRadius
 	%VisionLeftPeriph.target_position.y = - detectRadius
@@ -53,6 +47,12 @@ func vision_baseline():
 	%VisionLeftPeriph2.target_position.y = - detectRadius
 	%VisionRightPeriph3.target_position.y = - detectRadius
 	%VisionLeftPeriph3.target_position.y = - detectRadius
+	%VisionRightPeriph.rotate(PI/8)
+	%VisionLeftPeriph.rotate(-PI/8)
+	%VisionRightPeriph2.rotate(PI/4)
+	%VisionLeftPeriph2.rotate(-PI/4)
+	%VisionRightPeriph3.rotate(PI*0.375)
+	%VisionLeftPeriph3.rotate(-PI*0.375)
 	var VisionTemp = [%VisionRightPeriph,%VisionRightPeriph2,%VisionRightPeriph3,%VisionLeftPeriph,%VisionLeftPeriph2,%VisionLeftPeriph3,%VisionCenter]
 	Vision.append_array(VisionTemp)
 

@@ -21,9 +21,11 @@ script = ExtResource("2_bjt74")
 
 [node name="GunRight" parent="." instance=ExtResource("8_m64x7")]
 unique_name_in_owner = true
+Bullet_speed = 200.0
 
 [node name="GunLeft" parent="." instance=ExtResource("8_m64x7")]
 unique_name_in_owner = true
+Bullet_speed = 200.0
 
 [node name="MovementStyle1" parent="." instance=ExtResource("5_m64x7")]
 unique_name_in_owner = true
@@ -39,7 +41,7 @@ zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 rotation_smoothing_enabled = true
-rotation_smoothing_speed = 3.0
+rotation_smoothing_speed = 2.0
 script = ExtResource("7_y7bk3")
 
 [node name="LabelHealthLeft" type="Label" parent="Camera2D"]

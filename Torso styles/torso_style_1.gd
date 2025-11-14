@@ -5,8 +5,8 @@ var rightShoulder = Vector2.ZERO
 var shoulderMidpoint = Vector2.ZERO
 var shoulderFocus = Vector2.ZERO
 
-var targetLeft = AimingManager.targetLeft
-var targetRight = AimingManager.targetRight
+var targetLeft = AimingManager.targetLeftPos
+var targetRight = AimingManager.targetRightPos
 
 #joint rotation speed
 var shoulderSpeed = 1.0
@@ -74,14 +74,14 @@ func update_positions():
 	
 	#%HeadNew.global_position = AimingManager.neck
 	
-	targetLeft = AimingManager.targetLeft
-	targetRight = AimingManager.targetRight
+	targetLeft = AimingManager.targetLeftPos
+	targetRight = AimingManager.targetRightPos
 
 
 func chase_abdomen():
 	var tween: Tween
 	tween = create_tween()
-	tween.tween_property(%ShoulderShapeTS1,"global_position",Movement.abdomenMidpoint,Movement.placingWeight*2 / TimeManager.gameSpeed)#.set_trans(Movement.styleTween)
+	tween.tween_property(%ShoulderShapeTS1,"global_position",Movement.abdomenMidpoint,Movement.placingWeight*2 / TimeManager.gameSpeed)
 
 
 func rotate_towards_abdomen():
@@ -89,7 +89,7 @@ func rotate_towards_abdomen():
 	diff = clampf(diff,-45,45)
 	var tween: Tween
 	tween = create_tween()
-	tween.tween_property(%ShoulderShapeTS1,"rotation",%ShoulderShapeTS1.rotation+diff,1 / TimeManager.gameSpeed).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(%ShoulderShapeTS1,"rotation",%ShoulderShapeTS1.rotation+diff,0.5 / TimeManager.gameSpeed).set_ease(Tween.EASE_IN_OUT)
 
 
 func chase_joint(parent:Node2D,joint:Node2D,stiff:float):
@@ -154,20 +154,20 @@ func _process(_delta):
 	
 	#left shoulder
 	chase_joint($"LeftShoulder",$"LeftShoulderJoint",0.1)
-	left_joint_rotation($"LeftShoulderJoint",AimingManager.targetLeft,shoulderSpeed * leftShoulderSpeedModifier,0,PI*0.75)
+	left_joint_rotation($"LeftShoulderJoint",AimingManager.targetLeftPos,shoulderSpeed * leftShoulderSpeedModifier,0,PI*0.75)
 	
 	#left elbow
 	chase_joint($"LeftElbow",$"LeftElbowJoint",0.04)
-	left_joint_rotation($"LeftElbowJoint",AimingManager.targetLeft,elbowSpeed * leftElbowSpeedModifier,-($"LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)),($"LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)+PI*0.4))
+	left_joint_rotation($"LeftElbowJoint",AimingManager.targetLeftPos,elbowSpeed * leftElbowSpeedModifier,-($"LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)),($"LeftShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)+PI*0.4))
 	#lower_left_elbow($"LeftElbow",%LeftBiceps,target)
 	
 	#right shoulder
 	chase_joint($"RightShoulder",$"RightShoulderJoint",0.1)
-	right_joint_rotation($"RightShoulderJoint",AimingManager.targetRight,shoulderSpeed * rightShoulderSpeedModifier,PI*0.75,0)
+	right_joint_rotation($"RightShoulderJoint",AimingManager.targetRightPos,shoulderSpeed * rightShoulderSpeedModifier,PI*0.75,0)
 	
 	#right elbow
 	chase_joint($"RightElbow",$"RightElbowJoint",0.04)
-	right_joint_rotation($"RightElbowJoint",AimingManager.targetRight,elbowSpeed * rightElbowSpeedModifier,-($"RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)-PI*0.4),$"RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle))	
+	right_joint_rotation($"RightElbowJoint",AimingManager.targetRightPos,elbowSpeed * rightElbowSpeedModifier,-($"RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle)-PI*0.4),$"RightShoulderJoint".rotation-deg_to_rad(Movement.cumulativeAngle))	
 	
 	#For calculating the rotational direction (minus values means turning left, plus values means turning right)
 	var RAangleAfter = find_angle_between($"LeftShoulder",$"RightShoulder",%GunRight)

@@ -128,6 +128,15 @@ func move(body:Node2D, dir: Vector2):
 		var tween: Tween
 		tween = create_tween()
 		tween.tween_property(body,"position",body.global_position + dir * dist,moveTime / TimeManager.gameSpeed).set_trans(Movement.styleTween)
+		
+	
+	#sign that target is beyond max range
+	var other = other_shoe(body)
+	var targetPos = body.global_position + dir * Movement.moveDistance
+	var dist = targetPos.distance_to(other.global_position)
+	if moveCooldown == false and dist > Movement.maxMoveDistance or check_collision(targetPos) == true:
+		%Blocked.global_position = body.global_position + dir * Movement.moveDistance
+		%Blocked.modulate.a = 1.0
 
 
 #update baseline positions

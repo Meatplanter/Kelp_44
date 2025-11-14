@@ -32,8 +32,8 @@ func target_chase_mouse():
 func update_positions():
 	#target = get_global_mouse_position()
 	#%Target.global_position = target
-	AimingManager.targetLeft = %Target.global_position
-	AimingManager.targetRight = %Target.global_position
+	AimingManager.targetLeft = %Target
+	AimingManager.targetRight = %Target
 	
 	if %HeadNew: %HeadNew.global_position = AimingManager.neck
 	
@@ -56,10 +56,10 @@ func cooldown_color():
 func _ready():
 	if get_parent().has_node("GunLeft"): 
 		%GunLeft.Laser_sights = true
-		AimingManager.targetLeft = Vector2.ZERO
+		AimingManager.targetLeft = %Target
 	if get_parent().has_node("GunRight"):
 		%GunRight.Laser_sights = true
-		AimingManager.targetRight = Vector2.ZERO
+		AimingManager.targetRight = %Target
 	if Global.gameMode == 0 and get_parent().is_in_group("Player"): %Target.hide()
 	if get_parent().is_in_group("Drone"): %Target.hide()
 

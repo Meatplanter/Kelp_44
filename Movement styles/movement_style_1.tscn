@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvnli7euh2sh5"]
+[gd_scene load_steps=9 format=3 uid="uid://dvnli7euh2sh5"]
 
 [ext_resource type="Script" uid="uid://cefdsbs03kmvy" path="res://Movement styles/left_shoe.gd" id="1_erlqy"]
 [ext_resource type="Script" uid="uid://uywm0k410f3q" path="res://Movement styles/movement_style_1.gd" id="1_mfysb"]
 [ext_resource type="Texture2D" uid="uid://mhadgvm6kalh" path="res://Assets/Shoe.png" id="2_mfysb"]
 [ext_resource type="Script" uid="uid://c685n3bo15euj" path="res://Movement styles/right_shoe.gd" id="3_8fgma"]
+[ext_resource type="Texture2D" uid="uid://caycvmxlpygfm" path="res://Assets/Blocked.png" id="5_und7s"]
+[ext_resource type="Script" uid="uid://bdfu722cwwetl" path="res://Movement styles/blocked.gd" id="6_yvcat"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e7sbo"]
 radius = 6.0
@@ -58,5 +60,12 @@ polygon = PackedVector2Array(-24, -8, 24, -8, 29, 0, 24, 8, -24, 8, -29, 0)
 [node name="AbdomenMidpoint" type="Marker2D" parent="."]
 position = Vector2(2.98023e-08, 0)
 scale = Vector2(0.75, 1)
+
+[node name="Blocked" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+texture = ExtResource("5_und7s")
+script = ExtResource("6_yvcat")
 
 [connection signal="timeout" from="MovementCooldown" to="." method="_on_movement_cooldown_timeout"]

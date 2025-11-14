@@ -13,6 +13,7 @@ var bloodTrailScene = false #true is pixels, false is sprite
 
 
 func shoot(Gun:Node2D):
+	Gun.cooldown = randf_range(0.98,1.02)
 	const BULLET = preload("res://Weapons/bullet_new.tscn")
 	var new_bullet = BULLET.instantiate()
 	var shooting_point = Gun.get_node("%ShootingPoint")
