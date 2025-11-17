@@ -21,11 +21,9 @@ script = ExtResource("2_bjt74")
 
 [node name="GunRight" parent="." instance=ExtResource("8_m64x7")]
 unique_name_in_owner = true
-Bullet_speed = 200.0
 
 [node name="GunLeft" parent="." instance=ExtResource("8_m64x7")]
 unique_name_in_owner = true
-Bullet_speed = 200.0
 
 [node name="MovementStyle1" parent="." instance=ExtResource("5_m64x7")]
 unique_name_in_owner = true

@@ -14,6 +14,9 @@ var shootingDistance
 var bloodTrailScene
 var shooter
 
+
+#var timePassed = 0.0
+
 func _ready() -> void:
 	shootingPoint = global_position
 	$SubViewport/Tracer2.position.x = -162 #so the tracer doesn't appear behind on the first frame
@@ -43,6 +46,9 @@ func _process(_delta: float) -> void:
 		if bulletEntryDistance >= 160:
 			queue_free()
 	
+	##debugging stuff
+	#timePassed += TimeManager.gameSpeed
+	#print("speed: ",bulletSpeed,"  travel dist: ",travelledDistance," time passed: ",timePassed)
 
 func _physics_process(delta: float) -> void:
 	var direction = Vector2.RIGHT.rotated(rotation)

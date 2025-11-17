@@ -56,12 +56,14 @@ func _process(_delta):
 	if should_shoot(gunLeft):
 		gunLeft.aiming_at().attention *= 0.5
 		gunLeft.aiming_at().threat *= 0.5
+		gunLeft.look_at(gunLeft.aiming_at().simulatedPosition)
 		WeaponManager.shoot(gunLeft)
 		AimingManager.targetLeft = null
 	
 	if should_shoot(gunRight):
 		gunRight.aiming_at().attention *= 0.5
 		gunRight.aiming_at().threat *= 0.5
+		gunRight.look_at(gunRight.aiming_at().simulatedPosition)
 		WeaponManager.shoot(gunRight)
 		AimingManager.targetRight = null
 		

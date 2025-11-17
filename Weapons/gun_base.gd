@@ -13,7 +13,8 @@ func aiming_at():
 		return collider
 
 func _ready():
-	if Global.gameMode == 0 and get_parent().is_in_group("Player"): self.hide()
+	if Global.gameMode == 0 and get_parent().is_in_group("Player"): self.hide() #hide when just avoiding
+	if get_parent().is_in_group("Player"): WeaponManager.playerBulletSpeed = Bullet_speed
 
 func _draw():
 	if Laser_sights == true:

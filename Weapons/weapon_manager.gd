@@ -11,6 +11,7 @@ var bulletSlowdown = 0.998
 var bloodTrailVisible = true
 var bloodTrailScene = false #true is pixels, false is sprite
 
+var playerBulletSpeed
 
 func shoot(Gun:Node2D):
 	Gun.cooldown = randf_range(0.98,1.02)

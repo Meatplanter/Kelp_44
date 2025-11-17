@@ -5,6 +5,7 @@ var firerate = EnemyManager.enemyFirerate
 var speed = EnemyManager.enemySpeed
 
 var strafeBool = true
+var simulatedPosition
 
 var noticed = false
 #var lastNoticed = 25.0
@@ -58,6 +59,15 @@ func threat_drop():
 func chase_player():
 	var direction = global_position.direction_to(Movement.midpoint)
 	velocity = direction * TimeManager.gameSpeed * speed
+	var distanceTo = self.global_position.distance_to(Movement.midpoint)
+	var bulletSpeed = WeaponManager.playerBulletSpeed
+	simulatedPosition = global_position + direction * speed * distanceTo / bulletSpeed
+
+func calculate_simulated_position(): #so that the player shoots where the enemy will be going
+	var distanceTo = self.global_position.distance_to(Movement.midpoint)
+	var bulletSpeed = WeaponManager.playerBulletSpeed
+	var timeToImpact = distanceTo * 1.2 / bulletSpeed * 100
+	var simPos = global_position + speed * timeToImpact
 
 func strafe(clockwise: bool):
 	var direction
@@ -66,6 +76,9 @@ func strafe(clockwise: bool):
 	elif clockwise == false:
 		direction = global_position.direction_to(Movement.midpoint).rotated(-PI/2)
 	velocity = direction * TimeManager.gameSpeed * speed
+	var distanceTo = self.global_position.distance_to(Movement.midpoint)
+	var bulletSpeed = WeaponManager.playerBulletSpeed
+	simulatedPosition = global_position + direction * speed * distanceTo / bulletSpeed
 
 func _ready() -> void:
 	EnemyManager.register_enemy(self)
@@ -80,7 +93,8 @@ func _process(_delta: float) -> void:
 		chase_player()
 	else:
 		strafe(strafeBool)
-	
+		
+
 	attention_drop()
 	threat_drop()
 	update_noticed_array()
