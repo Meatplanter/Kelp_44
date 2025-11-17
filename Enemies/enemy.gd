@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var health = EnemyManager.enemyHealth
 var firerate = EnemyManager.enemyFirerate
+var speed = EnemyManager.enemySpeed
 
 var strafeBool = true
 
@@ -56,7 +57,7 @@ func threat_drop():
 
 func chase_player():
 	var direction = global_position.direction_to(Movement.midpoint)
-	velocity = direction * TimeManager.gameSpeed * 30.0
+	velocity = direction * TimeManager.gameSpeed * speed
 
 func strafe(clockwise: bool):
 	var direction
@@ -64,7 +65,7 @@ func strafe(clockwise: bool):
 		direction = global_position.direction_to(Movement.midpoint).rotated(PI/2)
 	elif clockwise == false:
 		direction = global_position.direction_to(Movement.midpoint).rotated(-PI/2)
-	velocity = direction * TimeManager.gameSpeed * 30.0
+	velocity = direction * TimeManager.gameSpeed * speed
 
 func _ready() -> void:
 	EnemyManager.register_enemy(self)
@@ -86,10 +87,10 @@ func _process(_delta: float) -> void:
 	
 	move_and_slide()
 	
-	#debugging stuff
-	$Label.text = "Att: "+str(int(attention))+"  Thr: "+str(int(threat))
-	if self in EnemyManager.EnemiesOutOfReach: $Label.add_theme_color_override("font_color", Color.RED)
-	else: $Label.add_theme_color_override("font_color", Color.WHITE)
+	##debugging stuff
+	#$Label.text = "Att: "+str(int(attention))+"  Thr: "+str(int(threat))
+	#if self in EnemyManager.EnemiesOutOfReach: $Label.add_theme_color_override("font_color", Color.RED)
+	#else: $Label.add_theme_color_override("font_color", Color.WHITE)
 
 func take_damage():
 	health -= 1

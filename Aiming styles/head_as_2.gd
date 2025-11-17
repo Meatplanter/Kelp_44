@@ -9,6 +9,7 @@ var enemy_direction = Vector2()
 var angle = 0
 @export var detectRadius = 200
 var FOV = 220
+var retargetCD = 2.0
 
 var Vision: Array = []
 
@@ -18,7 +19,7 @@ func turn_to_enemy(target):
 	var targetOrientation = (target.global_position - %HeadAS2.global_position).normalized()
 	var angleTo = rad_to_deg(headOrientation.angle_to(targetOrientation))
 	var targetAngle = clampf(%HeadAS2.rotation_degrees + angleTo,Movement.cumulativeAngle - 90,Movement.cumulativeAngle + 90)
-	var rotSpeed = clampf((abs(angleTo)/90),0.1,0.3)
+	var rotSpeed = clampf((abs(angleTo)/90),0.1,0.4)
 	turningTween = create_tween()
 	turningTween.tween_property(%HeadAS2,"rotation_degrees",targetAngle, rotSpeed / TimeManager.gameSpeed)
 
@@ -62,11 +63,26 @@ func _ready():
 
 func _process(delta):
 	#if headScanning == true: scanning()
+	retargetCD -= TimeManager.bulletTime
+	retargetCD = clampf(retargetCD, 0.0, 2.0)
 	notice_enemy()
-	if EnemyManager.EnemiesNoticed.size() > 0:
+	if EnemyManager.EnemiesNoticed.size() > 0 and retargetCD == 0.0:
 		EnemyManager.sort_enemies_by_importance(EnemyManager.EnemiesNoticed) 
 		var target = EnemyManager.EnemiesNoticed[0]
+		for enemy in EnemyManager.EnemiesNoticed:
+			if enemy.is_in_group("Enemy") and enemy not in EnemyManager.EnemiesOutOfReach:
+				target = enemy
+				break
+		
 		turn_to_enemy(target)
+		retargetCD += 2.0
+		
+		#debugging stuff
+		#if target: target.modulate  = Color(1, 0, 0, 0.7)
+		#
+		#for enemy in EnemyManager.EnemiesNoticed:
+			#if enemy != target: enemy.modulate  = Color(1, 1, 1, 1)
+		#
 		#print(target)
 	
 	##trying to implement field of vision

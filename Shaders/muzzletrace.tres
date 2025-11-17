@@ -1,0 +1,18 @@
+[gd_resource type="VisualShader" load_steps=2 format=3 uid="uid://drbotvhoflrmp"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_phei8"]
+output_port_for_preview = 0
+input_name = "color"
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+
+
+"
+graph_offset = Vector2(-183.51, 4.51811)
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_phei8")
+nodes/fragment/2/position = Vector2(-160.344, 213.505)

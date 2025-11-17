@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5awhdfbgthhg"]
+
+[ext_resource type="Texture2D" uid="uid://cgvq74c58k71c" path="res://Assets/SmokeCloud.png" id="1_4yn46"]
+[ext_resource type="Texture2D" uid="uid://buh6yha3le7li" path="res://Assets/MuzzleFlashSmoke.png" id="2_54y6w"]
+
+[node name="MuzzleFlash" type="Node2D"]
+
+[node name="SmokeCloud" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(10, 0)
+texture = ExtResource("1_4yn46")
+
+[node name="MuzzleFlashSmoke" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(5, 0)
+texture = ExtResource("2_54y6w")

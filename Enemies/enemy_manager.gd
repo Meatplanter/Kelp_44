@@ -11,6 +11,8 @@ var targetEnemyRight = null
 
 var enemyHealth = 2
 var enemyFirerate = 1.0
+var enemySpeed = 15.0
+var enemyAccOffset = 10.0 #degrees; will randomize aim from -x to +x degrees before shooting
 
 var maxX = 0
 var minX = 0

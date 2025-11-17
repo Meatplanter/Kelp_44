@@ -47,6 +47,8 @@ func _process(delta):
 	if cooldown <= 0 and get_parent().is_in_group("Enemy") and aiming_at() and aiming_at().is_in_group("Player"): 
 		cooldown = randf_range(0.98,1.02)
 		get_parent().threat += randf_range(90.0,110.0)
+		var rotationRND = randf_range(-EnemyManager.enemyAccOffset,EnemyManager.enemyAccOffset)
+		self.rotate(deg_to_rad(rotationRND))
 		WeaponManager.shoot(self)
 		
 	if get_parent().is_in_group("Player"):
