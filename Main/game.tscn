@@ -1,18 +1,73 @@
-[gd_scene load_steps=8 format=4 uid="uid://i7ssqk3udw6h"]
+[gd_scene load_steps=15 format=4 uid="uid://i7ssqk3udw6h"]
 
 [ext_resource type="Texture2D" uid="uid://3sssh4smi3wv" path="res://Assets/Resized.png" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://cxp434ialc278" path="res://Main/game.gd" id="1_fc0e3"]
+[ext_resource type="Texture2D" uid="uid://brdswnin6j7g" path="res://Assets/OuterWall.png" id="3_ialyd"]
 [ext_resource type="Script" uid="uid://bolv5qalbxfwr" path="res://Main/debugging_node.gd" id="3_xmdxi"]
-[ext_resource type="PackedScene" uid="uid://bqhvigu27dsbf" path="res://Enemies/enemy.tscn" id="5_ialyd"]
+[ext_resource type="Texture2D" uid="uid://cuob0rmgqkpp2" path="res://Assets/OuterWallSpritesheet.png" id="4_ialyd"]
+[ext_resource type="PackedScene" uid="uid://dgc5tpjlvxdvf" path="res://Visuals/church_bench.tscn" id="6_n0uw5"]
+[ext_resource type="PackedScene" uid="uid://cofnhv3hspalx" path="res://Visuals/church_column.tscn" id="6_rmus7"]
+[ext_resource type="PackedScene" uid="uid://ux27a743iihg" path="res://Visuals/church_candle_chandelier.tscn" id="7_gvu17"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc0e3"]
 texture = ExtResource("1_e2o6t")
 0:0/size_in_atlas = Vector2i(4, 4)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n0uw5"]
+texture = ExtResource("3_ialyd")
+texture_region_size = Vector2i(32, 32)
+
 [sub_resource type="TileSet" id="TileSet_7jktm"]
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_fc0e3")
+sources/4 = SubResource("TileSetAtlasSource_n0uw5")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rmus7"]
+texture = ExtResource("4_ialyd")
+texture_region_size = Vector2i(1, 1)
+0:0/size_in_atlas = Vector2i(32, 5)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-15.9966, -2.51747, 16.024, -2.49003, 15.9829, 2.49003, -15.9966, 2.51747)
+0:6/size_in_atlas = Vector2i(32, 5)
+0:6/0 = 0
+0:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-15.9966, -2.51747, 16.024, -2.49003, 15.9829, 2.49003, -15.9966, 2.51747)
+0:13/size_in_atlas = Vector2i(7, 7)
+0:13/0 = 0
+0:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.50526, -3.50526, -3.49154, 3.50526, 3.49154, 3.50526, 3.51897, -3.51897)
+8:13/size_in_atlas = Vector2i(7, 7)
+8:13/0 = 0
+8:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.50526, -3.50526, -3.49154, 3.50526, 3.49154, 3.50526, 3.51897, -3.51897)
+0:21/size_in_atlas = Vector2i(7, 7)
+0:21/0 = 0
+0:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.50526, -3.50526, -3.49154, 3.50526, 3.49154, 3.50526, 3.51897, -3.51897)
+8:21/size_in_atlas = Vector2i(7, 7)
+8:21/0 = 0
+8:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.50526, -3.50526, -3.49154, 3.50526, 3.49154, 3.50526, 3.51897, -3.51897)
+17:21/size_in_atlas = Vector2i(7, 7)
+17:21/0 = 0
+17:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.50526, -3.50526, -3.49154, 3.50526, 3.49154, 3.50526, 3.51897, -3.51897)
+17:13/size_in_atlas = Vector2i(7, 7)
+17:13/0 = 0
+17:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.50526, -3.50526, -3.49154, 3.50526, 3.49154, 3.50526, 3.51897, -3.51897)
+25:13/size_in_atlas = Vector2i(7, 7)
+25:13/0 = 0
+25:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.50526, -3.50526, -3.49154, 3.50526, 3.49154, 3.50526, 3.51897, -3.51897)
+25:21/size_in_atlas = Vector2i(7, 7)
+25:21/0 = 0
+25:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3.50526, -3.50526, -3.49154, 3.50526, 3.49154, 3.50526, 3.51897, -3.51897)
+33:0/size_in_atlas = Vector2i(5, 32)
+33:0/0 = 0
+33:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2.50375, -16.0034, -2.50375, 15.9897, 2.51747, 16.0034, 2.50375, -16.0172)
+39:0/size_in_atlas = Vector2i(5, 32)
+39:0/0 = 0
+39:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2.50375, -16.0034, -2.50375, 15.9897, 2.51747, 16.0034, 2.50375, -16.0172)
+
+[sub_resource type="TileSet" id="TileSet_gvu17"]
+tile_size = Vector2i(1, 1)
+physics_layer_0/collision_layer = 129
+physics_layer_0/collision_mask = 129
+sources/0 = SubResource("TileSetAtlasSource_rmus7")
 
 [sub_resource type="Curve2D" id="Curve2D_feb5d"]
 _data = {
@@ -23,11 +78,131 @@ point_count = 5
 [node name="Game" type="Node2D"]
 script = ExtResource("1_fc0e3")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="LayerHolder" type="Node2D" parent="."]
+
+[node name="Floor" type="TileMapLayer" parent="LayerHolder"]
+self_modulate = Color(0.873298, 0.873298, 0.873298, 1)
 z_index = -1
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAD+/wAAAAAAAAAAAAD+//7/AAAAAAAAAAAAAP7/AAAAAAAAAAACAP7/AAAAAAAAAAACAAAAAAAAAAAAAAACAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD+/wIAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wAAAAAAAAAAAAD8//7/AAAAAAAAAAD8//z/AAAAAAAAAAD+//z/AAAAAAAAAAAAAPz/AAAAAAAAAAACAPz/AAAAAAAAAAAEAPz/AAAAAAAAAAAEAP7/AAAAAAAAAAAEAAAAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAQAAAAAAAAAAAACAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAD+/wQAAAAAAAAAAAD8/wQAAAAAAAAAAAA=")
+rotation = -0.000103133
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAD+/wAAAAAAAAAAAAD+//7/AAAAAAAAAAAAAP7/AAAAAAAAAAACAP7/AAAAAAAAAAACAAAAAAAAAAAAAAACAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD+/wIAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wAAAAAAAAAAAAD8//7/AAAAAAAAAAD8//z/AAAAAAAAAAD+//z/AAAAAAAAAAAAAPz/AAAAAAAAAAACAPz/AAAAAAAAAAAEAPz/AAAAAAAAAAAEAP7/AAAAAAAAAAAEAAAAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAQAAAAAAAAAAAACAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAD+/wQAAAAAAAAAAAD8/wQAAAAAAAAAAAAGAPz/AAAAAAAAAAAGAP7/AAAAAAAAAAAGAAAAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAIAAIAAAAAAAAAAAAIAAAAAAAAAAAAAAAIAP7/AAAAAAAAAAAIAPz/AAAAAAAAAAAIAPr/AAAAAAAAAAAGAPr/AAAAAAAAAAAEAPr/AAAAAAAAAAACAPr/AAAAAAAAAAAAAPr/AAAAAAAAAAD+//r/AAAAAAAAAAD8//r/AAAAAAAAAAD6//r/AAAAAAAAAAD6//z/AAAAAAAAAAD6//7/AAAAAAAAAAD6/wAAAAAAAAAAAAD6/wIAAAAAAAAAAAD6/wQAAAAAAAAAAAD6/wYAAAAAAAAAAAD8/wYAAAAAAAAAAAD+/wYAAAAAAAAAAAAAAAYAAAAAAAAAAAACAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAIAAYAAAAAAAAAAAAIAAgAAAAAAAAAAAAGAAgAAAAAAAAAAAAEAAgAAAAAAAAAAAACAAgAAAAAAAAAAAAAAAgAAAAAAAAAAAD+/wgAAAAAAAAAAAD8/wgAAAAAAAAAAAD6/wgAAAAAAAAAAAD4/wgAAAAAAAAAAAD4/wYAAAAAAAAAAAD4/wQAAAAAAAAAAAD4/wIAAAAAAAAAAAD4/wAAAAAAAAAAAAD4//7/AAAAAAAAAAD4//z/AAAAAAAAAAD4//r/AAAAAAAAAAD4//j/AAAAAAAAAAD4//b/AAAAAAAAAAD6//b/AAAAAAAAAAD6//j/AAAAAAAAAAD8//j/AAAAAAAAAAD8//b/AAAAAAAAAAD+//b/AAAAAAAAAAD+//j/AAAAAAAAAAAAAPj/AAAAAAAAAAAAAPb/AAAAAAAAAAACAPb/AAAAAAAAAAACAPj/AAAAAAAAAAAEAPj/AAAAAAAAAAAEAPb/AAAAAAAAAAAGAPb/AAAAAAAAAAAGAPj/AAAAAAAAAAAIAPj/AAAAAAAAAAAIAPb/AAAAAAAAAAAKAPb/AAAAAAAAAAAKAPj/AAAAAAAAAAAKAPr/AAAAAAAAAAAKAPz/AAAAAAAAAAAKAP7/AAAAAAAAAAAKAAAAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAYAAAAAAAAAAAAKAAgAAAAAAAAAAAAMAAgAAAAAAAAAAAAOAAgAAAAAAAAAAAAOAAYAAAAAAAAAAAAMAAYAAAAAAAAAAAAMAAQAAAAAAAAAAAAMAAIAAAAAAAAAAAAOAAQAAAAAAAAAAAAOAAIAAAAAAAAAAAAOAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAMAP7/AAAAAAAAAAAOAP7/AAAAAAAAAAAOAPz/AAAAAAAAAAAMAPz/AAAAAAAAAAAMAPr/AAAAAAAAAAAOAPr/AAAAAAAAAAAOAPj/AAAAAAAAAAAMAPj/AAAAAAAAAAAMAPb/AAAAAAAAAAAOAPb/AAAAAAAAAAD2//b/AAAAAAAAAAD0//b/AAAAAAAAAADy//b/AAAAAAAAAADw//b/AAAAAAAAAADw//j/AAAAAAAAAADy//j/AAAAAAAAAAD0//j/AAAAAAAAAAD2//j/AAAAAAAAAAD2//r/AAAAAAAAAAD0//r/AAAAAAAAAADy//r/AAAAAAAAAADw//r/AAAAAAAAAADw//z/AAAAAAAAAADy//z/AAAAAAAAAAD0//z/AAAAAAAAAAD2//z/AAAAAAAAAAD2//7/AAAAAAAAAAD0//7/AAAAAAAAAADy//7/AAAAAAAAAADw//7/AAAAAAAAAADw/wAAAAAAAAAAAADy/wAAAAAAAAAAAAD0/wAAAAAAAAAAAAD2/wAAAAAAAAAAAAD2/wIAAAAAAAAAAAD0/wIAAAAAAAAAAADy/wIAAAAAAAAAAADw/wIAAAAAAAAAAADw/wQAAAAAAAAAAADy/wQAAAAAAAAAAAD0/wQAAAAAAAAAAAD2/wQAAAAAAAAAAAD2/wYAAAAAAAAAAAD0/wYAAAAAAAAAAADy/wYAAAAAAAAAAADw/wYAAAAAAAAAAADw/wgAAAAAAAAAAADy/wgAAAAAAAAAAAD0/wgAAAAAAAAAAAD2/wgAAAAAAAAAAADw/woAAAAAAAAAAADy/woAAAAAAAAAAAD0/woAAAAAAAAAAAD2/woAAAAAAAAAAAD4/woAAAAAAAAAAAD6/woAAAAAAAAAAAD8/woAAAAAAAAAAAD+/woAAAAAAAAAAAAAAAoAAAAAAAAAAAACAAoAAAAAAAAAAAAEAAoAAAAAAAAAAAAGAAoAAAAAAAAAAAAIAAoAAAAAAAAAAAAKAAoAAAAAAAAAAAAMAAoAAAAAAAAAAAAOAAoAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_7jktm")
 rendering_quadrant_size = 32
+
+[node name="OuterWalls" type="TileMapLayer" parent="LayerHolder"]
+texture_filter = 1
+position = Vector2(0, 1)
+scale = Vector2(5.1, 5.1)
+tile_map_data = PackedByteArray("AACZ/7//AAAAAA0AAACs/7//AAAAAAAAAADM/7//AAAAAAAAAADs/7//AAAAAAAAAAAMAL//AAAAAAAAAAAsAL//AAAAAAAAAABMAL//AAAAAAAAAABfAL//AAAIAA0AAABfANL/AAAnAAAAAABfAPL/AAAnAAAAAABfABIAAAAnAAAAAABfADIAAAAnAAAAAABfAEUAAAAIABUAAABMAEUAAAAAAAYAAAAsAEUAAAAAAAYAAAAMAEUAAAAAAAYAAADs/0UAAAAAAAYAAADM/0UAAAAAAAYAAACs/0UAAAAAAAYAAACZ/0UAAAAAABUAAACZ/zIAAAAhAAAAAACZ/xIAAAAhAAAAAACZ//L/AAAhAAAAAACZ/9L/AAAhAAAAAAA=")
+tile_set = SubResource("TileSet_gvu17")
+
+[node name="Benches" type="Node2D" parent="."]
+
+[node name="ChurchBench" parent="Benches" instance=ExtResource("6_n0uw5")]
+position = Vector2(230, -71)
+
+[node name="ChurchBench2" parent="Benches" instance=ExtResource("6_n0uw5")]
+light_mask = 128
+visibility_layer = 128
+position = Vector2(-230, -71)
+
+[node name="ChurchBench3" parent="Benches" instance=ExtResource("6_n0uw5")]
+light_mask = 128
+visibility_layer = 128
+position = Vector2(230, -136)
+
+[node name="ChurchBench4" parent="Benches" instance=ExtResource("6_n0uw5")]
+light_mask = 128
+visibility_layer = 128
+position = Vector2(-230, -136)
+
+[node name="ChurchBench5" parent="Benches" instance=ExtResource("6_n0uw5")]
+light_mask = 128
+visibility_layer = 128
+position = Vector2(230, -201)
+
+[node name="ChurchBench6" parent="Benches" instance=ExtResource("6_n0uw5")]
+light_mask = 128
+visibility_layer = 128
+position = Vector2(-230, -201)
+
+[node name="ChurchBench7" parent="Benches" instance=ExtResource("6_n0uw5")]
+light_mask = 128
+visibility_layer = 128
+position = Vector2(230, -266)
+
+[node name="ChurchBench8" parent="Benches" instance=ExtResource("6_n0uw5")]
+light_mask = 128
+visibility_layer = 128
+position = Vector2(-230, -266)
+
+[node name="ChurchBench9" parent="Benches" instance=ExtResource("6_n0uw5")]
+light_mask = 128
+visibility_layer = 128
+position = Vector2(230, 292)
+
+[node name="ChurchBench10" parent="Benches" instance=ExtResource("6_n0uw5")]
+light_mask = 128
+visibility_layer = 128
+position = Vector2(-230, 292)
+
+[node name="ChurchBench11" parent="Benches" instance=ExtResource("6_n0uw5")]
+light_mask = 128
+visibility_layer = 128
+position = Vector2(230, 227)
+
+[node name="ChurchBench12" parent="Benches" instance=ExtResource("6_n0uw5")]
+light_mask = 128
+visibility_layer = 128
+position = Vector2(-230, 227)
+
+[node name="ChurchBench13" parent="Benches" instance=ExtResource("6_n0uw5")]
+light_mask = 128
+visibility_layer = 128
+position = Vector2(230, 162)
+
+[node name="ChurchBench14" parent="Benches" instance=ExtResource("6_n0uw5")]
+light_mask = 128
+visibility_layer = 128
+position = Vector2(-230, 162)
+
+[node name="ChurchBench15" parent="Benches" instance=ExtResource("6_n0uw5")]
+light_mask = 128
+visibility_layer = 128
+position = Vector2(230, 97)
+
+[node name="ChurchBench16" parent="Benches" instance=ExtResource("6_n0uw5")]
+light_mask = 128
+visibility_layer = 128
+position = Vector2(-230, 97)
+
+[node name="Columns" type="Node2D" parent="."]
+
+[node name="ChurchColumn" parent="Columns" instance=ExtResource("6_rmus7")]
+position = Vector2(-344, 222)
+
+[node name="ChurchColumn2" parent="Columns" instance=ExtResource("6_rmus7")]
+position = Vector2(349, 222)
+
+[node name="ChurchColumn3" parent="Columns" instance=ExtResource("6_rmus7")]
+position = Vector2(-345, -208)
+
+[node name="ChurchColumn4" parent="Columns" instance=ExtResource("6_rmus7")]
+position = Vector2(345, -212)
+
+[node name="CandleChandeliers" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.470588)
+
+[node name="ChurchCandleChandelier" parent="CandleChandeliers" instance=ExtResource("7_gvu17")]
+position = Vector2(-111, -176)
+
+[node name="ChurchCandleChandelier2" parent="CandleChandeliers" instance=ExtResource("7_gvu17")]
+position = Vector2(-111, 193)
+
+[node name="ChurchCandleChandelier3" parent="CandleChandeliers" instance=ExtResource("7_gvu17")]
+position = Vector2(112, -176)
+
+[node name="ChurchCandleChandelier4" parent="CandleChandeliers" instance=ExtResource("7_gvu17")]
+position = Vector2(112, 193)
 
 [node name="Path2D" type="Path2D" parent="."]
 scale = Vector2(0.825, 0.825)
@@ -47,9 +222,6 @@ autostart = true
 
 [node name="DebuggingNode" type="Marker2D" parent="."]
 script = ExtResource("3_xmdxi")
-
-[node name="Enemy" parent="." instance=ExtResource("5_ialyd")]
-position = Vector2(-203, -204)
 
 [connection signal="timeout" from="BulletSpawnTime" to="." method="_on_bullet_spawn_time_timeout"]
 [connection signal="timeout" from="SlomoBulletSpawnTime" to="." method="_on_slomo_bullet_spawn_time_timeout"]

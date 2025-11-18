@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://155porgqwl8x"]
+
+[ext_resource type="Texture2D" uid="uid://cbdijq1nd0kuj" path="res://Assets/ChurchCandleHolder.png" id="1_xqtb5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_77480"]
+radius = 6.08276
+
+[node name="ChurchCandleHolder" type="StaticBody2D"]
+collision_layer = 129
+collision_mask = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_77480")
+
+[node name="ChurchCandleHolder" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_xqtb5")

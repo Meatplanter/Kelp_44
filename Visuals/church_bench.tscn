@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgc5tpjlvxdvf"]
+
+[ext_resource type="Texture2D" uid="uid://cd42dy33vwr2j" path="res://Assets/ChurchBench.png" id="1_u0fnp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lu438"]
+size = Vector2(255, 33)
+
+[node name="ChurchBench" type="StaticBody2D"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="ChurchBench" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_u0fnp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -4.5)
+shape = SubResource("RectangleShape2D_lu438")

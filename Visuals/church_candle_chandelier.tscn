@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ux27a743iihg"]
+
+[ext_resource type="Texture2D" uid="uid://cg2gvw66eq7et" path="res://Assets/ChurchCandleChandelier.png" id="1_xshxy"]
+
+[node name="ChurchCandleChandelier" type="Node2D"]
+
+[node name="ChurchCandleChandelier" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_xshxy")
