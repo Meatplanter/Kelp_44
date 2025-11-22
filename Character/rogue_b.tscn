@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://ctyixwmxls1xf"]
+[gd_scene load_steps=14 format=3 uid="uid://ctyixwmxls1xf"]
 
 [ext_resource type="Script" uid="uid://74ugebrbbmct" path="res://Visuals/debugging_node.gd" id="2_bjt74"]
+[ext_resource type="Shader" uid="uid://qw85edksqlrt" path="res://Shaders/Unshaded.gdshader" id="3_oupi2"]
 [ext_resource type="PackedScene" uid="uid://dvnli7euh2sh5" path="res://Movement styles/movement_style_1.tscn" id="5_m64x7"]
 [ext_resource type="PackedScene" uid="uid://bom5cdjsr3oj8" path="res://Torso styles/torso_style_1.tscn" id="6_t0gij"]
 [ext_resource type="Script" uid="uid://bfrfmnvcxdukh" path="res://Camera styles/camera_2d_new.gd" id="7_y7bk3"]
@@ -10,6 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://cd7bd2fnud82r" path="res://Aiming styles/aiming_style_2.tscn" id="10_rmqlk"]
 [ext_resource type="PackedScene" uid="uid://c5nunyagwdk5f" path="res://UI/pause_menu.tscn" id="10_t0gij"]
 [ext_resource type="PackedScene" uid="uid://ct4uhithfj3kk" path="res://UI/level_up_screen.tscn" id="11_qhx67"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_api4q"]
+shader = ExtResource("3_oupi2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6whms"]
+shader = ExtResource("3_oupi2")
 
 [node name="RogueB" type="CharacterBody2D" groups=["Player"]]
 visibility_layer = 2
@@ -21,9 +28,11 @@ script = ExtResource("2_bjt74")
 
 [node name="GunRight" parent="." instance=ExtResource("8_m64x7")]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_api4q")
 
 [node name="GunLeft" parent="." instance=ExtResource("8_m64x7")]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_6whms")
 
 [node name="MovementStyle1" parent="." instance=ExtResource("5_m64x7")]
 unique_name_in_owner = true

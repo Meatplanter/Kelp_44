@@ -7,6 +7,7 @@ var LeftShoeNode
 var gameSpeed
 
 var enemy_count = 0
+var spawnerArray: Array = []
 
 func spawn_bullet():
 	var new_bullet = preload("res://Weapons/bullet_new.tscn").instantiate()
@@ -18,8 +19,11 @@ func spawn_bullet():
 
 func spawn_enemy():
 	var new_enemy = preload("res://Enemies/enemy.tscn").instantiate()
-	%PathFollow2D.progress_ratio = randf()
-	new_enemy.global_position = %PathFollow2D.global_position + Movement.midpoint
+	var randSpawn = spawnerArray.pick_random()
+	if randSpawn == $Spawners/Spawner1 or randSpawn == $Spawners/Spawner4: new_enemy.strafeBool = true
+	elif randSpawn == $Spawners/Spawner2 or randSpawn == $Spawners/Spawner3: new_enemy.strafeBool = false
+	else: new_enemy.strafeBool = randf() < 0.5
+	new_enemy.global_position = randSpawn.global_position
 	if enemy_count < 5:
 		add_child(new_enemy)
 
@@ -34,6 +38,13 @@ func spawn_player():
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 	spawn_player()
+	
+	var SpawnerTemp = [$Spawners/Spawner1,$Spawners/Spawner2,$Spawners/Spawner3,$Spawners/Spawner4]
+	spawnerArray.append_array(SpawnerTemp)
+	
+	if Global.gameMode == 1:
+		$BulletSpawnTime.wait_time *= 10
+		$SlomoBulletSpawnTime.wait_time *= 10
 
 func _process(_delta):
 	

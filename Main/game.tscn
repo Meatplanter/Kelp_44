@@ -71,7 +71,7 @@ sources/0 = SubResource("TileSetAtlasSource_rmus7")
 
 [sub_resource type="Curve2D" id="Curve2D_feb5d"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -600, -300, 0, 0, 0, 0, 600, -300, 0, 0, 0, 0, 600, 300, 0, 0, 0, 0, -600, 300, 0, 0, 0, 0, -600, -300)
+"points": PackedVector2Array(0, 0, 0, 0, -600, -300, 0, 0, 0, 0, 555.152, -290.909, 0, 0, 0, 0, 551.515, 328.485, 0, 0, 0, 0, -598.788, 327.273, 0, 0, 0, 0, -600, -300)
 }
 point_count = 5
 
@@ -81,7 +81,7 @@ script = ExtResource("1_fc0e3")
 [node name="LayerHolder" type="Node2D" parent="."]
 
 [node name="Floor" type="TileMapLayer" parent="LayerHolder"]
-self_modulate = Color(0.873298, 0.873298, 0.873298, 1)
+self_modulate = Color(0.477881, 0.47788, 0.47788, 1)
 z_index = -1
 rotation = -0.000103133
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAD+/wAAAAAAAAAAAAD+//7/AAAAAAAAAAAAAP7/AAAAAAAAAAACAP7/AAAAAAAAAAACAAAAAAAAAAAAAAACAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD+/wIAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wAAAAAAAAAAAAD8//7/AAAAAAAAAAD8//z/AAAAAAAAAAD+//z/AAAAAAAAAAAAAPz/AAAAAAAAAAACAPz/AAAAAAAAAAAEAPz/AAAAAAAAAAAEAP7/AAAAAAAAAAAEAAAAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAQAAAAAAAAAAAACAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAD+/wQAAAAAAAAAAAD8/wQAAAAAAAAAAAAGAPz/AAAAAAAAAAAGAP7/AAAAAAAAAAAGAAAAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAIAAIAAAAAAAAAAAAIAAAAAAAAAAAAAAAIAP7/AAAAAAAAAAAIAPz/AAAAAAAAAAAIAPr/AAAAAAAAAAAGAPr/AAAAAAAAAAAEAPr/AAAAAAAAAAACAPr/AAAAAAAAAAAAAPr/AAAAAAAAAAD+//r/AAAAAAAAAAD8//r/AAAAAAAAAAD6//r/AAAAAAAAAAD6//z/AAAAAAAAAAD6//7/AAAAAAAAAAD6/wAAAAAAAAAAAAD6/wIAAAAAAAAAAAD6/wQAAAAAAAAAAAD6/wYAAAAAAAAAAAD8/wYAAAAAAAAAAAD+/wYAAAAAAAAAAAAAAAYAAAAAAAAAAAACAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAIAAYAAAAAAAAAAAAIAAgAAAAAAAAAAAAGAAgAAAAAAAAAAAAEAAgAAAAAAAAAAAACAAgAAAAAAAAAAAAAAAgAAAAAAAAAAAD+/wgAAAAAAAAAAAD8/wgAAAAAAAAAAAD6/wgAAAAAAAAAAAD4/wgAAAAAAAAAAAD4/wYAAAAAAAAAAAD4/wQAAAAAAAAAAAD4/wIAAAAAAAAAAAD4/wAAAAAAAAAAAAD4//7/AAAAAAAAAAD4//z/AAAAAAAAAAD4//r/AAAAAAAAAAD4//j/AAAAAAAAAAD4//b/AAAAAAAAAAD6//b/AAAAAAAAAAD6//j/AAAAAAAAAAD8//j/AAAAAAAAAAD8//b/AAAAAAAAAAD+//b/AAAAAAAAAAD+//j/AAAAAAAAAAAAAPj/AAAAAAAAAAAAAPb/AAAAAAAAAAACAPb/AAAAAAAAAAACAPj/AAAAAAAAAAAEAPj/AAAAAAAAAAAEAPb/AAAAAAAAAAAGAPb/AAAAAAAAAAAGAPj/AAAAAAAAAAAIAPj/AAAAAAAAAAAIAPb/AAAAAAAAAAAKAPb/AAAAAAAAAAAKAPj/AAAAAAAAAAAKAPr/AAAAAAAAAAAKAPz/AAAAAAAAAAAKAP7/AAAAAAAAAAAKAAAAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAYAAAAAAAAAAAAKAAgAAAAAAAAAAAAMAAgAAAAAAAAAAAAOAAgAAAAAAAAAAAAOAAYAAAAAAAAAAAAMAAYAAAAAAAAAAAAMAAQAAAAAAAAAAAAMAAIAAAAAAAAAAAAOAAQAAAAAAAAAAAAOAAIAAAAAAAAAAAAOAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAMAP7/AAAAAAAAAAAOAP7/AAAAAAAAAAAOAPz/AAAAAAAAAAAMAPz/AAAAAAAAAAAMAPr/AAAAAAAAAAAOAPr/AAAAAAAAAAAOAPj/AAAAAAAAAAAMAPj/AAAAAAAAAAAMAPb/AAAAAAAAAAAOAPb/AAAAAAAAAAD2//b/AAAAAAAAAAD0//b/AAAAAAAAAADy//b/AAAAAAAAAADw//b/AAAAAAAAAADw//j/AAAAAAAAAADy//j/AAAAAAAAAAD0//j/AAAAAAAAAAD2//j/AAAAAAAAAAD2//r/AAAAAAAAAAD0//r/AAAAAAAAAADy//r/AAAAAAAAAADw//r/AAAAAAAAAADw//z/AAAAAAAAAADy//z/AAAAAAAAAAD0//z/AAAAAAAAAAD2//z/AAAAAAAAAAD2//7/AAAAAAAAAAD0//7/AAAAAAAAAADy//7/AAAAAAAAAADw//7/AAAAAAAAAADw/wAAAAAAAAAAAADy/wAAAAAAAAAAAAD0/wAAAAAAAAAAAAD2/wAAAAAAAAAAAAD2/wIAAAAAAAAAAAD0/wIAAAAAAAAAAADy/wIAAAAAAAAAAADw/wIAAAAAAAAAAADw/wQAAAAAAAAAAADy/wQAAAAAAAAAAAD0/wQAAAAAAAAAAAD2/wQAAAAAAAAAAAD2/wYAAAAAAAAAAAD0/wYAAAAAAAAAAADy/wYAAAAAAAAAAADw/wYAAAAAAAAAAADw/wgAAAAAAAAAAADy/wgAAAAAAAAAAAD0/wgAAAAAAAAAAAD2/wgAAAAAAAAAAADw/woAAAAAAAAAAADy/woAAAAAAAAAAAD0/woAAAAAAAAAAAD2/woAAAAAAAAAAAD4/woAAAAAAAAAAAD6/woAAAAAAAAAAAD8/woAAAAAAAAAAAD+/woAAAAAAAAAAAAAAAoAAAAAAAAAAAACAAoAAAAAAAAAAAAEAAoAAAAAAAAAAAAGAAoAAAAAAAAAAAAIAAoAAAAAAAAAAAAKAAoAAAAAAAAAAAAMAAoAAAAAAAAAAAAOAAoAAAAAAAAAAAA=")
@@ -179,30 +179,42 @@ position = Vector2(-230, 97)
 
 [node name="ChurchColumn" parent="Columns" instance=ExtResource("6_rmus7")]
 position = Vector2(-344, 222)
+scale = Vector2(0.3, 0.3)
 
 [node name="ChurchColumn2" parent="Columns" instance=ExtResource("6_rmus7")]
-position = Vector2(349, 222)
+position = Vector2(344, 222)
+scale = Vector2(0.3, 0.3)
 
 [node name="ChurchColumn3" parent="Columns" instance=ExtResource("6_rmus7")]
 position = Vector2(-345, -208)
+scale = Vector2(0.3, 0.3)
 
 [node name="ChurchColumn4" parent="Columns" instance=ExtResource("6_rmus7")]
-position = Vector2(345, -212)
+position = Vector2(345, -208)
+scale = Vector2(0.3, 0.3)
 
 [node name="CandleChandeliers" type="Node2D" parent="."]
 modulate = Color(1, 1, 1, 0.470588)
 
 [node name="ChurchCandleChandelier" parent="CandleChandeliers" instance=ExtResource("7_gvu17")]
-position = Vector2(-111, -176)
+position = Vector2(-231, -179)
+rotation = 0.785398
+scale = Vector2(2, 2)
 
 [node name="ChurchCandleChandelier2" parent="CandleChandeliers" instance=ExtResource("7_gvu17")]
-position = Vector2(-111, 193)
+position = Vector2(-231, 193)
+rotation = 0.785398
+scale = Vector2(2, 2)
 
 [node name="ChurchCandleChandelier3" parent="CandleChandeliers" instance=ExtResource("7_gvu17")]
-position = Vector2(112, -176)
+position = Vector2(229, -176)
+rotation = 0.785398
+scale = Vector2(2, 2)
 
 [node name="ChurchCandleChandelier4" parent="CandleChandeliers" instance=ExtResource("7_gvu17")]
-position = Vector2(112, 193)
+position = Vector2(231, 193)
+rotation = 0.785398
+scale = Vector2(2, 2)
 
 [node name="Path2D" type="Path2D" parent="."]
 scale = Vector2(0.825, 0.825)
@@ -211,6 +223,7 @@ curve = SubResource("Curve2D_feb5d")
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 unique_name_in_owner = true
 position = Vector2(-600, -300)
+rotation = 0.00786972
 
 [node name="BulletSpawnTime" type="Timer" parent="."]
 wait_time = 0.2
@@ -222,6 +235,21 @@ autostart = true
 
 [node name="DebuggingNode" type="Marker2D" parent="."]
 script = ExtResource("3_xmdxi")
+
+[node name="Spawners" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Spawner1" type="Marker2D" parent="Spawners"]
+position = Vector2(-398, -240)
+
+[node name="Spawner2" type="Marker2D" parent="Spawners"]
+position = Vector2(398, -240)
+
+[node name="Spawner3" type="Marker2D" parent="Spawners"]
+position = Vector2(-397, 273)
+
+[node name="Spawner4" type="Marker2D" parent="Spawners"]
+position = Vector2(399, 271)
 
 [connection signal="timeout" from="BulletSpawnTime" to="." method="_on_bullet_spawn_time_timeout"]
 [connection signal="timeout" from="SlomoBulletSpawnTime" to="." method="_on_slomo_bullet_spawn_time_timeout"]

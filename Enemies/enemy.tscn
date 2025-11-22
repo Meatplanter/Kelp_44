@@ -1,19 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqhvigu27dsbf"]
+[gd_scene load_steps=9 format=3 uid="uid://bqhvigu27dsbf"]
 
 [ext_resource type="Script" uid="uid://cey3hoiu0kp28" path="res://Enemies/enemy.gd" id="1_4gyqm"]
 [ext_resource type="Texture2D" uid="uid://b7oifqaddjc5d" path="res://Assets/Sombr.png" id="2_qi2p4"]
 [ext_resource type="PackedScene" uid="uid://djlscpladb4be" path="res://Visuals/crosshair.tscn" id="4_iifgy"]
 [ext_resource type="PackedScene" uid="uid://b6o1fo0ewnjln" path="res://Weapons/gun_new.tscn" id="5_3yqyl"]
 [ext_resource type="PackedScene" uid="uid://cv6rrvjpkfwc4" path="res://Visuals/crosshair_green.tscn" id="5_epg4t"]
+[ext_resource type="Shader" uid="uid://qw85edksqlrt" path="res://Shaders/Unshaded.gdshader" id="6_8wvsg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iifgy"]
-radius = 20.0
+radius = 15.0333
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gk8ng"]
+shader = ExtResource("6_8wvsg")
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 129
 collision_mask = 129
 script = ExtResource("1_4gyqm")
 metadata/Enemy = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 
 [node name="Sombr" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -39,11 +45,10 @@ rotation = 0.785398
 
 [node name="GunNew" parent="." instance=ExtResource("5_3yqyl")]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_gk8ng")
 position = Vector2(34, 0)
-Firerate = 2.0
 
 [node name="Label" type="Label" parent="."]
-visible = false
 offset_left = -20.0
 offset_top = -11.0
 offset_right = 20.0

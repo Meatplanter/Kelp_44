@@ -1,10 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://cd7bd2fnud82r"]
+[gd_scene load_steps=10 format=3 uid="uid://cd7bd2fnud82r"]
 
 [ext_resource type="Script" uid="uid://d21xaev5r7np2" path="res://Aiming styles/aiming_style_2.gd" id="1_chrti"]
+[ext_resource type="Shader" uid="uid://qw85edksqlrt" path="res://Shaders/Unshaded.gdshader" id="3_olijn"]
 [ext_resource type="Script" uid="uid://c6wo2qt1seuhb" path="res://Aiming styles/head_as_2.gd" id="3_vnu2v"]
 [ext_resource type="Texture2D" uid="uid://bbqhe4bkrpp8a" path="res://Assets/HatCompressed.png" id="4_ri3jk"]
 [ext_resource type="Script" uid="uid://k4xceb8ppe3p" path="res://Aiming styles/dummy_target_l.gd" id="5_ri3jk"]
 [ext_resource type="Script" uid="uid://form3d2yhc4c" path="res://Aiming styles/dummy_target_r.gd" id="6_olijn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8s13t"]
+shader = ExtResource("3_olijn")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vnu2v"]
 radius = 20.0
@@ -23,6 +27,7 @@ detectRadius = 500
 [node name="HatCompressed" type="Sprite2D" parent="HeadAS2"]
 unique_name_in_owner = true
 texture_filter = 1
+material = SubResource("ShaderMaterial_8s13t")
 texture = ExtResource("4_ri3jk")
 flip_v = true
 

@@ -3,6 +3,7 @@ extends CharacterBody2D
 var health = EnemyManager.enemyHealth
 var firerate = EnemyManager.enemyFirerate
 var speed = EnemyManager.enemySpeed
+@export var unmoving = false
 
 var strafeBool = true
 var simulatedPosition
@@ -22,6 +23,15 @@ func update_noticed_array():
 	elif attention <= 0.0 and noticed:
 		EnemyManager.EnemiesNoticed.erase(self)
 		noticed = false
+
+
+func make_circle_occluder(radius: float, points := 32):
+	var poly := PackedVector2Array()
+	for i in range(points):
+		var angle = TAU * i / points
+		poly.append(Vector2(cos(angle), sin(angle)) * radius)
+	$LightOccluder2D.occluder = OccluderPolygon2D.new()
+	$LightOccluder2D.occluder.polygon = poly
 
 
 func attention_drop():
@@ -63,12 +73,6 @@ func chase_player():
 	var bulletSpeed = WeaponManager.playerBulletSpeed
 	simulatedPosition = global_position + direction * speed * distanceTo / bulletSpeed
 
-func calculate_simulated_position(): #so that the player shoots where the enemy will be going
-	var distanceTo = self.global_position.distance_to(Movement.midpoint)
-	var bulletSpeed = WeaponManager.playerBulletSpeed
-	var timeToImpact = distanceTo * 1.2 / bulletSpeed * 100
-	var simPos = global_position + speed * timeToImpact
-
 func strafe(clockwise: bool):
 	var direction
 	if clockwise == true:
@@ -82,18 +86,19 @@ func strafe(clockwise: bool):
 
 func _ready() -> void:
 	EnemyManager.register_enemy(self)
-	strafeBool = randf() < 0.5
 	firerate = randf_range(firerate*0.75,firerate*1.5)
 	%GunNew.Firerate = firerate
+	make_circle_occluder(30)
 
 
 func _process(_delta: float) -> void:
 	look_at(Movement.midpoint)
-	if global_position.distance_to(Movement.midpoint) > 300: 
-		chase_player()
-	else:
-		strafe(strafeBool)
-		
+	if unmoving == false:
+		if global_position.distance_to(Movement.midpoint) > 600: 
+			chase_player()
+		else:
+			strafe(strafeBool)
+	else: simulatedPosition = global_position
 
 	attention_drop()
 	threat_drop()
@@ -102,7 +107,7 @@ func _process(_delta: float) -> void:
 	move_and_slide()
 	
 	##debugging stuff
-	#$Label.text = "Att: "+str(int(attention))+"  Thr: "+str(int(threat))
+	#$Label.text = "Firerate: "+str(float(firerate))
 	#if self in EnemyManager.EnemiesOutOfReach: $Label.add_theme_color_override("font_color", Color.RED)
 	#else: $Label.add_theme_color_override("font_color", Color.WHITE)
 

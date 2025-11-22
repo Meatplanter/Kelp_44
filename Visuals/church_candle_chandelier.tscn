@@ -1,9 +1,50 @@
-[gd_scene load_steps=2 format=3 uid="uid://ux27a743iihg"]
+[gd_scene load_steps=4 format=3 uid="uid://ux27a743iihg"]
 
 [ext_resource type="Texture2D" uid="uid://cg2gvw66eq7et" path="res://Assets/ChurchCandleChandelier.png" id="1_xshxy"]
+
+[sub_resource type="Gradient" id="Gradient_xshxy"]
+offsets = PackedFloat32Array(0.0448718, 0.166667, 0.666667, 1)
+colors = PackedColorArray(0.494624, 0.494624, 0.494624, 1, 1, 1, 1, 1, 0.455054, 0.455054, 0.455054, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pehgb"]
+gradient = SubResource("Gradient_xshxy")
+fill = 1
+fill_from = Vector2(0.509091, 0.477273)
 
 [node name="ChurchCandleChandelier" type="Node2D"]
 
 [node name="ChurchCandleChandelier" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("1_xshxy")
+
+[node name="PointLight2D4" type="PointLight2D" parent="."]
+position = Vector2(0, -14)
+color = Color(1, 1, 1, 0.486275)
+energy = 0.5
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_pehgb")
+texture_scale = 5.0
+
+[node name="PointLight2D5" type="PointLight2D" parent="."]
+position = Vector2(15, 0)
+color = Color(1, 1, 1, 0.486275)
+energy = 0.5
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_pehgb")
+texture_scale = 5.0
+
+[node name="PointLight2D6" type="PointLight2D" parent="."]
+position = Vector2(-14, 1)
+color = Color(1, 1, 1, 0.486275)
+energy = 0.5
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_pehgb")
+texture_scale = 5.0
+
+[node name="PointLight2D7" type="PointLight2D" parent="."]
+position = Vector2(1, 15)
+color = Color(1, 1, 1, 0.486275)
+energy = 0.5
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_pehgb")
+texture_scale = 5.0

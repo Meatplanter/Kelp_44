@@ -1,11 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://bom5cdjsr3oj8"]
+[gd_scene load_steps=10 format=3 uid="uid://bom5cdjsr3oj8"]
 
 [ext_resource type="Script" uid="uid://dvcs23flrl00h" path="res://Torso styles/torso_style_1.gd" id="1_ugtap"]
 [ext_resource type="Script" uid="uid://cq6xqf1ol7n1q" path="res://Torso styles/shoulder_shape_TS1.gd" id="2_ugtap"]
+[ext_resource type="Shader" uid="uid://qw85edksqlrt" path="res://Shaders/Unshaded.gdshader" id="3_8qe83"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ugtap"]
 radius = 8.0
 height = 48.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_t8yo0"]
+polygon = PackedVector2Array(-24, 8, -29, 0, -24, -8, 24, -8, 29, 0, 24, 8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dkhv6"]
+shader = ExtResource("3_8qe83")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_awwtg"]
+shader = ExtResource("3_8qe83")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_clirn"]
+shader = ExtResource("3_8qe83")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jul1m"]
+shader = ExtResource("3_8qe83")
 
 [node name="TorsoStyle1" type="Node2D"]
 script = ExtResource("1_ugtap")
@@ -26,6 +42,9 @@ polygon = PackedVector2Array(-24, -8, 24, -8, 29, 0, 24, 8, -24, 8, -29, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ugtap")
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="ShoulderShapeTS1"]
+occluder = SubResource("OccluderPolygon2D_t8yo0")
+
 [node name="ShoulderMidpoint" type="Marker2D" parent="."]
 position = Vector2(2.98023e-08, 0)
 
@@ -37,6 +56,7 @@ position = Vector2(2.98023e-08, 0)
 
 [node name="LeftBiceps" type="Polygon2D" parent="LeftShoulderJoint"]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_dkhv6")
 position = Vector2(-27, 0)
 color = Color(0.244615, 0.130091, 0.0260141, 1)
 polygon = PackedVector2Array(0, 0, 3, -4, 27, -4, 30, 0, 27, 4, 3, 4)
@@ -47,6 +67,7 @@ polygon = PackedVector2Array(0, 0, 3, -4, 27, -4, 30, 0, 27, 4, 3, 4)
 
 [node name="LeftForearm" type="Polygon2D" parent="LeftElbowJoint"]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_awwtg")
 position = Vector2(-27, 0)
 color = Color(0.38372, 0.216172, 0.0617191, 1)
 polygon = PackedVector2Array(0, 0, 3, -4, 27, -4, 30, 0, 27, 4, 3, 4)
@@ -59,6 +80,7 @@ position = Vector2(2.98023e-08, 0)
 
 [node name="RightBiceps" type="Polygon2D" parent="RightShoulderJoint"]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_clirn")
 position = Vector2(-3, 0)
 color = Color(0.244615, 0.130091, 0.0260141, 1)
 polygon = PackedVector2Array(0, 0, 3, -4, 27, -4, 30, 0, 27, 4, 3, 4)
@@ -70,6 +92,7 @@ position = Vector2(2.98023e-08, 0)
 
 [node name="RightForearm" type="Polygon2D" parent="RightElbowJoint"]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_jul1m")
 position = Vector2(-3, 0)
 color = Color(0.38372, 0.216172, 0.0617191, 1)
 polygon = PackedVector2Array(0, 0, 3, -4, 27, -4, 30, 0, 27, 4, 3, 4)

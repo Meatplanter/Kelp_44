@@ -12,6 +12,7 @@ var shootingPoint
 var shootingDistance
 
 var bloodTrailScene
+var bodyAlive = true
 var shooter
 
 
@@ -76,10 +77,11 @@ func _on_body_entered(body: Node2D) -> void:
 		new_wound.global_position = bulletEntryPoint
 		#extra threat for enemy that shot and hit player
 		if shooter and shooter.is_in_group("Enemy") and body.is_in_group("Player"): shooter.threat += randf_range(90.0,110.0)
-		
+	else:
+		bodyAlive = false
 
 func _on_splatter_timer_timeout() -> void:
-	if self.is_visible_in_tree() == false && Global.bloodTrailVisible == true:
+	if self.is_visible_in_tree() == false && Global.bloodTrailVisible == true && bodyAlive == true:
 		var bloodTrail = bloodTrailScene.instantiate()
 		bloodTrail.rotation_degrees = randf_range(0,360)
 		bloodTrail.scale = Vector2(randf_range(0.5,2),randf_range(0.5,2))
@@ -87,7 +89,7 @@ func _on_splatter_timer_timeout() -> void:
 		get_parent().add_child(bloodTrail)
 
 func _on_slomo_splatter_timer_timeout() -> void:
-	if self.is_visible_in_tree() == false && Global.bloodTrailVisible == true:
+	if self.is_visible_in_tree() == false && Global.bloodTrailVisible == true && bodyAlive == true:
 		var bloodTrail = bloodTrailScene.instantiate()
 		bloodTrail.rotation_degrees = randf_range(0,360)
 		bloodTrail.scale = Vector2(randf_range(0.5,2),randf_range(0.5,2))
